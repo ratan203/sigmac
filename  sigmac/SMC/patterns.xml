@@ -1,0 +1,60 @@
+<patterns>
+	<relationship type="is_a">
+		<pattern>
+			<basePattern>
+				<![CDATA["S: (NP=c1 $+ (VP=var1 <, (VBZ <: is & $+ (NP=c2 <, (DT=tmp <: a | <: an) & !<< NP & > =var1))))"]]>
+			</basePattern>
+			<concept name="c2" ishead="false">
+				<modifierPattern>
+					<tregex><![CDATA[NP <, DT=tmp]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>
+				</modifierPattern>				
+			</concept>
+			<concept name="c1" ishead="true">
+				<modifierPattern>
+					<tregex><![CDATA[NP <, DT=tmp]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>
+				</modifierPattern>
+			</concept>			
+		</pattern>	
+	</relationship>
+	
+	<relationship type="none">
+		<pattern>
+			<basePattern>
+				<![CDATA["NP=c1  !<:JJS & !<:CD & !<:RB & !<< NP"]]>
+			</basePattern>
+			<concept name="c1" ishead="false">
+				<modifierPattern>
+					<tregex><![CDATA[NP <, DT=tmp | <, CD=tmp | <, JJR=tmp | <, PRP=tmp]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>
+					<tregex><![CDATA[NP < (ADJP=tmp !<- (VBN $- RB))]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>				
+					<tregex><![CDATA[NP <, JJR=tmp]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>						
+				</modifierPattern>				
+			</concept>			
+		</pattern>	
+	</relationship>
+	
+	<relationship type="is_a">
+		<pattern>
+			<basePattern>
+				<![CDATA["S <, (NP=c1 $+ (VP <, (VBZ<: is $+ (NP [<<, (a >(DT=tmp1>(NP=c2 !$+ PP & !$+CC & !<<NP & !<</^,$/ ))) | <<, (an>(DT=tmp1 >(NP=c2 !$+ PP & !$+CC & !<< NP & !<</^,$/ )))]))))"]]>
+			</basePattern>
+			<concept name="c2" ishead="false">
+				<modifierPattern>
+					<tregex><![CDATA[NP <, DT=tmp]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>
+				</modifierPattern>				
+			</concept>
+			<concept name="c1" ishead="true">
+				<modifierPattern>
+					<tregex><![CDATA[NP <, DT=tmp]]></tregex>
+					<tsurgeon>delete tmp</tsurgeon>
+				</modifierPattern>
+			</concept>			
+		</pattern>	
+	</relationship>
+	
+</patterns>
