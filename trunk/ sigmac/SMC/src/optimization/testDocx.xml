@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><document>. 
+Inside some methods there exist some sub methods. To describe the sub method comments are used. An example for this can be find in main.java.nl.headspring.photoz.imagecollection.fs.metadata.SanselanExifMetadataWriter (from line no 51 to 54). 
+    // establish jpegMedatadata. 
+    if (metadata != null) {. 
+      jpegMetadata = (JpegImageMetadata) metadata;. 
+    }. 
+Also some of testing codes also exist and they are commented and some future developing details also exists as comments. These kind of comment also a bad smell of code.. 
+Solution: Above sub methods comments can remove by turning method fragments into methods whose name explains the purpose of the method. As an example,. 
+public String estMetadata(){. 
+     if (metadata != null) {. 
+         jpegMetadata = (JpegImageMetadata) metadata;. 
+    }. 
+}. 
+ Also the above mentioned non important comments also can remove.. 
+Data Clumps. 
+In the classes nl.headspring.photoz.client.ImagePropertyEditor and nl.headspring.photoz.client.PreviewPane have data clumps with these fields’ eventBus, imageService, descriptionPane, closeButton, maxSize and rb.. 
+Solution: We can use Extract Class on the fields to turn the clumps into an object. Then implement method signatures by grouping parameters that naturally go together or instead of getting several values from an object and passes as parameters in a method whole object can pass.. 
+Switch Statements. 
+There is switch statement can be found in main.java.nl.headspring.photoz.client.FolderView class and main.java.nl.headspring.photoz.client.AnnotationTree class.. 
+Solution: We can use Extract Method to identify switch fragments and then we can create each of those fragmented can be move by converting as methods into the class where the polymorphism is needed.. 
+Speculative Generality. 
+Speculative Generality occurred since unused parameter ‘ e‘ was found in line (42)  of method 'handleBusEvent', line (47)  in method 'componentResized', line (51)  in method 'componentMoved', line (55)  in method 'componentShown', line (60)  in method 'componentHidden' is unused.. 
+Solution: We can remove those kinds of parameters from those methods.<titles><title scale="4">Comments</title><title scale="1">    // establish jpegMedatadata</title><title scale="1">Solution: </title><title scale="1">public String estMetadata(){</title><title scale="1">     if (metadata != null) {</title><title scale="1">         jpegMetadata = (JpegImageMetadata) metadata;</title><title scale="1">    }</title><title scale="1">}</title><title scale="1">Data Clumps</title><title scale="1">nl.headspring.photoz.client.ImagePropertyEditor</title><title scale="1">nl.headspring.photoz.client.PreviewPane</title><title scale="1">eventBus</title><title scale="1">imageService</title><title scale="1">descriptionPane</title><title scale="1">closeButton</title><title scale="1">maxSize</title><title scale="1">rb</title><title scale="1">Solution: </title><title scale="1">Switch Statements</title><title scale="1">main.java.nl.headspring.photoz.client.FolderView</title><title scale="1">main.java.nl.headspring.photoz.client.AnnotationTree</title><title scale="1">Solution: </title><title scale="1">Speculative Generality</title><title scale="1">e</title><title scale="1">'handleBusEvent'</title><title scale="1">'componentResized'</title><title scale="1">'componentMoved'</title><title scale="1">'componentShown'</title><title scale="1">'componentHidden'</title><title scale="1">Solution: </title></titles></document>
