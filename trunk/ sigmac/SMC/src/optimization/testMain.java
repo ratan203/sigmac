@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Set;
+import morphoroot.JWNLOps;
 import net.didion.jwnl.JWNLException;
 
 /**
