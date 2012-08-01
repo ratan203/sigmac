@@ -51,7 +51,7 @@ public class testMain {
 //        }
 
     XMLFormattingExtractor xml=new XMLFormattingExtractor();
-    ArrayList<String> al1= xml.getXMLFormatting(s1);
+    ArrayList<String> al1= xml.getXMLFormatting("src\\optimization\\testDocx.xml");
      Iterator itr = al1.iterator();
       while(itr.hasNext()) {
          Object element = itr.next();
