@@ -58,20 +58,20 @@ public class XMLFormattingExtractor {
                             Element el = (Element)nl.item(i);
 
                             //get the title text and add to list
-                            l1.add(getTextValue(el, "title"));                            
+                            getTextValue(el, "title");                            
                     }
             }
     }
 
-    private String getTextValue(Element ele, String tagName) {
-            String textVal = "";
+    private void getTextValue(Element ele, String tagName) {
             NodeList nl = ele.getElementsByTagName(tagName);
             if(nl != null && nl.getLength() > 0) {
-                    Element el = (Element)nl.item(0);
-                    textVal = el.getFirstChild().getNodeValue();
+                for(int i = 0 ; i < nl.getLength();i++) {
+                    Element el = (Element)nl.item(i);
+                    l1.add(el.getFirstChild().getNodeValue());
+                }
             }
 
-            return textVal;
     }
 
     public ArrayList<String> getXMLFormatting(String path){
