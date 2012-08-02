@@ -45,23 +45,46 @@ public class DBConnector {
         Statement stmt = (Statement) con.createStatement();
         int updateQuery;
 
-         String QueryString = "INSERT INTO document(docURI,name,size(kb)) VALUES "+"("+doc.getUri()+",name,size)";
-         updateQuery= stmt.executeUpdate(QueryString);
+        con.setAutoCommit(false);
+        String modDocUri=doc.getUri().trim();
+        if(doc.getUri().contains("'")){
+            modDocUri=doc.getUri().replace("'", "''");
+        }
+        String QueryString = "INSERT INTO document(docURI,name,size) VALUES (\'"+modDocUri+"\','name',55)";
+        updateQuery= stmt.executeUpdate(QueryString);
+        String getDocId = "SELECT * from document WHERE docURI=\'"+modDocUri+"\'";
+        ResultSet rs1= stmt.executeQuery(getDocId);
+        while (rs1.next()) {
+            updateQuery= rs1.getInt("docId");
+        }        
 
         PreparedStatement insertConcept = null;
         PreparedStatement insertConceptDoc = null;
-        
-        String insertConceptString ="INSERT INTO concept(concept,frequency,strength) VALUES "+"(?,?,?)";
-        String insertConceptDocString ="INSERT INTO conceptdoc(id,docid) VALUES "+"(?,?)";
-        con.setAutoCommit(false);
+//        con.setAutoCommit(false);
+        String insertConceptString ="INSERT INTO concept(concept,frequency,strength) VALUES (?,?,?)";
+        String insertConceptDocString ="INSERT INTO conceptdoc(id,docid) VALUES (?,?)";        
         insertConcept = con.prepareStatement(insertConceptString);
         insertConceptDoc= con.prepareStatement(insertConceptDocString);
-
         for (String e : concept.keySet()) {
-            insertConcept.setString(1, e);
+            insertConcept.setString(1, e.trim());
             insertConcept.setInt(2, concept.get(e).getFreequency());
-            insertConcept.setInt(2, concept.get(e).getStrength());
-            int temp=insertConcept.executeUpdate();
+            insertConcept.setInt(3, concept.get(e).getStrength());
+            insertConcept.executeUpdate();
+            con.commit();
+
+            String modConcept=e.trim();
+            if(e.contains("'")){
+                modConcept=e.replace("'", "''");
+            }
+            String getConId = "SELECT * from concept WHERE concept=\'"+modConcept+"\'";
+//            System.out.println(getConId);
+//            System.exit(0);
+            ResultSet rs2= stmt.executeQuery(getConId);
+            int temp = 0;
+            while (rs2.next()) {
+                temp= rs2.getInt("id");
+            }
+
             insertConceptDoc.setInt(1, temp);
             insertConceptDoc.setInt(2, updateQuery);
             insertConceptDoc.executeUpdate();
@@ -90,14 +113,23 @@ public class DBConnector {
             relationships=concept.get(e).getRelationships();
             for (String f : relationships.keySet()) {
                 for(RelatedConcept g:relationships.get(f)){
-                    insertRelDoc.setString(1, g.getType());
+                    insertRelDoc.setString(1, g.getType().trim());
                     insertRelDoc.setInt(2, g.getFreequency());
                     insertRelDoc.setInt(3, g.getStrength());
-                    insertRelDoc.setInt(4, conceptMap.get(f));
+                    insertRelDoc.setInt(4, conceptMap.get(f.trim()));
                     insertRelDoc.setBoolean(5, g.isHead());
-                    int temp=insertRelDoc.executeUpdate();
-                    insertRelConDoc.setInt(1, conceptMap.get(e));
-                    insertRelConDoc.setInt(2, temp);
+                    insertRelDoc.executeUpdate();
+                    con.commit();
+                   
+                    String getRelId = "SELECT * from relationship WHERE type=\'"+g.getType()+"\' and relConceptId="+conceptMap.get(f.trim());
+                    ResultSet rs3= stmt.executeQuery(getRelId);
+                    int temp1 = 0;
+                    while (rs3.next()) {
+                        temp1= rs3.getInt("relId");
+                    }
+
+                    insertRelConDoc.setInt(1, conceptMap.get(e.trim()));
+                    insertRelConDoc.setInt(2, temp1);
                     insertRelConDoc.executeUpdate();
                     con.commit();
                 }
