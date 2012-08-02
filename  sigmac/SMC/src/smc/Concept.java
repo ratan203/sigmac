@@ -17,52 +17,75 @@ import java.util.Set;
 public class Concept implements Serializable {
     private String name;
     private HashMap<String,ArrayList<RelatedConcept>> relationships;
+    private int freequency;
     private int strength;
+    private float importance;
+    public static final int FREEQUENCY_STRENTH_MULTIPLIER=1;
 
     public Concept(String name){
         this.name=name;
         relationships=new HashMap<String, ArrayList<RelatedConcept>>();
-        strength=1;
+        freequency=1;
+        strength=0;
     }
 
-    public Concept(String name, int strength){
-        this.name=name;
-        relationships=new HashMap<String, ArrayList<RelatedConcept>>();
-        this.strength=strength;
+    public int getFreequency() {
+        return freequency;
     }
 
-    public int getStrength() {
-        return strength;
+    public void setFreequency(int freequency) {
+        this.freequency = freequency;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
 
-    public void modifyStrength(int amount){
+
+    public void modifyFreequency(int amount){
         //System.out.println("Test2");
-        this.setStrength(strength+amount);
+        freequency+=amount;
+    }
+
+    public void modifyImprotance(float amount){
+        importance+=amount;
+        System.out.println("modify importance of");
+        System.out.println(this.name);
+        System.out.println(importance);
     }
 
     public String getName() {
         return name;
     }
 
+    public int getStrength(){
+        return this.strength;
+    }
+
+    public int getValue(){
+        return this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
+    }
+
+    public void setStrength(int strength){
+        this.strength=strength;
+    }
+
+    public void updateStrength(int amount){
+        this.strength+=amount;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void addRelatedConcept(String name,String type,boolean isHead,int strength){
+    public void addRelatedConcept(String name,String type,boolean isHead,int freequency){
 //        System.out.println(name +" : "+strength);
         ArrayList<RelatedConcept> list;
-        RelatedConcept con=new RelatedConcept(type, name, isHead, strength);
+        RelatedConcept con=new RelatedConcept(type, name, isHead, freequency);
         boolean match=false;
         if(this.relationships.containsKey(name)){
             list=relationships.get(name);
             for(RelatedConcept c : list){
                 if(con.equals(c)){
 //                    System.out.println("fffffffffffffffffffffffffffffffffff");
-                    c.modifyStrength(strength);
+                    c.modifyFreequency(freequency);
                     match=true;
                     break;
                 }
@@ -86,7 +109,7 @@ public class Concept implements Serializable {
     }
 
     public void addRelatedConcept(RelatedConcept rc){
-        this.addRelatedConcept(rc.getRelatedConcept(), rc.getType(), rc.isHead(), rc.getStrength());
+        this.addRelatedConcept(rc.getRelatedConcept(), rc.getType(), rc.isHead(), rc.getFreequency());
     }
 
     public void addRelatedConcepts(HashMap<String, ArrayList<RelatedConcept>> rcs){
@@ -106,7 +129,9 @@ public class Concept implements Serializable {
 
     public void printConcept(){
         System.out.println("Concept : "+ name);
-        System.out.println("Strength : "+ strength);
+        System.out.println("Freequency : "+ freequency);
+        System.out.println("Strength : "+strength);
+        System.out.println("Importance : "+importance);
         System.out.println("*********Relationships*******************");
         Set<String> keys=relationships.keySet();
         for(String key : keys){
@@ -114,7 +139,7 @@ public class Concept implements Serializable {
             ArrayList<RelatedConcept> rels=relationships.get(key);
             for(RelatedConcept rel : rels){
                 System.out.println("Type : "+rel.getType());
-                System.out.println("Strength : "+rel.getStrength());
+                System.out.println("Strength : "+rel.getFreequency());
                 System.out.println("Is Head : "+ rel.isHead());
             }
         }
