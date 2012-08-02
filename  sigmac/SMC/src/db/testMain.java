@@ -7,6 +7,7 @@ package db;
 
 import com.mysql.jdbc.*;
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 /**
  *
@@ -19,19 +20,21 @@ public class testMain {
 
         try{
           Statement stmt = (Statement) conn.createStatement();
-          String query = "Select * FROM concept";
-          ResultSet rs = stmt.executeQuery(query);
-
-          ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
-          int columnsNumber = rsmd.getColumnCount();
+          String getconceptString = "SELECT * from concept";
+        ResultSet rs= stmt.executeQuery(getconceptString);
+        HashMap<String,Integer> conceptMap = new HashMap<String, Integer>();
+//        ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+//          int columnsNumber = rsmd.getColumnCount();
 
           while (rs.next()) {
-              for(int i=1;i<=columnsNumber;i++){
-                String dbtime = rs.getString(i);
-                System.out.print(dbtime+"  ");
-              }
-              System.out.println("");
-          } //end while
+                String conName = rs.getString("concept");
+                int conId=rs.getInt("id");
+                conceptMap.put(conName, conId);
+          }
+
+                for (String e : conceptMap.keySet()) {
+                    System.out.println(e+"   "+conceptMap.get(e));
+                }
 
           conn.close();
           System.out.println("Disconnected from database");
