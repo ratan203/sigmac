@@ -41,7 +41,7 @@ public class Parser {
         calc=new StrengthCalculator();
     }
 
-    public void parse(String fileName,DocumentPreprocessor.DocType doctype,
+    public Document parse(String fileName,DocumentPreprocessor.DocType doctype,
             String delimeter){
         DocumentPreprocessor p=new DocumentPreprocessor(fileName,doctype);
         p.setElementDelimiter(delimeter);
@@ -58,6 +58,7 @@ public class Parser {
 //        System.out.println("done");
         calc.calculateImportance(doc);
         doc.printDoc();
+        return doc;
 //        try {
 //            FileOutputStream fos = new FileOutputStream("doccc.ser");
 //            try {
