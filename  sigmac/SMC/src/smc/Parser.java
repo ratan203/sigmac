@@ -12,7 +12,6 @@ import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,12 +31,14 @@ public class Parser {
     TreebankLanguagePack tlp;
     GrammaticalStructureFactory gsf;
     SentenceAnalyzer analyzer;
+    StrengthCalculator calc;
 
     public Parser(String modelFile){
         lp=new LexicalizedParser(modelFile);
         tlp = new PennTreebankLanguagePack();
         gsf = tlp.grammaticalStructureFactory();
         analyzer=new SentenceAnalyzer();
+        calc=new StrengthCalculator();
     }
 
     public void parse(String fileName,DocumentPreprocessor.DocType doctype,
@@ -55,18 +56,19 @@ public class Parser {
             doc.addConcepts(cons);
         }
 //        System.out.println("done");
+        calc.calculateImportance(doc);
         doc.printDoc();
-        try {
-            FileOutputStream fos = new FileOutputStream("doccc.ser");
-            try {
-                ObjectOutputStream oout = new ObjectOutputStream(fos);
-                oout.writeObject(doc);
-                oout.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            FileOutputStream fos = new FileOutputStream("doccc.ser");
+//            try {
+//                ObjectOutputStream oout = new ObjectOutputStream(fos);
+//                oout.writeObject(doc);
+//                oout.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

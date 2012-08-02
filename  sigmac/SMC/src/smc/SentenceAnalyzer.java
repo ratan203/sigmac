@@ -82,8 +82,9 @@ public class SentenceAnalyzer {
                         hConcept+=leave.nodeString()+" ";
                     }
                     if(cMap.containsKey(hConcept)){
-                        Concept c=cMap.get(hConcept);
-                        c.modifyStrength(1);
+                        //Concept c=cMap.get(hConcept);
+                        //c.modifyFreequency(1);
+                        System.out.println("not expected");
                     }else{
                         cMap.put(hConcept, new Concept(hConcept));
                     }
@@ -110,8 +111,8 @@ public class SentenceAnalyzer {
                         dConcept+=leave.nodeString()+" ";
                     }
                     if(cMap.containsKey(dConcept)){
-                        Concept c=cMap.get(dConcept);
-                        c.modifyStrength(1);
+                        //Concept c=cMap.get(dConcept);
+                        //c.modifyFreequency(1);
                     }else{
                         cMap.put(dConcept, new Concept(dConcept));
                     }
@@ -151,8 +152,8 @@ public class SentenceAnalyzer {
                     concept+=leave.nodeString()+" ";
                 }
                 if(cMap.containsKey(concept)){
-                    Concept c=cMap.get(concept);
-                    c.modifyStrength(1);
+                    //Concept c=cMap.get(concept);
+                    //c.modifyFreequency(1);
                 }else{
                     cMap.put(concept, new Concept(concept));
                 }
