@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<DocumentT>
+<Document>
 <Title Scale="3">Java</Title>
 <Title Scale="3">Programming language</Title>
+<Title Scale="4">Comments</Title>
+<Title Scale="1">    // establish jpegMedatadata</Title>
+<Title Scale="1">Solution: </Title>
+<Title Scale="1">public String estMetadata(){</Title>
+<Title Scale="1">     if (metadata != null) {</Title>
+<Title Scale="1">         jpegMetadata = (JpegImageMetadata) metadata;</Title>
+<Title Scale="1">    }</Title>
 <Body>
 Java is a programming language originally developed by James Gosling at Sun Microsystems (which has since merged into Oracle Corporation) and released in 1995 as a core component of Sun Microsystems' Java platform. 
 The language derives much of its syntax from C and C++ but has a simpler object model and fewer low-level facilities. 

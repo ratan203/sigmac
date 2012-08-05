@@ -20,7 +20,7 @@ import smc.RelatedConcept;
 public class DBManager {
 public void updateDB(Connection con, Document doc){
         HashMap<String,Concept> concept=doc.getDoc();
-        HashMap<String,ArrayList<RelatedConcept>> relationships;
+        HashMap<String,ArrayList<RelatedConcept>> relationships=new HashMap<String, ArrayList<RelatedConcept>>();
         try{
         Statement stmt = (Statement) con.createStatement();
         int updateQuery;
@@ -45,14 +45,15 @@ public void updateDB(Connection con, Document doc){
         PreparedStatement insertConcept = null;
         PreparedStatement insertConceptDoc = null;
 //        con.setAutoCommit(false);
-        String insertConceptString ="INSERT INTO concepts(concept,frequency,strength) VALUES (?,?,?)";
+        String insertConceptString ="INSERT INTO concepts(concept,frequency,titleStrnegth,strength) VALUES (?,?,?,?)";
         String insertConceptDocString ="INSERT INTO concept_doc(conceptId,docid) VALUES (?,?)";
         insertConcept = con.prepareStatement(insertConceptString);
         insertConceptDoc= con.prepareStatement(insertConceptDocString);
         for (String e : concept.keySet()) {
             insertConcept.setString(1, e.trim());
             insertConcept.setInt(2, concept.get(e).getFreequency());
-            insertConcept.setInt(3, concept.get(e).getStrength());
+            insertConcept.setInt(3, concept.get(e).getTitleStrength());
+            insertConcept.setInt(4, concept.get(e).getStrength());
             insertConcept.executeUpdate();
             con.commit();
 
@@ -87,7 +88,7 @@ public void updateDB(Connection con, Document doc){
           } //end while
 
         PreparedStatement insertRelDoc = null;
-        String insertConceptRelDocString ="INSERT INTO relationships(type,frequency,strength,relConceptId,isHead) VALUES "+"(?,?,?,?,?)";
+        String insertConceptRelDocString ="INSERT INTO relationships(type,frequency,isStrength, partStrength, strength,relConceptId,isHead) VALUES "+"(?,?,?,?,?,?,?)";
         insertRelDoc = con.prepareStatement(insertConceptRelDocString);
 
         PreparedStatement insertRelConDoc = null;
@@ -95,27 +96,33 @@ public void updateDB(Connection con, Document doc){
         insertRelConDoc = con.prepareStatement(insertRelConDocString);
         for (String e : concept.keySet()) {
             relationships=concept.get(e).getRelationships();
-            for (String f : relationships.keySet()) {
-                for(RelatedConcept g:relationships.get(f)){
-                    insertRelDoc.setString(1, g.getType().trim());
-                    insertRelDoc.setInt(2, g.getFreequency());
-                    insertRelDoc.setInt(3, g.getStrength());
-                    insertRelDoc.setInt(4, conceptMap.get(f.trim()));
-                    insertRelDoc.setBoolean(5, g.isHead());
-                    insertRelDoc.executeUpdate();
-                    con.commit();
+            if(!relationships.isEmpty()){
+                for (String f : relationships.keySet()) {
+                    if(relationships.get(f)!=null){
+                    for(RelatedConcept g:relationships.get(f)){
+                            insertRelDoc.setString(1, g.getType().trim());
+                            insertRelDoc.setInt(2, g.getFreequency());
+                            insertRelDoc.setInt(3, g.getIsStrength());
+                            insertRelDoc.setInt(4, g.getPartStrength());
+                            insertRelDoc.setInt(5, g.getStrength());
+                            insertRelDoc.setInt(6, conceptMap.get(f.trim()));
+                            insertRelDoc.setBoolean(5, g.isHead());
+                            insertRelDoc.executeUpdate();
+                            con.commit();
 
-                    String getRelId = "SELECT * from relationships WHERE type=\'"+g.getType()+"\' and relConceptId="+conceptMap.get(f.trim());
-                    ResultSet rs3= stmt.executeQuery(getRelId);
-                    int temp1 = 0;
-                    while (rs3.next()) {
-                        temp1= rs3.getInt("relId");
+                            String getRelId = "SELECT * from relationships WHERE type=\'"+g.getType()+"\' and relConceptId="+conceptMap.get(f.trim());
+                            ResultSet rs3= stmt.executeQuery(getRelId);
+                            int temp1 = 0;
+                            while (rs3.next()) {
+                                temp1= rs3.getInt("relId");
+                            }
+
+                            insertRelConDoc.setInt(1, conceptMap.get(e.trim()));
+                            insertRelConDoc.setInt(2, temp1);
+                            insertRelConDoc.executeUpdate();
+                            con.commit();
+                        }
                     }
-
-                    insertRelConDoc.setInt(1, conceptMap.get(e.trim()));
-                    insertRelConDoc.setInt(2, temp1);
-                    insertRelConDoc.executeUpdate();
-                    con.commit();
                 }
             }
         }

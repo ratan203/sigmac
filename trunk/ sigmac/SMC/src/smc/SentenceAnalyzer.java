@@ -11,6 +11,7 @@ import edu.stanford.nlp.trees.tregex.TregexMatcher;
 import edu.stanford.nlp.trees.tregex.tsurgeon.Tsurgeon;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -250,5 +251,34 @@ public class SentenceAnalyzer {
             patterns.add(p);
 //            System.out.println(p.getTregexPattern());
         }
+    }
+
+    public Set<String> analyzeTitle(Tree title){
+        //ArrayList<String> tmp=new ArrayList<String>();
+        Set<String> titleConcept=new HashSet<String>();
+        for(Pattern p : patterns){
+            if(p.getType().equals("none")){
+                TregexMatcher matcher=p.getTregexPattern().matcher(title);
+                while(matcher.find()){
+                    for(String key : p.getHeadKeys()){
+                        Tree match=matcher.getNode(key);
+                        for(ModifierPattern ptn : p.getSurgeonScripts(key)){
+                            match=Tsurgeon.processPattern(ptn.getTreg(), ptn.getTsur(), match);
+                        }
+                        Tree t=match.firstChild();
+                        if(t==null){
+                            continue;
+                        }
+                        List<LabeledScoredTreeNode> leaves=match.getLeaves();
+                        String concept="";
+                        for(LabeledScoredTreeNode leave : leaves){
+                            concept+=leave.nodeString()+" ";
+                        }
+                        titleConcept.add(concept);
+                    }
+                }
+            }
+        }
+        return titleConcept;
     }
 }

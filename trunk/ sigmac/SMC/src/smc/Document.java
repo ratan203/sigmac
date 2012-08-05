@@ -17,6 +17,7 @@ import java.util.Set;
 public class Document implements Serializable {
 
     private HashMap<String,Concept> doc;
+    private HashMap<String,Title> title=new HashMap<String, Title>();
     private String uri;
     private String name="";
     private int size=0;
@@ -28,6 +29,7 @@ public class Document implements Serializable {
     public Document(String uri){
         doc=new HashMap<String, Concept>();
         this.uri=uri;
+        this.setTitleInfo(this.uri);
     }
 
     public HashMap<String, Concept> getDoc() {
@@ -44,6 +46,15 @@ public class Document implements Serializable {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public HashMap<String,Title> getTitleInfo() {
+        return title;
+    }
+
+    public void setTitleInfo(String uri) {
+        XMLFormattingExtractor xe=new XMLFormattingExtractor();
+        title=xe.getXMLFormatting(uri);
     }
 
     public void addConcepts(ArrayList<Concept> concepts){
@@ -79,4 +90,12 @@ public class Document implements Serializable {
         return size;
     }
 
+    public int getTotalDocumentStrength(){
+        int val=0;
+        Set<String> keys=doc.keySet();
+        for(String key : keys){
+            val+=doc.get(key).getValue();
+        }
+        return val;
+    }
 }
