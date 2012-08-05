@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +58,7 @@ public class Parser {
         }
 //        System.out.println("done");
         calc.calculateImportance(doc);
-        doc.printDoc();
+//        doc.printDoc();
         return doc;
 //        try {
 //            FileOutputStream fos = new FileOutputStream("doccc.ser");
@@ -71,5 +72,11 @@ public class Parser {
 //        } catch (FileNotFoundException ex) {
 //            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+    }
+
+    public Set<String> parseTitle(String title){
+       // ArrayList<String> words=new ArrayList<String>();
+        Tree parse = lp.apply(title);
+        return analyzer.analyzeTitle(parse);
     }
 }

@@ -5,13 +5,12 @@
 
 package optimization;
 
+import java.util.HashMap;
+import smc.Title;
+import smc.XMLFormattingExtractor;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Set;
-import morphoroot.JWNLOps;
 import net.didion.jwnl.JWNLException;
 
 /**
@@ -25,9 +24,9 @@ public class testMain {
      */
     public static void main(String[] args) throws JWNLException, FileNotFoundException{
         // TODO code application logic here
-        JWNLOps jnw=new JWNLOps();
+        JwnlOperations jnw=new JwnlOperations();
         String s1;
-        s1=jnw.getMorphologicalRoot("database management systems");
+        s1=jnw.getMorphologicalRoot("cars ");
         Boolean is=jnw.assertIsRel("java", "object-oriented programming languages");
         Boolean part=jnw.assertPartOfRel("horn", "car");
 
@@ -38,7 +37,7 @@ public class testMain {
 //        }
 //        if(s1.size()>0){
 //        for(String s : s1){
-//            System.out.println("Morphological Root : "+s);
+////            System.out.println("Morphological Root : "+s);
 //            Set<String> s2=new HashSet<String>();
 //            s2=jnw.getMeronym("car");
 //            if(s2.size()>0){
@@ -51,13 +50,13 @@ public class testMain {
 //            System.out.println("No Result");
 //        }
 
-    XMLFormattingExtractor xml=new XMLFormattingExtractor();
-    ArrayList<String> al1= xml.getXMLFormatting("src\\optimization\\testDocx.xml");
-     Iterator itr = al1.iterator();
-      while(itr.hasNext()) {
-         Object element = itr.next();
-         System.out.println(element);
-      }
+//    XMLFormattingExtractor xml=new XMLFormattingExtractor();
+//    HashMap<String, Title> al1= xml.getXMLFormatting("src\\optimization\\testDocx.xml");
+//     Iterator itr = al1.iterator();
+//      while(itr.hasNext()) {
+//         Object element = itr.next();
+//         System.out.println(element);
+//      }
 
 
 

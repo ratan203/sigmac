@@ -21,6 +21,7 @@ public class StrengthCalculator {
 
     public void calculateImportance(Document doc){
         HashMap<String, Concept> conceptMap = doc.getDoc();
+        int totalDocStrength=doc.getTotalDocumentStrength();
         Set<String> keySet = conceptMap.keySet();
         for(String key : keySet){
             Concept concept=conceptMap.get(key);
@@ -34,7 +35,7 @@ public class StrengthCalculator {
                 System.out.println("RelValue : "+relValue);
                 Concept con=conceptMap.get(relKey);
                 System.out.println("Concept value : "+concept.getValue());
-                con.modifyImprotance((float)concept.getValue()*relValue/totalOut);
+                con.modifyImprotance((float)concept.getValue()*relValue/(totalOut*totalDocStrength));
             }
         }
     }

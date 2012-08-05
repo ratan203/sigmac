@@ -18,6 +18,7 @@ public class Concept implements Serializable {
     private String name;
     private HashMap<String,ArrayList<RelatedConcept>> relationships;
     private int freequency;
+    private int titleStrength;
     private int strength;
     private float importance;
     public static final int FREEQUENCY_STRENTH_MULTIPLIER=1;
@@ -69,6 +70,14 @@ public class Concept implements Serializable {
 
     public void updateStrength(int amount){
         this.strength+=amount;
+    }
+
+    public void setTitleStrength(int tStrength){
+        this.titleStrength=tStrength;
+    }
+
+    public int getTitleStrength(){
+        return this.titleStrength;
     }
 
     public void setName(String name) {

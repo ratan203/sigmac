@@ -8,6 +8,8 @@ package database;
 import com.mysql.jdbc.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import net.didion.jwnl.JWNLException;
+import optimization.Optimizer;
 import smc.Document;
 
 /**
@@ -15,7 +17,7 @@ import smc.Document;
  * @author Thilina
  */
 public class testMain {
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, JWNLException {
         DBConnector db1=new DBConnector();
         DBManager dbm=new DBManager();
         Connection conn=(Connection) db1.getConnection();
@@ -45,8 +47,8 @@ public class testMain {
 //        }
 
         Deserialize des=new Deserialize();
-
-        Document doc =des.deserDocument();
+        Optimizer op=new Optimizer();
+        Document doc =op.optimizeDocument(des.deserDocument());
         dbm.updateDB(conn, doc);
     }
 

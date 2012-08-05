@@ -17,6 +17,8 @@ public class RelatedConcept implements Serializable {
     private boolean isHead;
     private int freequency;
     private int strength;
+    private int isStrength;
+    private int partStrength;
     public static final int headStrengthMultiplier=2;
     public static final int tailStrengthMultiplier=1;
 
@@ -66,8 +68,28 @@ public class RelatedConcept implements Serializable {
         this.type = type;
     }
 
+    public int getIsStrength() {
+        return isStrength;
+    }
+
+    public void setIsStrength(int val) {
+        this.isStrength = val;
+    }
+
+    public int getPartStrength() {
+        return partStrength;
+    }
+
+    public void setPartStrength(int val) {
+        this.partStrength = val;
+    }
+
     public boolean isHead(){
         return isHead;
+    }
+
+    public void setHead(Boolean head){
+        this.isHead=head;
     }
 
     public void modifyFreequency(int amount){
