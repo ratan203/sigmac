@@ -18,6 +18,8 @@ public class Document implements Serializable {
 
     private HashMap<String,Concept> doc;
     private String uri;
+    private String name="";
+    private int size=0;
 
     public Document(){
         doc=new HashMap<String, Concept>();
@@ -67,6 +69,14 @@ public class Document implements Serializable {
             Concept con=doc.get(key);
             con.printConcept();
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSize() {
+        return size;
     }
 
 }
