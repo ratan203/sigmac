@@ -45,8 +45,8 @@ public void updateDB(Connection con, Document doc){
         PreparedStatement insertConcept = null;
         PreparedStatement insertConceptDoc = null;
 //        con.setAutoCommit(false);
-        String insertConceptString ="INSERT INTO concepts(concept,frequency,titleStrength,strength) VALUES (?,?,?,?)";
-        String insertConceptDocString ="INSERT INTO concept_doc(conceptId,docid) VALUES (?,?)";
+        String insertConceptString ="INSERT INTO concepts(conceptName,frequency,titleStrength,strength) VALUES (?,?,?,?)";
+        String insertConceptDocString ="INSERT INTO concept_doc(conceptId,docId) VALUES (?,?)";
         insertConcept = con.prepareStatement(insertConceptString);
         insertConceptDoc= con.prepareStatement(insertConceptDocString);
         for (String e : concept.keySet()) {
@@ -61,7 +61,7 @@ public void updateDB(Connection con, Document doc){
             if(e.contains("'")){
                 modConcept=e.replace("'", "''");
             }
-            String getConId = "SELECT * from concepts WHERE concept=\'"+modConcept+"\'";
+            String getConId = "SELECT * from concepts WHERE conceptName=\'"+modConcept+"\'";
 //            System.out.println(getConId);
 //            System.exit(0);
             ResultSet rs2= stmt.executeQuery(getConId);
@@ -82,13 +82,13 @@ public void updateDB(Connection con, Document doc){
         HashMap<String,Integer> conceptMap = new HashMap<String, Integer>();
 
          while (rs.next()) {
-                String conName = rs.getString("concept");
+                String conName = rs.getString("conceptName");
                 int conId=rs.getInt("conceptId");
-                conceptMap.put(conName, conId);
+                conceptMap.put(conName.trim(), conId);
           } //end while
 
         PreparedStatement insertRelDoc = null;
-        String insertConceptRelDocString ="INSERT INTO relationships(type,frequency,isStrength, partStrength, strength,relConceptId,isHead) VALUES "+"(?,?,?,?,?,?,?)";
+        String insertConceptRelDocString ="INSERT INTO relationships(type,frequency,is_aStrength, part_ofStrength, strength,conceptId,isHead) VALUES "+"(?,?,?,?,?,?,?)";
         insertRelDoc = con.prepareStatement(insertConceptRelDocString);
 
         PreparedStatement insertRelConDoc = null;
@@ -105,19 +105,27 @@ public void updateDB(Connection con, Document doc){
                             insertRelDoc.setInt(3, g.getIsStrength());
                             insertRelDoc.setInt(4, g.getPartStrength());
                             insertRelDoc.setInt(5, g.getStrength());
-                            insertRelDoc.setInt(6, conceptMap.get(f.trim()));
+                            int conceptId=0;
+                            if(conceptMap.get(f.trim())!=null){
+                                conceptId=conceptMap.get(f.trim());
+                            }
+                            insertRelDoc.setInt(6,conceptId );
                             insertRelDoc.setBoolean(7, g.isHead());
                             insertRelDoc.executeUpdate();
                             con.commit();
 
-                            String getRelId = "SELECT * from relationships WHERE type=\'"+g.getType()+"\' and relConceptId="+conceptMap.get(f.trim());
+                            String getRelId = "SELECT * from relationships WHERE type=\'"+g.getType()+"\' and conceptId="+conceptId;
                             ResultSet rs3= stmt.executeQuery(getRelId);
                             int temp1 = 0;
                             while (rs3.next()) {
                                 temp1= rs3.getInt("relId");
                             }
 
-                            insertRelConDoc.setInt(1, conceptMap.get(e.trim()));
+                            int oriCon=0;
+                            if(conceptMap.get(e.trim())!=null){
+                                oriCon=conceptMap.get(e.trim());
+                            }
+                            insertRelConDoc.setInt(1, oriCon);
                             insertRelConDoc.setInt(2, temp1);
                             insertRelConDoc.executeUpdate();
                             con.commit();
