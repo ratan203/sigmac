@@ -99,7 +99,7 @@ public void updateDB(Connection con, Document doc){
             if(!relationships.isEmpty()){
                 for (String f : relationships.keySet()) {
                     if(relationships.get(f)!=null){
-                    for(RelatedConcept g:relationships.get(f)){
+                        for(RelatedConcept g:relationships.get(f)){
                             insertRelDoc.setString(1, g.getType().trim());
                             insertRelDoc.setInt(2, g.getFreequency());
                             insertRelDoc.setInt(3, g.getIsStrength());
