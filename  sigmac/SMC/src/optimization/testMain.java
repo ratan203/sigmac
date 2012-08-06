@@ -26,14 +26,14 @@ public class testMain {
         // TODO code application logic here
         JwnlOperations jnw=new JwnlOperations();
         String s1;
-        s1=jnw.getMorphologicalRoot("mobile applications ");
+        s1=jnw.getMorphologicalRoot("  mobile applications ");
         Boolean is=jnw.assertIsRel("java", "object-oriented programming languages");
         Boolean part=jnw.assertPartOfRel("horn", "car");
 
         System.out.println(is);
         System.out.println(part);
 //        for(String s : s1){
-        System.out.println(s1);
+        System.out.println("-"+s1+"-");
 //        }
 //        if(s1.size()>0){
 //        for(String s : s1){
@@ -50,15 +50,15 @@ public class testMain {
 //            System.out.println("No Result");
 //        }
 
-        XMLFormattingExtractor xml=new XMLFormattingExtractor();
-        HashMap<String, Title> al1= xml.getXMLFormatting("testDocx.xml");
-         for(String a:al1.keySet()){
-             System.out.println(a);
-             System.out.println(al1.get(a).getTitleStrength());
-             for(String b:al1.get(a).getTitleSet()){
-                 System.out.println(b);
-             }
-         }
+//        XMLFormattingExtractor xml=new XMLFormattingExtractor();
+//        HashMap<String, Title> al1= xml.getXMLFormatting("testDocx.xml");
+//         for(String a:al1.keySet()){
+//             System.out.println(a);
+//             System.out.println(al1.get(a).getTitleStrength());
+//             for(String b:al1.get(a).getTitleSet()){
+//                 System.out.println(b);
+//             }
+//         }
     }
 
 }

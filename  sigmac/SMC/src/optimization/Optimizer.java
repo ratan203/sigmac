@@ -31,7 +31,7 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
     HashMap<String,Concept> doc1 = new HashMap<String, Concept>();
     for(String con:doc.keySet()){
         String morphRoot;
-        morphRoot=wn.getMorphologicalRoot(con);
+        morphRoot=wn.getMorphologicalRoot(con).trim();
         if(doc1.containsKey(morphRoot)){
             concept=doc1.get(morphRoot);
             concept.setFreequency(concept.getFreequency()+doc.get(con).getFreequency());
@@ -55,21 +55,24 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
 private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relationshipsCommon) throws FileNotFoundException, JWNLException{
     ArrayList<RelatedConcept> relListCommon=new ArrayList<RelatedConcept>();
     for(String rel:relationshipsCommon.keySet()){
-        String morphRootRel=wn.getMorphologicalRoot(rel);
+        String morphRootRel=wn.getMorphologicalRoot(rel).trim();
         if(relationships1.containsKey(morphRootRel)){
             ArrayList<RelatedConcept> relList = new ArrayList<RelatedConcept>();
             relListCommon=relationships1.get(morphRootRel);
             if(relationshipsCommon.get(rel)!=null){
-                relList.addAll(relationshipsCommon.get(rel));
+                for(RelatedConcept re:relationshipsCommon.get(rel)){
+                    re.setRelatedConcept(morphRootRel);
+                    relList.add(re);
+                }
                 for(RelatedConcept rc:relListCommon){
                     for(int i=0;i<relList.size();i++){
                         if(relList.get(i).getType().equals(rc.getType())){
                             relList.get(i).setFreequency(relList.get(i).getFreequency()+rc.getFreequency());
-                            relList.get(i).setRelatedConcept(morphRootRel);
-                        }else{
-                            rc.setRelatedConcept(morphRootRel);
-                            relList.add(rc);
                         }
+                    }
+                    if(!relList.contains(rc)){
+                        rc.setRelatedConcept(morphRootRel);
+                        relList.add(rc);
                     }
                 }
             }
@@ -89,15 +92,15 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                     for(RelatedConcept g:rel1.get(f)){
                         if(g.getType().equals("aso")){
                             if(wn.assertIsRel(con, g.getRelatedConcept())){
-                                g.setType("is_a");
+                                g.setType("is a");
                                 g.setIsStrength(1);
                                 g.setHead(Boolean.FALSE);
                             }else if(wn.assertIsRel(g.getRelatedConcept(), con)){
-                                g.setType("is_a");
+                                g.setType("is a");
                                 g.setIsStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }
-                        }else if(g.getType().equals("is_a")){
+                        }else if(g.getType().equals("is a")){
                             if(wn.assertIsRel(con, g.getRelatedConcept())){
                                 g.setIsStrength(1);
                             }else if(wn.assertIsRel(g.getRelatedConcept(), con)){
@@ -107,15 +110,15 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
 
                         if(g.getType().equals("aso")){
                         if(wn.assertPartOfRel(con, g.getRelatedConcept())){
-                                g.setType("part_of");
+                                g.setType("part of");
                                 g.setPartStrength(1);
                                 g.setHead(Boolean.FALSE);
                             }else if(wn.assertPartOfRel(g.getRelatedConcept(), con)){
-                                g.setType("part_of");
+                                g.setType("part of");
                                 g.setPartStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }
-                        }else if(g.getType().equals("part_of")){
+                        }else if(g.getType().equals("part of")){
                             if(wn.assertPartOfRel(con, g.getRelatedConcept())){
                                 g.setPartStrength(1);
                             }else if(wn.assertPartOfRel(g.getRelatedConcept(), con)){
@@ -142,8 +145,8 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
         }
 
         HashMap<String, Concept> dd1=d1.getDoc();
-        int totTitleStr=0;
         for(String con:dd1.keySet()){
+            int totTitleStr=0;
             for(String a:titleList.keySet()){
                 if(titleList.get(a).getTitleSet().contains(con)){
                     totTitleStr+=titleList.get(a).getTitleStrength();
