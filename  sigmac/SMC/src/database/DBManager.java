@@ -45,7 +45,7 @@ public void updateDB(Connection con, Document doc){
         PreparedStatement insertConcept = null;
         PreparedStatement insertConceptDoc = null;
 //        con.setAutoCommit(false);
-        String insertConceptString ="INSERT INTO concepts(concept,frequency,titleStrnegth,strength) VALUES (?,?,?,?)";
+        String insertConceptString ="INSERT INTO concepts(concept,frequency,titleStrength,strength) VALUES (?,?,?,?)";
         String insertConceptDocString ="INSERT INTO concept_doc(conceptId,docid) VALUES (?,?)";
         insertConcept = con.prepareStatement(insertConceptString);
         insertConceptDoc= con.prepareStatement(insertConceptDocString);
@@ -106,7 +106,7 @@ public void updateDB(Connection con, Document doc){
                             insertRelDoc.setInt(4, g.getPartStrength());
                             insertRelDoc.setInt(5, g.getStrength());
                             insertRelDoc.setInt(6, conceptMap.get(f.trim()));
-                            insertRelDoc.setBoolean(5, g.isHead());
+                            insertRelDoc.setBoolean(7, g.isHead());
                             insertRelDoc.executeUpdate();
                             con.commit();
 

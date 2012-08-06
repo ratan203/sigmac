@@ -46,10 +46,9 @@ public class testMain {
 //          e.printStackTrace();
 //        }
 
-        Deserialize des=new Deserialize();
-        Optimizer op=new Optimizer();
-        Document doc =op.optimizeDocument(des.deserDocument());
-        dbm.updateDB(conn, doc);
+//        Deserialize des=new Deserialize();
+//        Optimizer op=new Optimizer();
+//        dbm.updateDB(conn, doc);
     }
 
 }
