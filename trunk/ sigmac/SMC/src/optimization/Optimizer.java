@@ -8,6 +8,8 @@ package optimization;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import net.didion.jwnl.JWNLException;
 import smc.Concept;
 import smc.Document;
@@ -20,15 +22,11 @@ import smc.Title;
  */
 public class Optimizer {
  private HashMap<String,Concept> doc;
- private HashMap<String,ArrayList<RelatedConcept>> relationshipsold;
- private HashMap<String,ArrayList<RelatedConcept>> relationshipsnew;
+ private HashMap<String,ArrayList<RelatedConcept>> relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
  private Concept concept;
- private ArrayList<RelatedConcept> relListOld;
- private RelatedConcept relatedConcept;
- private ArrayList<String> formatting;
  private JwnlOperations wn=new JwnlOperations();
 
-public Document optimizeDocument(Document docc) throws FileNotFoundException, JWNLException{
+private Document optimizeDocument(Document docc) throws FileNotFoundException, JWNLException{
     doc=docc.getDoc();
     HashMap<String,Concept> doc1 = new HashMap<String, Concept>();
     for(String con:doc.keySet()){
@@ -39,60 +37,12 @@ public Document optimizeDocument(Document docc) throws FileNotFoundException, JW
             concept.setFreequency(concept.getFreequency()+doc.get(con).getFreequency());
             concept.setName(morphRoot);
 
-            HashMap<String,ArrayList<RelatedConcept>> relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
+            HashMap<String,ArrayList<RelatedConcept>> relationshipsold=new HashMap<String, ArrayList<RelatedConcept>>();
+            HashMap<String,ArrayList<RelatedConcept>> relationshipsnew=new HashMap<String, ArrayList<RelatedConcept>>();
             relationshipsold=concept.getRelationships();
             relationshipsnew=doc.get(con).getRelationships();
-            for(String rel:relationshipsold.keySet()){
-                String morphRootRel=wn.getMorphologicalRoot(rel);
-                if(relationships1.containsKey(morphRootRel)){
-                    ArrayList<RelatedConcept> relList = new ArrayList<RelatedConcept>();
-                    relListOld=relationships1.get(morphRootRel);
-                    relList=relationshipsold.get(rel);
-                    for(RelatedConcept rc:relListOld){
-                        for(RelatedConcept rc1:relList){
-                            if(rc1.getType().equals(rc.getType())){
-                                relatedConcept=rc1;
-                                relatedConcept.setFreequency(relatedConcept.getFreequency()+rc.getFreequency());
-                                relatedConcept.setRelatedConcept(morphRootRel);
-                                relList.remove(rc1);
-                                relList.add(relatedConcept);
-                            }else{
-                                relList.add(rc);
-                            }
-                        }
-                    }
-                    relationships1.remove(morphRootRel);
-                    relationships1.put(morphRootRel, relList);
-                }else{
-                    relationships1.put(morphRootRel, relationshipsold.get(rel));
-                }
-            }
-
-            for(String rel:relationshipsnew.keySet()){
-                String morphRootRel=wn.getMorphologicalRoot(rel);
-                if(relationships1.containsKey(morphRootRel)){
-                    ArrayList<RelatedConcept> relList = new ArrayList<RelatedConcept>();
-                    relListOld=relationships1.get(morphRootRel);
-                    relList=relationshipsold.get(rel);
-                    for(RelatedConcept rc:relListOld){
-                        for(RelatedConcept rc1:relList){
-                            if(rc1.getType().equals(rc.getType())){
-                                relatedConcept=rc1;
-                                relatedConcept.setFreequency(relatedConcept.getFreequency()+rc.getFreequency());
-                                relatedConcept.setRelatedConcept(morphRootRel);
-                                relList.remove(rc1);
-                                relList.add(relatedConcept);
-                            }else{
-                                relList.add(rc);
-                            }
-                        }
-                    }
-                    relationships1.remove(morphRootRel);
-                    relationships1.put(morphRootRel, relList);
-                }else{
-                    relationships1.put(morphRootRel, relationshipsold.get(rel));
-                }
-            }
+            relationshipJoin(relationshipsold);
+            relationshipJoin(relationshipsnew);
 
             concept.setRelationships(relationships1);
             doc1.remove(morphRoot);
@@ -101,11 +51,39 @@ public Document optimizeDocument(Document docc) throws FileNotFoundException, JW
             doc1.put(morphRoot, doc.get(con));
         }
     }
-    docc.setDoc(doc);
+    docc.setDoc(doc1);
     return docc;
 }
 
-    public void assertRelationships(Document d1) throws FileNotFoundException, JWNLException{
+private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relationshipsCommon) throws FileNotFoundException, JWNLException{
+    ArrayList<RelatedConcept> relListCommon=new ArrayList<RelatedConcept>();
+    for(String rel:relationshipsCommon.keySet()){
+        String morphRootRel=wn.getMorphologicalRoot(rel);
+        if(relationships1.containsKey(morphRootRel)){
+            ArrayList<RelatedConcept> relList = new ArrayList<RelatedConcept>();
+            relListCommon=relationships1.get(morphRootRel);
+            if(relationshipsCommon.get(rel)!=null){
+                relList.addAll(relationshipsCommon.get(rel));
+                for(RelatedConcept rc:relListCommon){
+                    for(int i=0;i<relList.size();i++){
+                        if(relList.get(i).getType().equals(rc.getType())){
+                            relList.get(i).setFreequency(relList.get(i).getFreequency()+rc.getFreequency());
+                            relList.get(i).setRelatedConcept(morphRootRel);
+                        }else{
+                            rc.setRelatedConcept(morphRootRel);
+                            relList.add(rc);
+                        }
+                    }
+                }
+            }
+            relationships1.remove(morphRootRel);
+            relationships1.put(morphRootRel, relList);
+        }else{
+            relationships1.put(morphRootRel, relationshipsCommon.get(rel));
+        }
+    }
+}
+    private Document optimizeRelationships(Document d1) throws FileNotFoundException, JWNLException{
         HashMap<String, Concept> dd1=d1.getDoc();
         HashMap<String,ArrayList<RelatedConcept>> rel1=new HashMap<String, ArrayList<RelatedConcept>>();
         for(String con:dd1.keySet()){
@@ -155,10 +133,33 @@ public Document optimizeDocument(Document docc) throws FileNotFoundException, JW
             }
             dd1.get(con).setRelationships(rel1);
         }
+        return d1;
     }
 
-    public void optimizeConcept(Document d1){
+    private Document optimizeConcept(Document d1) throws FileNotFoundException, JWNLException{
         HashMap<String,Title> titleList=d1.getTitleInfo();
+        for(String a:titleList.keySet()){
+            Set<String> titlSet=new HashSet<String>();
+            for(String b:titleList.get(a).getTitleSet()){
+                titlSet.add(wn.getMorphologicalRoot(b));
+            }
+            titleList.get(a).setTitleSet(titlSet);
+        }
 
+        HashMap<String, Concept> dd1=d1.getDoc();
+        int totTitleStr=0;
+        for(String con:dd1.keySet()){
+            for(String a:titleList.keySet()){
+                if(titleList.get(a).getTitleSet().contains(con)){
+                    totTitleStr+=titleList.get(a).getTitleStrength();
+                }
+            }
+            dd1.get(con).setTitleStrength(totTitleStr);
+        }
+        return d1;
+    }
+
+    public Document optimizeDoc(Document doc) throws FileNotFoundException, JWNLException{
+        return optimizeConcept(optimizeRelationships(optimizeDocument(doc)));
     }
 }

@@ -58,7 +58,7 @@ public class Parser {
         }
 //        System.out.println("done");
         calc.calculateImportance(doc);
-//        doc.printDoc();
+        doc.printDoc();
         return doc;
 //        try {
 //            FileOutputStream fos = new FileOutputStream("doccc.ser");

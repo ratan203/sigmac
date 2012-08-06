@@ -8,7 +8,6 @@ package smc;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
@@ -53,34 +52,38 @@ public class XMLFormattingExtractor {
             Element docEle = dom.getDocumentElement();
 
             //get a nodelist of elements
-            NodeList nl = docEle.getElementsByTagName("Title");
+            NodeList nl = docEle.getElementsByTagName("titles");
             if(nl != null && nl.getLength() > 0) {
                     for(int i = 0 ; i < nl.getLength();i++) {
 
                             //get the title element
-                            Element el = (Element)nl.item(i);
-                            int titleVal=Integer.parseInt(el.getAttribute("Scale"));
+                            Element el = (Element)nl.item(i);                            
+                            
                             //get the title text and add to list
-                            String titleStr=getTextValue(el);
-                            if(titleStr!=null){
-                                Set<String> set=p.parseTitle(titleStr);
-                                Title titl=new Title(set, titleVal);
-                                titleInfo.put(titleStr, titl);
-                            }
+                            setTitleInfo(el,"title");
+                            
                     }
             }
     }
 
-    private String getTextValue(Element ele) {
+    private void setTitleInfo(Element ele, String tagName) {
         String finTitle = null;
-//        NodeList nl = ele.getElementsByTagName(tagName);
-//        if(nl != null && nl.getLength() > 0) {
-//            for(int i = 0 ; i < nl.getLength();i++) {
-//                Element el = (Element)nl.item(i);
-                finTitle=ele.getFirstChild().getNodeValue();
-//            }
-//        }
-        return finTitle;   
+        int titleVal=0;
+        NodeList nl = ele.getElementsByTagName(tagName);
+        if(nl != null && nl.getLength() > 0) {
+            for(int i = 0 ; i < nl.getLength();i++) {
+                Element el = (Element)nl.item(i);
+                if(!el.getAttribute("scale").equals("")&&!el.getAttribute("scale").equals(null)){
+                    titleVal=Integer.parseInt(el.getAttribute("scale"));
+                }
+                finTitle=el.getFirstChild().getNodeValue();
+                if(finTitle!=null){
+                    Set<String> set=p.parseTitle(finTitle);
+                    Title titl=new Title(set, titleVal);
+                    titleInfo.put(finTitle, titl);
+                }
+            }
+        }
     }
 
     public HashMap<String,Title> getXMLFormatting(String path){

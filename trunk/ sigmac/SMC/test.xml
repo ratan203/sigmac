@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Document>
-<Title Scale="3">Java</Title>
-<Title Scale="3">Programming language</Title>
-<Title Scale="4">Comments</Title>
-<Title Scale="1">    // establish jpegMedatadata</Title>
-<Title Scale="1">Solution: </Title>
-<Title Scale="1">public String estMetadata(){</Title>
-<Title Scale="1">     if (metadata != null) {</Title>
-<Title Scale="1">         jpegMetadata = (JpegImageMetadata) metadata;</Title>
-<Title Scale="1">    }</Title>
-<Body>
+<titles><title scale="4">Comments</title><title scale="1">    // establish jpegMedatadata</title><title scale="1">Solution: </title><title scale="1">public String estMetadata(){</title><title scale="1">     if (metadata != null) {</title><title scale="1">         jpegMetadata = (JpegImageMetadata) metadata;</title><title scale="1">    }</title><title scale="1">}</title><title scale="1">Data Clumps</title><title scale="3">nl.headspring.photoz.client.ImagePropertyEditor</title><title scale="1">nl.headspring.photoz.client.PreviewPane</title><title scale="1">eventBus</title><title scale="1">imageService</title><title scale="5">descriptionPane</title><title scale="1">closeButton</title><title scale="1">maxSize</title><title scale="1">rb</title><title scale="1">Solution: </title><title scale="1">Switch Statements</title><title scale="1">main.java.nl.headspring.photoz.client.FolderView</title><title scale="1">main.java.nl.headspring.photoz.client.AnnotationTree</title><title scale="2">Solution: </title><title scale="1">Speculative Generality</title><title scale="1">e</title><title scale="1">'handleBusEvent'</title><title scale="1">'componentResized'</title><title scale="1">'componentMoved'</title><title scale="1">'componentShown'</title><title scale="1">'componentHidden'</title><title scale="1">Solution: </title></titles>
+<body>
 Java is a programming language originally developed by James Gosling at Sun Microsystems (which has since merged into Oracle Corporation) and released in 1995 as a core component of Sun Microsystems' Java platform. 
 The language derives much of its syntax from C and C++ but has a simpler object model and fewer low-level facilities. 
 Java applications are typically compiled to bytecode (class file) that can run on any Java Virtual Machine (JVM) regardless of computer architecture.
@@ -53,7 +45,7 @@ Following Oracle Corporation's acquisition of Sun Microsystems in 2009-2010, Ora
  Java software runs on laptops to data centers, game consoles to scientific supercomputers. 
  There are 930 million Java Runtime Environment downloads each year and 3 billion mobile phones run Java.
  On April 2, 2010, James Gosling resigned from Oracle.
-</Body>
+</body>
 
 ********* is a types *************
 
@@ -83,4 +75,6 @@ Java is currently one of the most popular programming languages in use, particul
 The original and reference implementation Java compilers, virtual machines, and class libraries were developed by Sun from 1995. 
 As of May 2007, in compliance with the specifications of the Java Community Process, Sun relicensed most of its Java technologies under the GNU General Public License. 
 Others have also developed alternative implementations of these Sun technologies, such as the GNU Compiler for Java and GNU Classpath.
+
+<titles><title scale="4">Comments</title><title scale="1">    // establish jpegMedatadata</title><title scale="1">Solution: </title><title scale="1">public String estMetadata(){</title><title scale="1">     if (metadata != null) {</title><title scale="1">         jpegMetadata = (JpegImageMetadata) metadata;</title><title scale="1">    }</title><title scale="1">}</title><title scale="1">Data Clumps</title><title scale="1">nl.headspring.photoz.client.ImagePropertyEditor</title><title scale="1">nl.headspring.photoz.client.PreviewPane</title><title scale="1">eventBus</title><title scale="1">imageService</title><title scale="1">descriptionPane</title><title scale="1">closeButton</title><title scale="1">maxSize</title><title scale="1">rb</title><title scale="1">Solution: </title><title scale="1">Switch Statements</title><title scale="1">main.java.nl.headspring.photoz.client.FolderView</title><title scale="1">main.java.nl.headspring.photoz.client.AnnotationTree</title><title scale="1">Solution: </title><title scale="1">Speculative Generality</title><title scale="1">e</title><title scale="1">'handleBusEvent'</title><title scale="1">'componentResized'</title><title scale="1">'componentMoved'</title><title scale="1">'componentShown'</title><title scale="1">'componentHidden'</title><title scale="1">Solution: </title></titles>
 </Document>
