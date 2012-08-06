@@ -37,17 +37,14 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             concept.setFreequency(concept.getFreequency()+doc.get(con).getFreequency());
             concept.setName(morphRoot);
 
-            HashMap<String,ArrayList<RelatedConcept>> relationshipsold=new HashMap<String, ArrayList<RelatedConcept>>();
-            HashMap<String,ArrayList<RelatedConcept>> relationshipsnew=new HashMap<String, ArrayList<RelatedConcept>>();
-            relationshipsold=concept.getRelationships();
-            relationshipsnew=doc.get(con).getRelationships();
-            relationshipJoin(relationshipsold);
-            relationshipJoin(relationshipsnew);
+            relationshipJoin(concept.getRelationships());
+            relationshipJoin(doc.get(con).getRelationships());
 
             concept.setRelationships(relationships1);
             doc1.remove(morphRoot);
             doc1.put(morphRoot, concept);
         }else{
+            doc.get(con).setName(morphRoot);
             doc1.put(morphRoot, doc.get(con));
         }
     }
@@ -76,8 +73,6 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                     }
                 }
             }
-            relationships1.remove(morphRootRel);
-            relationships1.put(morphRootRel, relList);
         }else{
             relationships1.put(morphRootRel, relationshipsCommon.get(rel));
         }
