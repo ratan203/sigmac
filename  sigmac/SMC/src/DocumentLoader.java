@@ -1,12 +1,16 @@
 
 import XMLParser.InXMLCreator;
 import adaptors.*;
-import java.io.File;
-import java.io.IOException;
-import java.security.Timestamp;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.mysql.jdbc.Connection;
+import database.DBConnector;
+import database.DBManager;
+import edu.stanford.nlp.process.DocumentPreprocessor.DocType;
+import java.io.File;
+import optimization.Optimizer;
+import smc.Parser;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -90,9 +94,18 @@ public class DocumentLoader {
             java.util.Date date= new java.util.Date();
             System.out.println(date.getTime());
             long timestamp=date.getTime();
+            
             xmlcreater.createXML(doc, "InterXML//"+timestamp+".xml",path);
             String XMLPath="InterXML//"+timestamp+".xml";
+            Parser p=new Parser("grammar/englishPCFG.ser.gz");
+            smc.Document doc2=p.parse(XMLPath, DocType.XML, "body");
+            Optimizer opti=new Optimizer();
+            smc.Document doc1=opti.optimizeDoc(doc2);
 
+            DBConnector db1=new DBConnector();
+            DBManager dbm=new DBManager();
+            Connection conn=(Connection) db1.getConnection();
+            dbm.updateDB(conn, doc1);
        }
    }
    
