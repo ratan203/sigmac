@@ -60,39 +60,36 @@ public class DocumentLoader {
    public void filepath(String path, String extension) throws Exception{
        //System.out.println("File Path ="+path+"   Extension is ="+extension);
        SCDocument doc = null;
-       if(extension.equalsIgnoreCase(".ppt")){
-//             DocReader docreader = new DocReader();
-//             doc=docreader.getDocument(path);
+       if(extension.equalsIgnoreCase(".doc")){
+             DocReader docreader = new DocReader();
+             doc=docreader.getDocument(path);    
+       }
+       else if(extension.equalsIgnoreCase(".ppt")){
              pptreader pptreader = new pptreader();
              doc=pptreader.getDocument(path);
-            
        }
-//       else if(extension.equalsIgnoreCase(".ppt")){
-//             pptreader pptreader = new pptreader();
-//             doc=pptreader.getDocument(path);
-//       }
-//       else if(extension.equalsIgnoreCase(".pdf")){
-//            File f=new File(path);
-//            PDFAdapter adapter=new PDFAdapter(f);
-//            doc=adapter.getDocument();
-//       }else if(extension.equalsIgnoreCase(".pptx")){
-//             PpptxSCD pptx = new PpptxSCD();
-//             doc=pptx.getDocument(path);
-//       }
-//       else if(extension.equalsIgnoreCase(".docx")){
-//             DocxSCD docx = new DocxSCD();
-//             doc=docx.getDocument(path);
-//       }
-//       else if(extension.equalsIgnoreCase(".odt")){
-//             OdsExtractor odt = new OdsExtractor();
-//             doc=odt.getDocument(path);
-//       }
+       else if(extension.equalsIgnoreCase(".pdf")){
+            File f=new File(path);
+            PDFAdapter adapter=new PDFAdapter(f);
+            doc=adapter.getDocument();
+       }else if(extension.equalsIgnoreCase(".pptx")){
+             PpptxSCD pptx = new PpptxSCD();
+             doc=pptx.getDocument(path);
+       }
+       else if(extension.equalsIgnoreCase(".docx")){
+             DocxSCD docx = new DocxSCD();
+             doc=docx.getDocument(path);
+       }
+       else if(extension.equalsIgnoreCase(".odt")){
+             OdsExtractor odt = new OdsExtractor();
+             doc=odt.getDocument(path);
+       }
 //       
        if(doc!=null){
             InXMLCreator xmlcreater=new InXMLCreator();
             java.util.Date date= new java.util.Date();
             System.out.println(date.getTime());
-            xmlcreater.createXML(doc, "C:\\Users\\COMPAQ\\Desktop\\Project\\XML\\"+date.getTime()+".xml");
+            xmlcreater.createXML(doc, "C:\\Users\\COMPAQ\\Desktop\\Project\\XML\\"+date.getTime()+".xml",path);
        }
    }
    
