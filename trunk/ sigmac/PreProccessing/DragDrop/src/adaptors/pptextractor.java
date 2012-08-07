@@ -1,7 +1,6 @@
 package adaptors;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.poi.hslf.HSLFSlideShow;
@@ -22,7 +21,7 @@ import org.apache.poi.hslf.usermodel.SlideShow;
  */
 public class pptextractor {
     String body=null;
-    public SCDocument textextractor(HSLFSlideShow slideshow,SlideShow ppss) throws IOException{
+    public SCDocument textextractor(HSLFSlideShow slideshow,SlideShow ppss){
         
         PowerPointExtractor ppte=new PowerPointExtractor(slideshow);
        // System.out.println(ppte.getText());

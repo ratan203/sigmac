@@ -1,6 +1,7 @@
 package XMLParser;
 	 
 import adaptors.SCDocument;
+import anaphorares.Anaphora;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +19,7 @@ import org.w3c.dom.Element;
 	 
 public class InXMLCreator {
  
-	public void createXML(SCDocument document,String outputFilePath) {
+	public void createXML(SCDocument document,String outputFilePath, String url) {
  
 	  try {
  
@@ -27,12 +28,25 @@ public class InXMLCreator {
  
 		// Document elements
 		Document doc = docBuilder.newDocument();
-		Element rootElement = doc.createElement("document");
+                
+                Anaphora ana=new Anaphora();
+                String tmpFile="C:\\test1.txt";
+                String ana1=document.getBody().toString();                
+                String anaRes=ana.resolveAnaph(ana1.replace("\n", "").replace("\r", ""),tmpFile);
+               
+                Element rootElement = doc.createElement("document");
 		doc.appendChild(rootElement);
+                
+                //Document Metadata
+                
+                Element uri = doc.createElement("Url");
+                rootElement.appendChild(uri);
+                uri.appendChild(doc.createTextNode(url));
  
 		// body elements
 		Element body = doc.createElement("body");
-		rootElement.appendChild(doc.createTextNode(document.getBody()));
+                rootElement.appendChild(body);
+		body.appendChild(doc.createTextNode(anaRes));
  
 		//Title elements
 		Element titles = doc.createElement("titles");

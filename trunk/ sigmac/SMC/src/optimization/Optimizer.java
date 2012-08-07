@@ -22,7 +22,7 @@ import smc.Title;
  */
 public class Optimizer {
  private HashMap<String,Concept> doc;
- private HashMap<String,ArrayList<RelatedConcept>> relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
+ private HashMap<String,ArrayList<RelatedConcept>> relationships1;
  private Concept concept;
  private JwnlOperations wn=new JwnlOperations();
 
@@ -36,6 +36,7 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             concept=doc1.get(morphRoot);
             concept.setFreequency(concept.getFreequency()+doc.get(con).getFreequency());
             concept.setName(morphRoot);
+            relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
 
             relationshipJoin(concept.getRelationships());
             relationshipJoin(doc.get(con).getRelationships());
