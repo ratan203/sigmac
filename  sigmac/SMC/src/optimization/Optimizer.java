@@ -54,10 +54,11 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
 
 private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relationshipsCommon) throws FileNotFoundException, JWNLException{
     ArrayList<RelatedConcept> relListCommon=new ArrayList<RelatedConcept>();
+    ArrayList<RelatedConcept> relList;
     for(String rel:relationshipsCommon.keySet()){
         String morphRootRel=wn.getMorphologicalRoot(rel).trim();
         if(relationships1.containsKey(morphRootRel)){
-            ArrayList<RelatedConcept> relList = new ArrayList<RelatedConcept>();
+            relList = new ArrayList<RelatedConcept>();
             relListCommon=relationships1.get(morphRootRel);
             if(relationshipsCommon.get(rel)!=null){
                 for(RelatedConcept re:relationshipsCommon.get(rel)){
@@ -77,8 +78,12 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                 }
             }
         }else{
-            relationships1.put(morphRootRel, relationshipsCommon.get(rel));
+            relList=relationshipsCommon.get(rel);
         }
+        if(relationships1.containsKey(morphRootRel)){
+            relationships1.remove(morphRootRel);
+        }
+        relationships1.put(morphRootRel, relList);
     }
 }
     private Document optimizeRelationships(Document d1) throws FileNotFoundException, JWNLException{
