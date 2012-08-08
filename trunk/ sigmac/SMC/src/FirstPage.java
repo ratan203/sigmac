@@ -1,11 +1,14 @@
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextPane;
 
 /*
  * To change this template, choose Tools | Templates
@@ -126,25 +129,38 @@ public class FirstPage extends javax.swing.JFrame {
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
         frame.getContentPane().add(jButton1);
-                
+        
+        
+        
         //javax.swing.border.TitledBorder dragBorder = new javax.swing.border.TitledBorder( "Drop 'em" );
         final javax.swing.JTextArea text = new javax.swing.JTextArea();
         text.append("Drop your files here");
         text.setEditable(false);
-        text.setWrapStyleWord(true);
-        frame.getContentPane().add( 
-            new javax.swing.JScrollPane( text ),
-            java.awt.BorderLayout.CENTER );
+       // text.setWrapStyleWord(true);
+        text.setBounds(20,20,250,260);
+        text.setVisible(true);
+        text.setBackground(Color.lightGray);
+        frame.getContentPane().add(text);
+        JTextPane jtp=new JTextPane();
+        jtp.setEditable(false);
+        
+        frame.getContentPane().add(jtp);
+       
         
          final MapAdjust mpa =new MapAdjust();
          jButton1.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e)
             {
-                //Execute when button is pressed
-                frame.setVisible(false);
-                mpa.setVisible(true);
-                
+                try {
+                    //Execute when button is pressed
+                    frame.setVisible(false);
+                    mpa.setVisible(true);
+                    mpa.setLocationRelativeTo(null);
+                    mpa.showPaths();
+                } catch (IOException ex) {
+                    Logger.getLogger(FirstPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
                
             }
         });   
@@ -152,14 +168,15 @@ public class FirstPage extends javax.swing.JFrame {
         int noOfFiles;
         new FileDrop( System.out, text, /*dragBorder,*/ new FileDrop.Listener()
         {   public void filesDropped( java.io.File[] files )
-            {
+            {  
                 text.setText(null);
                 text.append("\n You have added "+files.length+" files \n");
                 for( int i = 0; i < files.length; i++ )
                 {   try
                     {  
                        text.append( files[i].getCanonicalPath() + "\n" );
-                      // mpa.showLocation(files[i].getCanonicalPath());
+                       
+                       // mpa.showLocation(files[i].getCanonicalPath());
                        String filenameExtension = files[i].getCanonicalPath();
                        File filename = new File(filenameExtension);
                        String extension;
@@ -195,6 +212,7 @@ public class FirstPage extends javax.swing.JFrame {
         frame.setBounds( 100, 100, 300, 400 );
         frame.setDefaultCloseOperation( frame.EXIT_ON_CLOSE );
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         
    // end main
 
@@ -237,7 +255,9 @@ public class FirstPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new FirstPage().setVisible(true);
+                FirstPage fp=new FirstPage();
+                fp.setVisible(true);
+                fp.setLocationRelativeTo(null);
             }
         });
     }
