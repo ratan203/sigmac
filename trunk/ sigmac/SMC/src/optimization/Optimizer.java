@@ -31,7 +31,7 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
     HashMap<String,Concept> doc1 = new HashMap<String, Concept>();
     for(String con:doc.keySet()){
         String morphRoot;
-        morphRoot=wn.getMorphologicalRoot(con).trim();
+        morphRoot=wn.getMorphologicalRoot(con);
         if(doc1.containsKey(morphRoot)){
             concept=doc1.get(morphRoot);
             concept.setFreequency(concept.getFreequency()+doc.get(con).getFreequency());
@@ -39,14 +39,17 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
 
             relationshipJoin(concept.getRelationships());
-            relationshipJoin(doc.get(con).getRelationships());
+            relationshipJoin(doc.get(con).getRelationships());            
 
             concept.setRelationships(relationships1);
             doc1.remove(morphRoot);
             doc1.put(morphRoot, concept);
         }else{
             doc.get(con).setName(morphRoot);
-            doc1.put(morphRoot, doc.get(con));
+            relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
+            relationshipJoin(doc.get(con).getRelationships());
+            doc.get(con).setRelationships(relationships1);
+            doc1.put(morphRoot,doc.get(con));
         }
     }
     docc.setDoc(doc1);
@@ -57,7 +60,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
     ArrayList<RelatedConcept> relListCommon=new ArrayList<RelatedConcept>();
     ArrayList<RelatedConcept> relList;
     for(String rel:relationshipsCommon.keySet()){
-        String morphRootRel=wn.getMorphologicalRoot(rel).trim();
+        String morphRootRel=wn.getMorphologicalRoot(rel);
         if(relationships1.containsKey(morphRootRel)){
             relList = new ArrayList<RelatedConcept>();
             relListCommon=relationships1.get(morphRootRel);
