@@ -108,10 +108,10 @@ public class DocumentLoader {
             mpa.setDocumentsObjects(doc1);
             
 
-//            DBConnector db1=new DBConnector();
-//            DBManager dbm=new DBManager();
-//            Connection conn=(Connection) db1.getConnection();
-//            dbm.updateDB(conn, doc1);
+            DBConnector db1=new DBConnector();
+            DBManager dbm=new DBManager();
+            Connection conn=(Connection) db1.getConnection();
+            dbm.updateDB(conn, doc1);
        }
    }
    

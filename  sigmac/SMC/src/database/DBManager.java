@@ -102,6 +102,9 @@ public void updateDB(Connection con, Document doc){
                             int conceptId=0;
                             if(conceptMap.get(f)!=null){
                                 conceptId=conceptMap.get(f);
+                            }else{
+                                System.out.println("###############################"+f);
+                                System.out.println("-------------------------------"+e);
                             }
                             
                             insertRelDoc.setInt(6,conceptId );
@@ -119,6 +122,8 @@ public void updateDB(Connection con, Document doc){
                             int oriCon=0;
                             if(conceptMap.get(e)!=null){
                                 oriCon=conceptMap.get(e);
+                            }else{
+                                System.out.println("###############################"+e+"##########");
                             }
                             insertRelConDoc.setInt(1, oriCon);
                             insertRelConDoc.setInt(2, temp1);
