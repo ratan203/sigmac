@@ -22,7 +22,8 @@ import smc.Parser;
  */
 public class DocumentLoader {
    
-    
+   
+   
    public void insidefol(String paths,MapAdjust mpa) throws Exception{
       
        String path = paths; 
@@ -104,6 +105,8 @@ public class DocumentLoader {
             smc.Document doc2=p.parse(XMLPath, DocType.XML, "body");
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
+            mpa.setDocumentsObjects(doc1);
+            
 
 //            DBConnector db1=new DBConnector();
 //            DBManager dbm=new DBManager();
