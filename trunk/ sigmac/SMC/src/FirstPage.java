@@ -1,4 +1,5 @@
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,9 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
+import javax.swing.*;
+import net.infonode.gui.laf.InfoNodeLookAndFeel;
+import net.infonode.gui.laf.InfoNodeLookAndFeelTheme;
 
 /*
  * To change this template, choose Tools | Templates
@@ -24,8 +25,19 @@ public class FirstPage extends javax.swing.JFrame {
     /**
      * Creates new form FirstPage
      */
-    public FirstPage() {
+    public FirstPage() throws UnsupportedLookAndFeelException {
         initComponents();
+        UIManager.setLookAndFeel(new InfoNodeLookAndFeel());
+        SwingUtilities.updateComponentTreeUI(this);
+        InfoNodeLookAndFeelTheme theme =new InfoNodeLookAndFeelTheme("My Theme",
+                                     new Color(110, 120, 150),
+                                     new Color(0, 170, 0),
+                                     new Color(80, 80, 80),
+                                     Color.WHITE,
+                                     new Color(0, 170, 0),
+                                     Color.WHITE,
+                                     0.8);
+    UIManager.setLookAndFeel(new InfoNodeLookAndFeel(theme));
     }
 
     /**
@@ -125,7 +137,7 @@ public class FirstPage extends javax.swing.JFrame {
         JButton jButton1  = new JButton();;
 
         jButton1.setText("Next");
-        jButton1.setBounds(120, 300, 70, 25);
+        jButton1.setBounds(120, 320, 70, 25);
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
         frame.getContentPane().add(jButton1);
@@ -137,7 +149,7 @@ public class FirstPage extends javax.swing.JFrame {
         text.append("Drop your files here");
         text.setEditable(false);
        // text.setWrapStyleWord(true);
-        text.setBounds(20,20,250,260);
+        text.setBounds(20,20,250,230);
         text.setVisible(true);
         text.setBackground(Color.lightGray);
         frame.getContentPane().add(text);
@@ -210,6 +222,7 @@ public class FirstPage extends javax.swing.JFrame {
         }); // end FileDrop.Listener
 
         frame.setBounds( 100, 100, 300, 400 );
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation( frame.EXIT_ON_CLOSE );
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -255,7 +268,12 @@ public class FirstPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                FirstPage fp=new FirstPage();
+                FirstPage fp = null;
+                try {
+                    fp = new FirstPage();
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(FirstPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 fp.setVisible(true);
                 fp.setLocationRelativeTo(null);
             }
