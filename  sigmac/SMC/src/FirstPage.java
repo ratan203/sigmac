@@ -126,16 +126,14 @@ public class FirstPage extends javax.swing.JFrame {
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
         frame.getContentPane().add(jButton1);
-        
-        JLabel jl=new JLabel();
-        jl.setText("Drop your files here");
-        jl.setBounds(20, 30, 200, 50);
-        jl.setVisible(true);
-        frame.getContentPane().add(jl);
+                
         //javax.swing.border.TitledBorder dragBorder = new javax.swing.border.TitledBorder( "Drop 'em" );
         final javax.swing.JTextArea text = new javax.swing.JTextArea();
+        text.append("Drop your files here");
+        text.setEditable(false);
+        text.setWrapStyleWord(true);
         frame.getContentPane().add( 
-            new javax.swing.JScrollPane( text ), 
+            new javax.swing.JScrollPane( text ),
             java.awt.BorderLayout.CENTER );
         
         final MapAdjust mpa =new MapAdjust();
@@ -149,10 +147,13 @@ public class FirstPage extends javax.swing.JFrame {
                
             }
         });   
-        
+
+        int noOfFiles;
         new FileDrop( System.out, text, /*dragBorder,*/ new FileDrop.Listener()
         {   public void filesDropped( java.io.File[] files )
-            { 
+            {
+                text.setText(null);
+                text.append("\n You have added "+files.length+" files \n");
                 for( int i = 0; i < files.length; i++ )
                 {   try
                     {  

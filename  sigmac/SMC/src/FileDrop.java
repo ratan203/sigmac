@@ -275,7 +275,7 @@ public class FileDrop
                         {   javax.swing.JComponent jc = (javax.swing.JComponent) c;
                             normalBorder = jc.getBorder();
                             log( out, "FileDrop: normal border saved." );
-                            jc.setBorder( dragBorder );
+//                            jc.setBorder( dragBorder );
                             log( out, "FileDrop: drag border set." );
                         }   // end if: JComponent   
 
