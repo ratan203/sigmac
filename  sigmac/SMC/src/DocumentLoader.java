@@ -21,7 +21,9 @@ import smc.Parser;
  * @author COMPAQ
  */
 public class DocumentLoader {
-   public void insidefol(String paths) throws Exception{
+   
+    
+   public void insidefol(String paths,MapAdjust mpa) throws Exception{
       
        String path = paths; 
        String filess,foldername; //intialize the file and foler name variables
@@ -40,7 +42,7 @@ public class DocumentLoader {
                   if(dotPos>-1){
                            try {
                                 extension = filess.substring(dotPos);
-                                filepath(newfilepath,extension);
+                                filepath(newfilepath,extension,mpa);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -52,7 +54,7 @@ public class DocumentLoader {
              else{
                   foldername=listOfFiles[j].getName(); // if it is a folder
                   String newpath=path+"\\"+foldername;
-                  insidefol(newpath);                  //recall to the same function itselef
+                  insidefol(newpath,mpa);                  //recall to the same function itselef
                  }
         }
    }
@@ -61,7 +63,7 @@ public class DocumentLoader {
    
    
    
-   public void filepath(String path, String extension) throws Exception{
+   public void filepath(String path, String extension,MapAdjust mpa) throws Exception{
        //System.out.println("File Path ="+path+"   Extension is ="+extension);
        SCDocument doc = null;
        if(extension.equalsIgnoreCase(".doc")){
@@ -90,6 +92,7 @@ public class DocumentLoader {
        }
 //       
        if(doc!=null){
+            mpa.showLocation(path);
             InXMLCreator xmlcreater=new InXMLCreator();
             java.util.Date date= new java.util.Date();
             System.out.println(date.getTime());
@@ -102,10 +105,10 @@ public class DocumentLoader {
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
 
-            DBConnector db1=new DBConnector();
-            DBManager dbm=new DBManager();
-            Connection conn=(Connection) db1.getConnection();
-            dbm.updateDB(conn, doc1);
+//            DBConnector db1=new DBConnector();
+//            DBManager dbm=new DBManager();
+//            Connection conn=(Connection) db1.getConnection();
+//            dbm.updateDB(conn, doc1);
        }
    }
    

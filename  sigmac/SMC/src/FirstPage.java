@@ -136,14 +136,15 @@ public class FirstPage extends javax.swing.JFrame {
             new javax.swing.JScrollPane( text ),
             java.awt.BorderLayout.CENTER );
         
-        final MapAdjust mpa =new MapAdjust();
+         final MapAdjust mpa =new MapAdjust();
          jButton1.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e)
             {
                 //Execute when button is pressed
-                mpa.setVisible(true);
                 frame.setVisible(false);
+                mpa.setVisible(true);
+                
                
             }
         });   
@@ -158,7 +159,7 @@ public class FirstPage extends javax.swing.JFrame {
                 {   try
                     {  
                        text.append( files[i].getCanonicalPath() + "\n" );
-                       mpa.showLocation(files[i].getCanonicalPath());
+                      // mpa.showLocation(files[i].getCanonicalPath());
                        String filenameExtension = files[i].getCanonicalPath();
                        File filename = new File(filenameExtension);
                        String extension;
@@ -168,7 +169,7 @@ public class FirstPage extends javax.swing.JFrame {
                             if(dotPos>-1){
                                     extension = filenameExtension.substring(dotPos);
                             try {
-                                inside.filepath(filenameExtension,extension);
+                                inside.filepath(filenameExtension,extension,mpa);
                                 
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,7 +179,7 @@ public class FirstPage extends javax.swing.JFrame {
                             try {
                                 // Directory path here
                                 
-                                      inside.insidefol(files[i].getCanonicalPath());
+                                      inside.insidefol(files[i].getCanonicalPath(),mpa);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
