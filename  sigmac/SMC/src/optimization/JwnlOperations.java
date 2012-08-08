@@ -52,7 +52,7 @@ public class JwnlOperations {
 
     public String getMorphologicalRoot(String lexicalForm) throws FileNotFoundException, JWNLException{
         Dictionary dictionary=initWn();
-        String trimLexicalForm=lexicalForm.trim();
+        String trimLexicalForm=lexicalForm.toLowerCase().trim();
         String morphWord=trimLexicalForm;
         IndexWord baseForms = dictionary.getMorphologicalProcessor().lookupBaseForm(POS.NOUN, trimLexicalForm);
         String[] inWords=trimLexicalForm.split(" |\\_");
