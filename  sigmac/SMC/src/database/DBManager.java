@@ -26,11 +26,11 @@ public void updateDB(Connection con, Document doc){
         int updateQuery;
 
         con.setAutoCommit(false);
-        String modDocUri=doc.getUri().trim();
+        String modDocUri=doc.getUri();
         if(modDocUri.contains("'")){
             modDocUri=modDocUri.replace("'", "''");
         }
-        String modDocName=doc.getName().trim();
+        String modDocName=doc.getName();
         if(modDocName.contains("'")){
             modDocName=modDocName.replace("'", "''");
         }
@@ -50,24 +50,18 @@ public void updateDB(Connection con, Document doc){
         insertConcept = con.prepareStatement(insertConceptString);
         insertConceptDoc= con.prepareStatement(insertConceptDocString);
         for (String e : concept.keySet()) {
-            insertConcept.setString(1, e.trim());
+            insertConcept.setString(1, e);
             insertConcept.setInt(2, concept.get(e).getFreequency());
             insertConcept.setInt(3, concept.get(e).getTitleStrength());
             insertConcept.setInt(4, concept.get(e).getStrength());
             insertConcept.executeUpdate();
             con.commit();
 
-            String modConcept=e.trim();
-            if(e.contains("'")){
-                modConcept=e.replace("'", "''");
-            }
-            String getConId = "SELECT * from concepts WHERE conceptName=\'"+modConcept+"\'";
-//            System.out.println(getConId);
-//            System.exit(0);
+            String getConId ="SELECT LAST_INSERT_ID()";
             ResultSet rs2= stmt.executeQuery(getConId);
             int temp = 0;
             while (rs2.next()) {
-                temp= rs2.getInt("conceptId");
+                temp= rs2.getInt(1);
             }
 
             insertConceptDoc.setInt(1, temp);
@@ -77,14 +71,14 @@ public void updateDB(Connection con, Document doc){
         }
 
 
-        String getconceptString = "SELECT * from concepts";
+        String getconceptString = "SELECT concepts.conceptName, concepts.conceptId FROM concepts JOIN concept_doc ON concepts.conceptId= concept_doc.conceptId WHERE concept_doc.docId="+updateQuery;
         ResultSet rs= stmt.executeQuery(getconceptString);
         HashMap<String,Integer> conceptMap = new HashMap<String, Integer>();
 
          while (rs.next()) {
                 String conName = rs.getString("conceptName");
                 int conId=rs.getInt("conceptId");
-                conceptMap.put(conName.trim(), conId);
+                conceptMap.put(conName, conId);
           } //end while
 
         PreparedStatement insertRelDoc = null;
@@ -100,30 +94,31 @@ public void updateDB(Connection con, Document doc){
                 for (String f : relationships.keySet()) {
                     if(relationships.get(f)!=null){
                         for(RelatedConcept g:relationships.get(f)){
-                            insertRelDoc.setString(1, g.getType().trim());
+                            insertRelDoc.setString(1, g.getType());
                             insertRelDoc.setInt(2, g.getFreequency());
                             insertRelDoc.setInt(3, g.getIsStrength());
                             insertRelDoc.setInt(4, g.getPartStrength());
                             insertRelDoc.setInt(5, g.getStrength());
                             int conceptId=0;
-                            if(conceptMap.get(f.trim())!=null){
-                                conceptId=conceptMap.get(f.trim());
+                            if(conceptMap.get(f)!=null){
+                                conceptId=conceptMap.get(f);
                             }
+                            
                             insertRelDoc.setInt(6,conceptId );
                             insertRelDoc.setBoolean(7, g.isHead());
                             insertRelDoc.executeUpdate();
                             con.commit();
 
-                            String getRelId = "SELECT * from relationships WHERE type=\'"+g.getType()+"\' and conceptId="+conceptId;
-                            ResultSet rs3= stmt.executeQuery(getRelId);
+                            String getConId ="SELECT LAST_INSERT_ID()";
+                            ResultSet rs2= stmt.executeQuery(getConId);
                             int temp1 = 0;
-                            while (rs3.next()) {
-                                temp1= rs3.getInt("relId");
+                            while (rs2.next()) {
+                                temp1= rs2.getInt(1);
                             }
 
                             int oriCon=0;
-                            if(conceptMap.get(e.trim())!=null){
-                                oriCon=conceptMap.get(e.trim());
+                            if(conceptMap.get(e)!=null){
+                                oriCon=conceptMap.get(e);
                             }
                             insertRelConDoc.setInt(1, oriCon);
                             insertRelConDoc.setInt(2, temp1);
