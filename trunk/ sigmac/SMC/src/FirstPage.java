@@ -27,17 +27,17 @@ public class FirstPage extends javax.swing.JFrame {
      */
     public FirstPage() throws UnsupportedLookAndFeelException {
         initComponents();
-        UIManager.setLookAndFeel(new InfoNodeLookAndFeel());
-        SwingUtilities.updateComponentTreeUI(this);
-        InfoNodeLookAndFeelTheme theme =new InfoNodeLookAndFeelTheme("My Theme",
-                                     new Color(110, 120, 150),
-                                     new Color(0, 170, 0),
-                                     new Color(80, 80, 80),
-                                     Color.WHITE,
-                                     new Color(0, 170, 0),
-                                     Color.WHITE,
-                                     0.8);
-    UIManager.setLookAndFeel(new InfoNodeLookAndFeel(theme));
+//        UIManager.setLookAndFeel(new InfoNodeLookAndFeel());
+//        SwingUtilities.updateComponentTreeUI(this);
+//        InfoNodeLookAndFeelTheme theme =new InfoNodeLookAndFeelTheme("My Theme",
+//                                     new Color(110, 120, 150),
+//                                     new Color(0, 170, 0),
+//                                     new Color(80, 80, 80),
+//                                     Color.WHITE,
+//                                     new Color(0, 170, 0),
+//                                     Color.WHITE,
+//                                     0.8);
+//    UIManager.setLookAndFeel(new InfoNodeLookAndFeel(theme));
     }
 
     /**
@@ -134,15 +134,33 @@ public class FirstPage extends javax.swing.JFrame {
         this.setVisible(false);
         String path;
         final javax.swing.JFrame frame = new javax.swing.JFrame( "SigmaC File Drop" );
-        JButton jButton1  = new JButton();;
 
+        JButton jButton1  = new JButton();
         jButton1.setText("Next");
         jButton1.setBounds(120, 320, 70, 25);
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
         frame.getContentPane().add(jButton1);
         
-        
+        final JLabel jl1=new JLabel();
+        jl1.setText("File Processing Progress");
+        jl1.setBounds(25, 270, 240, 20);
+        jl1.setOpaque(true);
+        jl1.setVisible(true);
+        frame.getContentPane().add(jl1);
+
+        final JProgressBar jp=new JProgressBar(0, 100);
+        jp.setForeground(Color.GREEN);
+        jp.setBounds(25, 295, 240, 18);
+        jp.setVisible(true);
+        frame.getContentPane().add(jp);
+
+        class ProgressListener implements ActionListener {
+              public void actionPerformed(ActionEvent ae) {
+                  jl1.setText("ook");
+                  jp.setValue(10);
+              }
+          }
         
         //javax.swing.border.TitledBorder dragBorder = new javax.swing.border.TitledBorder( "Drop 'em" );
         final javax.swing.JTextArea text = new javax.swing.JTextArea();
@@ -151,6 +169,7 @@ public class FirstPage extends javax.swing.JFrame {
        // text.setWrapStyleWord(true);
         text.setBounds(20,20,250,230);
         text.setVisible(true);
+        text.setWrapStyleWord(true);
         text.setBackground(Color.lightGray);
         frame.getContentPane().add(text);
         JTextPane jtp=new JTextPane();
@@ -177,10 +196,11 @@ public class FirstPage extends javax.swing.JFrame {
             }
         });   
 
-        int noOfFiles;
         new FileDrop( System.out, text, /*dragBorder,*/ new FileDrop.Listener()
         {   public void filesDropped( java.io.File[] files )
-            {  
+            {
+                jl1.setText("File processed succesfully");
+                jp.setValue(100);
                 text.setText(null);
                 text.append("\n You have added "+files.length+" files \n");
                 for( int i = 0; i < files.length; i++ )

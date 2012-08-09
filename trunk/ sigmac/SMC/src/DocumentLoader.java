@@ -103,6 +103,7 @@ public class DocumentLoader {
             String XMLPath="InterXML//"+timestamp+".xml";
             Parser p=new Parser("grammar/englishPCFG.ser.gz");
             smc.Document doc2=p.parse(XMLPath, DocType.XML, "body");
+            
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
             mpa.setDocumentsObjects(doc1);
