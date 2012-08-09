@@ -23,7 +23,6 @@ public void updateDB(Connection con, Document doc){
         HashMap<String,ArrayList<RelatedConcept>> relationships=new HashMap<String, ArrayList<RelatedConcept>>();
         try{
         Statement stmt = (Statement) con.createStatement();
-        int updateQuery;
 
         con.setAutoCommit(false);
         String modDocUri=doc.getUri();
@@ -34,10 +33,11 @@ public void updateDB(Connection con, Document doc){
         if(modDocName.contains("'")){
             modDocName=modDocName.replace("'", "''");
         }
-        String QueryString = "INSERT INTO documents(docURI,name,size) VALUES (\'"+modDocUri+"\',\'"+modDocName+"\',"+doc.getSize()+")";
-        updateQuery= stmt.executeUpdate(QueryString);
+        String docInsertingQuery = "INSERT INTO documents(docURI,name,size) VALUES (\'"+modDocUri+"\',\'"+modDocName+"\',"+doc.getSize()+")";
+        stmt.executeUpdate(docInsertingQuery);
         String getDocId = "SELECT * from documents WHERE docURI=\'"+modDocUri+"\'";
         ResultSet rs1= stmt.executeQuery(getDocId);
+        int updateQuery = 0;
         while (rs1.next()) {
             updateQuery= rs1.getInt("docId");
         }
@@ -45,34 +45,47 @@ public void updateDB(Connection con, Document doc){
         PreparedStatement insertConcept = null;
         PreparedStatement insertConceptDoc = null;
 //        con.setAutoCommit(false);
-        String insertConceptString ="INSERT INTO concepts(conceptName,frequency,titleStrength,strength) VALUES (?,?,?,?)";
-        String insertConceptDocString ="INSERT INTO concept_doc(conceptId,docId) VALUES (?,?)";
-        insertConcept = con.prepareStatement(insertConceptString);
-        insertConceptDoc= con.prepareStatement(insertConceptDocString);
+        String insertConceptQuery ="INSERT INTO concepts(conceptName) VALUES (?)";
+        String insertConceptDocQuery ="INSERT INTO concept_doc(conceptId,docId,frequency,titleStrength,strength) VALUES (?,?,?,?,?)";
+        insertConcept = con.prepareStatement(insertConceptQuery);
+        insertConceptDoc= con.prepareStatement(insertConceptDocQuery);
         for (String e : concept.keySet()) {
-            insertConcept.setString(1, e);
-            insertConcept.setInt(2, concept.get(e).getFreequency());
-            insertConcept.setInt(3, concept.get(e).getTitleStrength());
-            insertConcept.setInt(4, concept.get(e).getStrength());
-            insertConcept.executeUpdate();
-            con.commit();
 
-            String getConId ="SELECT LAST_INSERT_ID()";
-            ResultSet rs2= stmt.executeQuery(getConId);
+            String getConceptQuery = "SELECT conceptId from concepts WHERE conceptName=\'"+e.replaceAll("'", "''")+"\'";
+            ResultSet rsCon= stmt.executeQuery(getConceptQuery);
+            int existConceptId=0;
+            if(rsCon.next())
+            while (rsCon.next()) {
+                existConceptId= rsCon.getInt("conceptId");
+            }
             int temp = 0;
-            while (rs2.next()) {
-                temp= rs2.getInt(1);
+            
+            if(existConceptId==0){
+                insertConcept.setString(1, e);                
+                insertConcept.executeUpdate();
+                con.commit();
+
+                String getConId ="SELECT LAST_INSERT_ID()";
+                ResultSet rs2= stmt.executeQuery(getConId);
+                while (rs2.next()) {
+                    temp= rs2.getInt(1);
+                }
+            }else{
+                temp=existConceptId;
             }
 
             insertConceptDoc.setInt(1, temp);
             insertConceptDoc.setInt(2, updateQuery);
+            insertConceptDoc.setInt(3, concept.get(e).getFreequency());
+            insertConceptDoc.setInt(4, concept.get(e).getTitleStrength());
+            insertConceptDoc.setInt(5, concept.get(e).getStrength());
             insertConceptDoc.executeUpdate();
             con.commit();
         }
 
 
-        String getconceptString = "SELECT concepts.conceptName, concepts.conceptId FROM concepts JOIN concept_doc ON concepts.conceptId= concept_doc.conceptId WHERE concept_doc.docId="+updateQuery;
-        ResultSet rs= stmt.executeQuery(getconceptString);
+        String getconceptQuery = "SELECT concepts.conceptName, concepts.conceptId FROM concepts JOIN concept_doc ON concepts.conceptId= concept_doc.conceptId WHERE concept_doc.docId="+updateQuery;
+        ResultSet rs= stmt.executeQuery(getconceptQuery);
         HashMap<String,Integer> conceptMap = new HashMap<String, Integer>();
 
          while (rs.next()) {
@@ -82,12 +95,12 @@ public void updateDB(Connection con, Document doc){
           } //end while
 
         PreparedStatement insertRelDoc = null;
-        String insertConceptRelDocString ="INSERT INTO relationships(type,frequency,is_aStrength, part_ofStrength, strength,conceptId,isHead) VALUES "+"(?,?,?,?,?,?,?)";
-        insertRelDoc = con.prepareStatement(insertConceptRelDocString);
+        String insertConceptRelDocQuery ="INSERT INTO relationships(type,frequency,is_aStrength, part_ofStrength, strength,conceptId,isHead) VALUES "+"(?,?,?,?,?,?,?)";
+        insertRelDoc = con.prepareStatement(insertConceptRelDocQuery);
 
         PreparedStatement insertRelConDoc = null;
-        String insertRelConDocString ="INSERT INTO related_concept(conceptId,relId) VALUES "+"(?,?)";
-        insertRelConDoc = con.prepareStatement(insertRelConDocString);
+        String insertRelConDocQuery ="INSERT INTO related_concept(conceptId,relId) VALUES "+"(?,?)";
+        insertRelConDoc = con.prepareStatement(insertRelConDocQuery);
         for (String e : concept.keySet()) {
             relationships=concept.get(e).getRelationships();
             if(!relationships.isEmpty()){

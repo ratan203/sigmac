@@ -1,10 +1,17 @@
 
+import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 /**
  * This class makes it easy to drag and drop files from the operating
@@ -275,6 +282,14 @@ public class FileDrop
                         {   javax.swing.JComponent jc = (javax.swing.JComponent) c;
                             normalBorder = jc.getBorder();
                             log( out, "FileDrop: normal border saved." );
+                            JTextArea jt=(JTextArea)jc;
+                            for (Component jb : jt.getParent().getComponents()){
+                                if((jb instanceof JLabel) )
+                                    {   
+                                        JLabel jl = (JLabel)jb;
+                                        jl.setText("File Processing Starting....");
+                                    }                                
+                            }                           
 //                            jc.setBorder( dragBorder );
                             log( out, "FileDrop: drag border set." );
                         }   // end if: JComponent   

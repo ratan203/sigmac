@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import net.infonode.gui.laf.InfoNodeLookAndFeel;
-import net.infonode.gui.laf.InfoNodeLookAndFeelTheme;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /*
  * To change this template, choose Tools | Templates
@@ -25,8 +24,25 @@ public class FirstPage extends javax.swing.JFrame {
     /**
      * Creates new form FirstPage
      */
-    public FirstPage() throws UnsupportedLookAndFeelException {
+    public FirstPage() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         initComponents();
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        } catch (ClassNotFoundException e) {
+            // handle exception
+        } catch (InstantiationException e) {
+            // handle exception
+        } catch (IllegalAccessException e) {
+            // handle exception
+        }
+//          UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 //        UIManager.setLookAndFeel(new InfoNodeLookAndFeel());
 //        SwingUtilities.updateComponentTreeUI(this);
 //        InfoNodeLookAndFeelTheme theme =new InfoNodeLookAndFeelTheme("My Theme",
@@ -149,18 +165,21 @@ public class FirstPage extends javax.swing.JFrame {
         jl1.setVisible(true);
         frame.getContentPane().add(jl1);
 
-        final JProgressBar jp=new JProgressBar(0, 100);
+        final JProgressBar jp=new JProgressBar(0, 1000);
         jp.setForeground(Color.GREEN);
         jp.setBounds(25, 295, 240, 18);
+        jp.setIndeterminate(true);
+        
         jp.setVisible(true);
         frame.getContentPane().add(jp);
 
-        class ProgressListener implements ActionListener {
-              public void actionPerformed(ActionEvent ae) {
-                  jl1.setText("ook");
-                  jp.setValue(10);
+          int delay = 900; //milliseconds
+          ActionListener taskPerformer = new ActionListener() {
+             public void actionPerformed(ActionEvent evt) {
+                  jp.setIndeterminate(false);
               }
-          }
+          };
+        new Timer(delay, taskPerformer).start();
         
         //javax.swing.border.TitledBorder dragBorder = new javax.swing.border.TitledBorder( "Drop 'em" );
         final javax.swing.JTextArea text = new javax.swing.JTextArea();
@@ -254,7 +273,7 @@ public class FirstPage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InstantiationException, ClassNotFoundException, IllegalAccessException, UnsupportedLookAndFeelException {
         /*
          * Set the Nimbus look and feel
          */
@@ -281,6 +300,7 @@ public class FirstPage extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+//          UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 
         /*
          * Create and display the form
@@ -290,7 +310,15 @@ public class FirstPage extends javax.swing.JFrame {
             public void run() {
                 FirstPage fp = null;
                 try {
-                    fp = new FirstPage();
+                    try {
+                        fp = new FirstPage();
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(FirstPage.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(FirstPage.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(FirstPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(FirstPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
