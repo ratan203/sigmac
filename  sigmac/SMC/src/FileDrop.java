@@ -288,7 +288,20 @@ public class FileDrop
                                     {   
                                         JLabel jl = (JLabel)jb;
                                         jl.setText("File Processing Starting....");
-                                    }                                
+                                    }
+//                                if((jb instanceof JProgressBar) )
+//                                    {
+//                                        final JProgressBar jp = (JProgressBar)jb;
+//                                        jp.setIndeterminate(true);
+//                                        int delay = 900; //milliseconds
+//                                        ActionListener taskPerformer = new ActionListener() {
+//                                           public void actionPerformed(ActionEvent evt) {
+//                                                jp.setIndeterminate(false);
+//                                                jp.setValue(50);
+//                                           }
+//                                        };
+//                                        new Timer(delay, taskPerformer).start();
+//                                    }
                             }                           
 //                            jc.setBorder( dragBorder );
                             log( out, "FileDrop: drag border set." );

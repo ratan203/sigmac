@@ -150,20 +150,21 @@ public class FirstPage extends javax.swing.JFrame {
         this.setVisible(false);
         String path;
         final javax.swing.JFrame frame = new javax.swing.JFrame( "SigmaC File Drop" );
+        final javax.swing.JFrame frame1 = new javax.swing.JFrame( "File Processing Progress" );
 
         JButton jButton1  = new JButton();
         jButton1.setText("Next");
         jButton1.setBounds(120, 320, 70, 25);
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
-        frame.getContentPane().add(jButton1);
+        frame1.getContentPane().add(jButton1);
         
         final JLabel jl1=new JLabel();
         jl1.setText("File Processing Progress");
         jl1.setBounds(25, 270, 240, 20);
         jl1.setOpaque(true);
         jl1.setVisible(true);
-        frame.getContentPane().add(jl1);
+        frame1.getContentPane().add(jl1);
 
         final JProgressBar jp=new JProgressBar(0, 1000);
         jp.setForeground(Color.GREEN);
@@ -171,7 +172,7 @@ public class FirstPage extends javax.swing.JFrame {
         jp.setIndeterminate(true);
         
         jp.setVisible(true);
-        frame.getContentPane().add(jp);
+        frame1.getContentPane().add(jp);
 
           int delay = 900; //milliseconds
           ActionListener taskPerformer = new ActionListener() {
@@ -265,6 +266,12 @@ public class FirstPage extends javax.swing.JFrame {
         frame.setDefaultCloseOperation( frame.EXIT_ON_CLOSE );
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+
+        frame1.setBounds( 0, 0, 300, 400 );
+        frame1.setLayout(new BorderLayout());
+        frame1.setDefaultCloseOperation( frame1.EXIT_ON_CLOSE );
+        frame1.setVisible(true);
+        frame1.setLocationRelativeTo(null);
         
    // end main
 
