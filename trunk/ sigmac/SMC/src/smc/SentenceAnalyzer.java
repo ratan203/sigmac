@@ -152,11 +152,14 @@ public class SentenceAnalyzer {
                 for(LabeledScoredTreeNode leave : leaves){
                     concept+=leave.nodeString()+" ";
                 }
+                concept=filterConcept(concept);
                 if(cMap.containsKey(concept)){
                     //Concept c=cMap.get(concept);
                     //c.modifyFreequency(1);
                 }else{
-                    cMap.put(concept, new Concept(concept));
+                    if(concept.equalsIgnoreCase("")){
+                        cMap.put(concept, new Concept(concept));
+                    }
                 }
             }
         }
@@ -280,5 +283,18 @@ public class SentenceAnalyzer {
             }
         }
         return titleConcept;
+    }
+
+    // this method needs to be implemented to prevent ugly concepts but
+    // this dose not have any effect on concepts returned by relationship patterns
+    private String filterConcept(String concept){
+        String cp="";
+        if(!(concept.length()<2)){
+            cp=concept;
+            if(concept.endsWith("\'s") || concept.endsWith("s\'")){
+                
+            }
+        }
+        return cp;
     }
 }
