@@ -25,7 +25,7 @@ public class Document implements Serializable {
     public Document(){
         doc=new HashMap<String, Concept>();
     }
-    
+
     public Document(String uri){
         doc=new HashMap<String, Concept>();
         this.uri=uri;
@@ -61,7 +61,7 @@ public class Document implements Serializable {
 //        System.out.println("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
         for(Concept c : concepts){
 //            System.out.println(c.getName());
-            if(doc.containsKey(c.getName())){                
+            if(doc.containsKey(c.getName())){
                 Concept con=doc.get(c.getName());
                 doc.remove(c.getName());
                 con.modifyFreequency(c.getStrength());
@@ -88,6 +88,10 @@ public class Document implements Serializable {
 
     public int getSize() {
         return size;
+    }
+
+    public void setSize(int size){
+        this.size=size;
     }
 
     public int getTotalDocumentStrength(){
