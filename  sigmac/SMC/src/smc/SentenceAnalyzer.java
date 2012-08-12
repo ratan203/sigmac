@@ -292,7 +292,7 @@ public class SentenceAnalyzer {
         if(!(concept.length()<2)){
             cp=concept;
             if(concept.endsWith("\'s") || concept.endsWith("s\'")){
-                
+                cp=concept.substring(0, concept.length()-2);
             }
         }
         return cp;
