@@ -52,6 +52,10 @@ public class Concept implements Serializable {
         System.out.println(importance);
     }
 
+    public float getImportance(){
+        return importance;
+    }
+
     public String getName() {
         return name;
     }

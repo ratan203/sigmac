@@ -37,16 +37,16 @@ public void updateDB(Connection con, Document doc){
         stmt.executeUpdate(docInsertingQuery);
         String getDocId = "SELECT * from documents WHERE docURI=\'"+modDocUri+"\'";
         ResultSet rs1= stmt.executeQuery(getDocId);
-        int updateQuery = 0;
+        int docId = 0;
         while (rs1.next()) {
-            updateQuery= rs1.getInt("docId");
+            docId= rs1.getInt("docId");
         }
 
         PreparedStatement insertConcept = null;
         PreparedStatement insertConceptDoc = null;
 //        con.setAutoCommit(false);
         String insertConceptQuery ="INSERT INTO concepts(conceptName) VALUES (?)";
-        String insertConceptDocQuery ="INSERT INTO concept_doc(conceptId,docId,frequency,titleStrength,importance,strength) VALUES (?,?,?,?,?)";
+        String insertConceptDocQuery ="INSERT INTO concept_doc(conceptId,docId,frequency,titleStrength,importance,strength) VALUES (?,?,?,?,?,?)";
         insertConcept = con.prepareStatement(insertConceptQuery);
         insertConceptDoc= con.prepareStatement(insertConceptDocQuery);
         for (String e : concept.keySet()) {
@@ -75,16 +75,17 @@ public void updateDB(Connection con, Document doc){
             }
 
             insertConceptDoc.setInt(1, temp);
-            insertConceptDoc.setInt(2, updateQuery);
+            insertConceptDoc.setInt(2, docId);
             insertConceptDoc.setInt(3, concept.get(e).getFreequency());
             insertConceptDoc.setInt(4, concept.get(e).getTitleStrength());
-            insertConceptDoc.setInt(5, concept.get(e).getStrength());
+            insertConceptDoc.setFloat(5, concept.get(e).getImportance());
+            insertConceptDoc.setInt(6, concept.get(e).getStrength());
             insertConceptDoc.executeUpdate();
             con.commit();
         }
 
 
-        String getconceptQuery = "SELECT concepts.conceptName, concepts.conceptId FROM concepts JOIN concept_doc ON concepts.conceptId= concept_doc.conceptId WHERE concept_doc.docId="+updateQuery;
+        String getconceptQuery = "SELECT concepts.conceptName, concepts.conceptId FROM concepts JOIN concept_doc ON concepts.conceptId= concept_doc.conceptId WHERE concept_doc.docId="+docId;
         ResultSet rs= stmt.executeQuery(getconceptQuery);
         HashMap<String,Integer> conceptMap = new HashMap<String, Integer>();
 
