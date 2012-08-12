@@ -29,7 +29,6 @@ public class Document implements Serializable {
     public Document(String uri){
         doc=new HashMap<String, Concept>();
         this.uri=uri;
-        this.setTitleInfo(this.uri);
         createName();
     }
 
@@ -53,9 +52,8 @@ public class Document implements Serializable {
         return title;
     }
 
-    public void setTitleInfo(String uri) {
-        XMLFormattingExtractor xe=new XMLFormattingExtractor();
-        title=xe.getXMLFormatting(uri);
+    public void setTitleInfo(HashMap<String, Title> titles) {
+        this.title=titles;
     }
 
     public void addConcepts(ArrayList<Concept> concepts){

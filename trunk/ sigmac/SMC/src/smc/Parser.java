@@ -52,6 +52,9 @@ public class Parser {
 //            System.out.println("ddssssssssssssssss");
             doc.addConcepts(cons);
         }
+
+        XMLFormattingExtractor xe=new XMLFormattingExtractor();
+        doc.setTitleInfo(xe.getXMLFormatting(doc.getUri()));
 //        System.out.println("done");
         calc.calculateImportance(doc);
 //        doc.printDoc();
