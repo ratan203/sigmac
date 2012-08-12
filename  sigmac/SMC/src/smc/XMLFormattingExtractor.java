@@ -73,7 +73,7 @@ public class XMLFormattingExtractor {
         if(nl != null && nl.getLength() > 0) {
             for(int i = 0 ; i < nl.getLength();i++) {
                 Element el = (Element)nl.item(i);
-                if(!el.getAttribute("scale").equals("")&&!el.getAttribute("scale").equals(null)){
+                if(!el.getAttribute("scale").equals("")&&!el.getAttribute("scale").equals("")){
                     titleVal=Integer.parseInt(el.getAttribute("scale"));
                 }
                 finTitle=el.getFirstChild().getNodeValue();
