@@ -30,6 +30,7 @@ public class Document implements Serializable {
         doc=new HashMap<String, Concept>();
         this.uri=uri;
         this.setTitleInfo(this.uri);
+        createName();
     }
 
     public HashMap<String, Concept> getDoc() {
@@ -86,6 +87,10 @@ public class Document implements Serializable {
         return name;
     }
 
+    public void setName(String name){
+        this.name=name;
+    }
+
     public int getSize() {
         return size;
     }
@@ -101,5 +106,14 @@ public class Document implements Serializable {
             val+=doc.get(key).getValue();
         }
         return val;
+    }
+
+    private void createName(){
+        int index1=this.uri.lastIndexOf("/");
+        if(index1!=-1){
+            this.name=this.uri.substring(index1);
+        }else{
+            this.name=this.uri;
+        }
     }
 }
