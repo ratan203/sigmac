@@ -12,15 +12,9 @@ import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -47,7 +41,9 @@ public class Parser {
         DocumentPreprocessor p=new DocumentPreprocessor(fileName,doctype);
         p.setElementDelimiter(delimeter);
         Document doc=new Document(fileName);
+        int sentenceCount=0;
         for (List<HasWord> sentence : p){
+            sentenceCount++;
             Tree parse = lp.apply(sentence);
             ArrayList<Concept> cons=analyzer.analyze(parse);
 //            for(Concept con : cons){
@@ -59,6 +55,7 @@ public class Parser {
 //        System.out.println("done");
         calc.calculateImportance(doc);
 //        doc.printDoc();
+        doc.setSize(sentenceCount);
         return doc;
 //        try {
 //            FileOutputStream fos = new FileOutputStream("doccc.ser");
