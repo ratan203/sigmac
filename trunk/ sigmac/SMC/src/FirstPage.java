@@ -42,18 +42,59 @@ public class FirstPage extends javax.swing.JFrame {
         } catch (IllegalAccessException e) {
             // handle exception
         }
-//          UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-//        UIManager.setLookAndFeel(new InfoNodeLookAndFeel());
-//        SwingUtilities.updateComponentTreeUI(this);
-//        InfoNodeLookAndFeelTheme theme =new InfoNodeLookAndFeelTheme("My Theme",
-//                                     new Color(110, 120, 150),
-//                                     new Color(0, 170, 0),
-//                                     new Color(80, 80, 80),
-//                                     Color.WHITE,
-//                                     new Color(0, 170, 0),
-//                                     Color.WHITE,
-//                                     0.8);
-//    UIManager.setLookAndFeel(new InfoNodeLookAndFeel(theme));
+    }
+
+    private int noOFFiles(java.io.File[] files){
+        int noFiles=0;
+        for( int i = 0; i < files.length; i++ ){
+            try{
+            String filenameExtension = files[i].getCanonicalPath();
+            int dotPos = filenameExtension.lastIndexOf(".");
+                if(dotPos>-1){
+                    try {
+                        noFiles+=1;
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else{
+                    try {
+                        noFiles+=traverseFolder(files[i]);
+                    } catch (Exception ex) {
+                        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            }
+            catch( java.io.IOException e ) {}
+        }
+        return noFiles;
+    }
+
+    private int traverseFolder(File file){
+        int noFiles = 0;
+       String filess,foldername;
+       File folder = file;
+       File[] listOfFiles = folder.listFiles(); 
+
+       for (int j = 0; j < listOfFiles.length; j++) {
+
+           if (listOfFiles[j].isFile())  {    
+                  filess = listOfFiles[j].getName();  
+                  int dotPos1 = filess.lastIndexOf(".");
+                  if(dotPos1>-1){
+                           try {
+                                noFiles+=1;
+                            } catch (Exception ex) {
+                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                      }
+           }
+         else{
+              traverseFolder(file);
+             }
+        }
+       return noFiles;
     }
 
     /**
@@ -153,30 +194,50 @@ public class FirstPage extends javax.swing.JFrame {
 
         JButton jButton1  = new JButton();
         jButton1.setText("Next");
-        jButton1.setBounds(120, 320, 70, 25);
+        jButton1.setBounds(170, 370, 70, 25);
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
         frame.getContentPane().add(jButton1);
-        
+
+        //for all files
         final JLabel jl1=new JLabel();
-        jl1.setText("File Processing Progress");
-        jl1.setBounds(25, 270, 240, 20);
+        jl1.setText("All Files Processing Progress");
+        jl1.setBounds(25, 270, 340, 20);
+        jl1.setName("labelAll");
         jl1.setOpaque(true);
         jl1.setVisible(true);
         frame.getContentPane().add(jl1);
 
-        final JProgressBar jp=new JProgressBar(0, 1000);
+        final JProgressBar jp=new JProgressBar();
         jp.setForeground(Color.GREEN);
-        jp.setBounds(25, 295, 240, 18);
+        jp.setBounds(25, 295, 340, 18);
         jp.setIndeterminate(true);
-        
+        jp.setName("proAll");
         jp.setVisible(true);
         frame.getContentPane().add(jp);
+
+        //for a single file
+        final JLabel jl2=new JLabel();
+        jl2.setText("Single File Processing Progress");
+        jl2.setBounds(25, 320, 340, 20);
+        jl2.setName("labelOne");
+        jl2.setOpaque(true);
+        jl2.setVisible(true);
+        frame.getContentPane().add(jl2);
+
+        final JProgressBar jp1=new JProgressBar(0, 100);
+        jp1.setForeground(Color.GREEN);
+        jp1.setBounds(25, 345, 340, 18);
+        jp1.setIndeterminate(true);
+        jp1.setName("proOne");
+        jp1.setVisible(true);
+        frame.getContentPane().add(jp1);
 
           int delay = 900; //milliseconds
           ActionListener taskPerformer = new ActionListener() {
              public void actionPerformed(ActionEvent evt) {
                   jp.setIndeterminate(false);
+                  jp1.setIndeterminate(false);
               }
           };
         new Timer(delay, taskPerformer).start();
@@ -185,8 +246,9 @@ public class FirstPage extends javax.swing.JFrame {
         final javax.swing.JTextArea text = new javax.swing.JTextArea();
         text.append("Drop your files here");
         text.setEditable(false);
-       // text.setWrapStyleWord(true);
-        text.setBounds(20,20,250,230);
+        text.setWrapStyleWord(true);
+        text.setLineWrap(true);
+        text.setBounds(20,20,350,230);
         text.setVisible(true);
         text.setWrapStyleWord(true);
         text.setBackground(Color.lightGray);
@@ -214,55 +276,64 @@ public class FirstPage extends javax.swing.JFrame {
                
             }
         });   
+        FileDrop fileDrop = new FileDrop(System.out, text, new FileDrop.Listener() {
 
-        new FileDrop( System.out, text, /*dragBorder,*/ new FileDrop.Listener()
-        {   public void filesDropped( java.io.File[] files )
-            {
-                jl1.setText("File processed succesfully");
-                jp.setValue(100);
+            public void filesDropped(java.io.File[] files) {
                 text.setText(null);
-                text.append("\n You have added "+files.length+" files \n");
-                for( int i = 0; i < files.length; i++ )
-                {   try
-                    {  
-                       text.append( files[i].getCanonicalPath() + "\n" );
-                       
-                       // mpa.showLocation(files[i].getCanonicalPath());
-                       String filenameExtension = files[i].getCanonicalPath();
-                       File filename = new File(filenameExtension);
-                       String extension;
-                       int dotPos = filenameExtension.lastIndexOf(".");
-                       extension=null;
-                       DocumentLoader inside=new DocumentLoader();
-                            if(dotPos>-1){
-                                    extension = filenameExtension.substring(dotPos);
+                int noOfAllFiles = noOFFiles(files);                
+                int noOfFiles = 0;
+                jp.setMinimum(0);
+                jp.setMaximum(noOfAllFiles * 100);
+                for (int i = 0; i < files.length; i++) {
+                    try {
+                        // mpa.showLocation(files[i].getCanonicalPath());
+                        // mpa.showLocation(files[i].getCanonicalPath());
+                        String filenameExtension = files[i].getCanonicalPath();
+                        File filename = new File(filenameExtension);
+                        String extension;
+                        int dotPos = filenameExtension.lastIndexOf(".");
+                        extension = null;
+                        DocumentLoader inside = new DocumentLoader();
+                        if (dotPos > -1) {
+                            extension = filenameExtension.substring(dotPos);
                             try {
-                                inside.filepath(filenameExtension,extension,mpa);
-                                
+                                text.append(files[i].getCanonicalPath() + "\n");
+                                noOfFiles += 1;
+                                jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles);
+                                jl2.setText("Processing file : " + files[i].getName());
+                                inside.filepath(filenameExtension, extension, mpa, text);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            }
-                            else{
+                        } else {
                             try {
                                 // Directory path here
-                                
-                                      inside.insidefol(files[i].getCanonicalPath(),mpa);
+                                // Directory path here
+                                noOfFiles += inside.insidefol(files[i].getCanonicalPath(), mpa, text);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                           
-                            }
-                       
-                    }   // end try
-                    catch( java.io.IOException e ) {}
-                }   // end for: through each dropped file
-            }   // end filesDropped
-        }); // end FileDrop.Listener
+                        }
+                    } // end try
+                    // end try
+                    catch (java.io.IOException e) {
+                    }
+                } // end for: through each dropped file
+                // end for: through each dropped file
+                // end for: through each dropped file
+                // end for: through each dropped file
+                text.append("\n You have added " + noOfFiles + " files \n\n");
+                text.append("Drop your files here \n");
+            } // end filesDropped
+            // end FileDrop.Listener
+            // end filesDropped
+            // end filesDropped
+        });
 
-        frame.setBounds( 100, 100, 300, 400 );
+        frame.setBounds( 100, 100, 400, 450 );
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation( frame.EXIT_ON_CLOSE );
+        frame.setResizable(false);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         

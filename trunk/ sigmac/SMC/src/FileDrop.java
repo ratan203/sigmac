@@ -281,28 +281,7 @@ public class FileDrop
                         if( c instanceof javax.swing.JComponent )
                         {   javax.swing.JComponent jc = (javax.swing.JComponent) c;
                             normalBorder = jc.getBorder();
-                            log( out, "FileDrop: normal border saved." );
-                            JTextArea jt=(JTextArea)jc;
-                            for (Component jb : jt.getParent().getComponents()){
-                                if((jb instanceof JLabel) )
-                                    {   
-                                        JLabel jl = (JLabel)jb;
-                                        jl.setText("File Processing Starting....");
-                                    }
-//                                if((jb instanceof JProgressBar) )
-//                                    {
-//                                        final JProgressBar jp = (JProgressBar)jb;
-//                                        jp.setIndeterminate(true);
-//                                        int delay = 900; //milliseconds
-//                                        ActionListener taskPerformer = new ActionListener() {
-//                                           public void actionPerformed(ActionEvent evt) {
-//                                                jp.setIndeterminate(false);
-//                                                jp.setValue(50);
-//                                           }
-//                                        };
-//                                        new Timer(delay, taskPerformer).start();
-//                                    }
-                            }                           
+                            log( out, "FileDrop: normal border saved." );                                                       
 //                            jc.setBorder( dragBorder );
                             log( out, "FileDrop: drag border set." );
                         }   // end if: JComponent   
