@@ -19,7 +19,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
  *
  * @author COMPAQ
  */
-public class FirstPage extends javax.swing.JFrame {
+public class FirstPage extends javax.swing.JFrame  {
 
     /**
      * Creates new form FirstPage
@@ -257,7 +257,6 @@ public class FirstPage extends javax.swing.JFrame {
         jtp.setEditable(false);
         
         frame.getContentPane().add(jtp);
-       
         
          final MapAdjust mpa =new MapAdjust();
          jButton1.addActionListener(new ActionListener() {
@@ -284,46 +283,64 @@ public class FirstPage extends javax.swing.JFrame {
                 int noOfFiles = 0;
                 jp.setMinimum(0);
                 jp.setMaximum(noOfAllFiles * 100);
-                for (int i = 0; i < files.length; i++) {
-                    try {
-                        // mpa.showLocation(files[i].getCanonicalPath());
-                        // mpa.showLocation(files[i].getCanonicalPath());
-                        String filenameExtension = files[i].getCanonicalPath();
-                        File filename = new File(filenameExtension);
-                        String extension;
-                        int dotPos = filenameExtension.lastIndexOf(".");
-                        extension = null;
-                        DocumentLoader inside = new DocumentLoader();
-                        if (dotPos > -1) {
-                            extension = filenameExtension.substring(dotPos);
-                            try {
-                                text.append(files[i].getCanonicalPath() + "\n");
-                                noOfFiles += 1;
-                                jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles);
-                                jl2.setText("Processing file : " + files[i].getName());
-                                inside.filepath(filenameExtension, extension, mpa, text);
-                            } catch (Exception ex) {
-                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            try {
-                                // Directory path here
-                                // Directory path here
-                                noOfFiles += inside.insidefol(files[i].getCanonicalPath(), mpa, text);
-                            } catch (Exception ex) {
-                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    } // end try
-                    // end try
-                    catch (java.io.IOException e) {
-                    }
-                } // end for: through each dropped file
+//                ProgressLoader pl=new ProgressLoader(jp, noOfAllFiles);
+//                Thread t=new Thread(pl);
+//                t.start();
+                
+                test tet=new test(files,text,mpa);
+                Thread tt=new Thread(tet);
+                tt.start();
+                
+                
+               
+                
+//                for (int i = 0; i < files.length; i++) {
+//                    try {
+//                        
+//                        // mpa.showLocation(files[i].getCanonicalPath());
+//                        // mpa.showLocation(files[i].getCanonicalPath());
+//                        final String filenameExtension = files[i].getCanonicalPath();
+//                        frame.setTitle(filenameExtension);
+//                        
+//                        jl3.setText(filenameExtension);
+//                        
+//                        
+//                        File filename = new File(filenameExtension);
+//                        String extension;
+//                        int dotPos = filenameExtension.lastIndexOf(".");
+//                        extension = null;
+//                        DocumentLoader inside = new DocumentLoader();
+//                        if (dotPos > -1) {
+//                            extension = filenameExtension.substring(dotPos);
+//                            try {
+//                                text.append(files[i].getCanonicalPath() + "\n");
+//                                noOfFiles += 1;
+//                                jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles);
+//                                jl2.setText("Processing file : " + files[i].getName());
+//                                inside.filepath(filenameExtension, extension, mpa, text);
+//                            } catch (Exception ex) {
+//                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        } else {
+//                            try {
+//                                // Directory path here
+//                                // Directory path here
+//                                noOfFiles += inside.insidefol(files[i].getCanonicalPath(), mpa, text);
+//                            } catch (Exception ex) {
+//                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+//                        }
+//                    } // end try
+//                    // end try
+//                    catch (java.io.IOException e) {
+//                    }
+//                } // end for: through each dropped file
                 // end for: through each dropped file
                 // end for: through each dropped file
                 // end for: through each dropped file
-                text.append("\n You have added " + noOfFiles + " files \n\n");
-                text.append("Drop your files here \n");
+                
+//                text.append("\n You have added " + noOfFiles + " files \n\n");
+//                text.append("Drop your files here \n");
             } // end filesDropped
             // end FileDrop.Listener
             // end filesDropped

@@ -28,12 +28,12 @@ public class InXMLCreator {
  
 		// Document elements
 		Document doc = docBuilder.newDocument();
-                
+
 //                Anaphora ana=new Anaphora();
 //                String tmpFile="anaphora//test1.txt";
 //                String ana1=document.getBody().replace("(", " ").replace(")", " ");
 //                String anaRes=ana.resolveAnaph(ana1.replace("\n", "").replace("\r", ""),tmpFile);
-               
+
                 Element rootElement = doc.createElement("document");
 		doc.appendChild(rootElement);
                 
