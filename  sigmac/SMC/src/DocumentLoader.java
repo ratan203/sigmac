@@ -8,7 +8,15 @@ import com.mysql.jdbc.Connection;
 import database.DBConnector;
 import database.DBManager;
 import edu.stanford.nlp.process.DocumentPreprocessor.DocType;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
+import javax.swing.Timer;
 import optimization.Optimizer;
 import smc.Parser;
 /*
@@ -24,8 +32,9 @@ public class DocumentLoader {
    
    
    
-   public void insidefol(String paths,MapAdjust mpa) throws Exception{
-      
+   public int insidefol(String paths,MapAdjust mpa,final java.awt.Component c) throws Exception{
+
+       int noFiles=0;
        String path = paths; 
        String filess,foldername; //intialize the file and foler name variables
        File folder = new File(path);
@@ -35,7 +44,7 @@ public class DocumentLoader {
      
            if (listOfFiles[j].isFile())  {            // if it is a file (not a folder)
                  String extension=null;
-                  filess = listOfFiles[j].getName();    //for each file ge the file name
+                  filess = listOfFiles[j].getName();    //for each file get the file name
                   String newfilepath=path+"\\"+filess;
                   int dotPos = filess.lastIndexOf(".");
                   
@@ -43,7 +52,11 @@ public class DocumentLoader {
                   if(dotPos>-1){
                            try {
                                 extension = filess.substring(dotPos);
-                                filepath(newfilepath,extension,mpa);
+                                JTextArea jt=(JTextArea) c;
+                                jt.append(newfilepath.trim()+"\n");
+                                getLabelOne(c).setText("Processing file : "+filess);
+                                noFiles+=1;
+                                filepath(newfilepath,extension,mpa,c);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -55,16 +68,19 @@ public class DocumentLoader {
              else{
                   foldername=listOfFiles[j].getName(); // if it is a folder
                   String newpath=path+"\\"+foldername;
-                  insidefol(newpath,mpa);                  //recall to the same function itselef
+                  insidefol(newpath,mpa,c);                  //recall to the same function itselef
                  }
         }
+       return noFiles;
    }
    
    
    
    
    
-   public void filepath(String path, String extension,MapAdjust mpa) throws Exception{
+   public void filepath(String path, String extension,MapAdjust mpa,final java.awt.Component c) throws Exception{
+
+       
        //System.out.println("File Path ="+path+"   Extension is ="+extension);
        SCDocument doc = null;
        if(extension.equalsIgnoreCase(".doc")){
@@ -114,6 +130,80 @@ public class DocumentLoader {
             Connection conn=(Connection) db1.getConnection();
             dbm.updateDB(conn, doc1);
        }
+   }
+
+   private JLabel getLabelAll(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JLabel) ){
+                    JLabel jl = (JLabel)jb;
+                    jLabels.add(jl);
+            }
+        }
+        JLabel jlAll = null;
+        for(JLabel jl:jLabels){
+            if(jl.getName().equals("labelAll")){
+                jlAll=jl;
+            }
+        }
+        return jlAll;
+   }
+
+    private JLabel getLabelOne(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JLabel) ){
+                    JLabel jl = (JLabel)jb;
+                    jLabels.add(jl);
+            }
+        }
+        JLabel jlOne = null;
+        for(JLabel jl:jLabels){
+             if(jl.getName().equals("labelOne")){
+                jlOne=jl;
+            }
+        }
+        return jlOne;
+   }
+
+       private JProgressBar getProgressAll(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JProgressBar> jProgressBars=new ArrayList<JProgressBar>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JProgressBar) ){
+                    JProgressBar jp = (JProgressBar)jb;
+                    jProgressBars.add(jp);
+            }
+        }
+
+        JProgressBar jpAll = null;
+        for(JProgressBar jl:jProgressBars){
+            if(jl.getName().equals("proAll")){
+                jpAll=jl;
+            }
+        }
+        return jpAll;
+   }
+
+          private JProgressBar getProgressOne(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JProgressBar> jProgressBars=new ArrayList<JProgressBar>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JProgressBar) ){
+                    JProgressBar jp = (JProgressBar)jb;
+                    jProgressBars.add(jp);
+            }
+        }
+
+        JProgressBar jpOne = null;
+        for(JProgressBar jl:jProgressBars){
+               if(jl.getName().equals("proOne")){
+                jpOne=jl;
+            }
+        }
+        return jpOne;
    }
    
    

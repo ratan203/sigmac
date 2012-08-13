@@ -65,7 +65,7 @@ frame.getContentPane().add(jButton1);
                             if(dotPos>-1){
                                     extension = filenameExtension.substring(dotPos);
                             try {
-                                inside.filepath(filenameExtension,extension,mpa);
+                                inside.filepath(filenameExtension,extension,mpa,text);
                                 
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,7 +75,7 @@ frame.getContentPane().add(jButton1);
                             try {
                                 // Directory path here
                                 
-                                      inside.insidefol(files[i].getCanonicalPath(),mpa);
+                                      inside.insidefol(files[i].getCanonicalPath(),mpa,text);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
