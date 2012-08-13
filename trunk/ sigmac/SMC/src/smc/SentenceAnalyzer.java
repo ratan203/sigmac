@@ -58,6 +58,9 @@ public class SentenceAnalyzer {
         }
         cMap.clear();
         matchedRelTypes.clear();
+        if(concepts.size()<2){
+            concepts.clear();
+        }		
         return concepts;
     }
 
