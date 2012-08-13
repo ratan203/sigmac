@@ -202,7 +202,7 @@ public class FirstPage extends javax.swing.JFrame {
         //for all files
         final JLabel jl1=new JLabel();
         jl1.setText("All Files Processing Progress");
-        jl1.setBounds(25, 270, 340, 20);
+        jl1.setBounds(25, 320, 340, 20);
         jl1.setName("labelAll");
         jl1.setOpaque(true);
         jl1.setVisible(true);
@@ -210,7 +210,7 @@ public class FirstPage extends javax.swing.JFrame {
 
         final JProgressBar jp=new JProgressBar();
         jp.setForeground(Color.GREEN);
-        jp.setBounds(25, 295, 340, 18);
+        jp.setBounds(25, 345, 340, 18);
         jp.setIndeterminate(true);
         jp.setName("proAll");
         jp.setVisible(true);
@@ -219,7 +219,7 @@ public class FirstPage extends javax.swing.JFrame {
         //for a single file
         final JLabel jl2=new JLabel();
         jl2.setText("Single File Processing Progress");
-        jl2.setBounds(25, 320, 340, 20);
+        jl2.setBounds(25, 270, 340, 20);
         jl2.setName("labelOne");
         jl2.setOpaque(true);
         jl2.setVisible(true);
@@ -227,7 +227,7 @@ public class FirstPage extends javax.swing.JFrame {
 
         final JProgressBar jp1=new JProgressBar(0, 100);
         jp1.setForeground(Color.GREEN);
-        jp1.setBounds(25, 345, 340, 18);
+        jp1.setBounds(25, 295, 340, 18);
         jp1.setIndeterminate(true);
         jp1.setName("proOne");
         jp1.setVisible(true);

@@ -54,7 +54,6 @@ public void updateDB(Connection con, Document doc){
             String getConceptQuery = "SELECT conceptId from concepts WHERE conceptName=\'"+e.replaceAll("'", "''")+"\'";
             ResultSet rsCon= stmt.executeQuery(getConceptQuery);
             int existConceptId=0;
-            if(rsCon.next())
             while (rsCon.next()) {
                 existConceptId= rsCon.getInt("conceptId");
             }

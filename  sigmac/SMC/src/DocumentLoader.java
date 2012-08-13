@@ -112,7 +112,6 @@ public class DocumentLoader {
             mpa.showLocation(path);
             InXMLCreator xmlcreater=new InXMLCreator();
             java.util.Date date= new java.util.Date();
-            System.out.println(date.getTime());
             long timestamp=date.getTime();
             
             xmlcreater.createXML(doc, "InterXML//"+timestamp+".xml",path);
