@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import smc.Document;
 import sun.dc.pr.PathStroker;
@@ -192,21 +194,51 @@ public class MapAdjust extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        System.exit(0);
+      //  System.exit(0);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
 
-       System.out.println(jList1.getSelectedIndex()); 
-       System.out.println("You have selected "+paths.get(jList1.getSelectedIndex()));
-       System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
+       
+       
+       
         
     }//GEN-LAST:event_jList1ValueChanged
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
        
-      
+      System.out.println(jList1.getSelectedIndex()); 
+       System.out.println("You have selected "+paths.get(jList1.getSelectedIndex()));
+       System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
+       
+       Document doc = documents.get(jList1.getSelectedIndex());
+       JSCreator jsc = new JSCreator();
+       
+        try {
+           jsc.CreateJS(doc);
+           
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        NativeInterface.open();
+        panel1.removeAll();
+          SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+          
+          Web a=new Web("D:\\Project_clone\\SMC\\example2.html");
+          JScrollPane scrollPane = new JScrollPane(a);
+          a.setBounds(0, 0, 700, 530);
+          a.setVisible(true);
+          
+        panel1.add(a);
+          
+       
+      }
+    });
     }//GEN-LAST:event_jList1MouseClicked
 
     public void showLocation(String file){
@@ -235,7 +267,7 @@ public class MapAdjust extends javax.swing.JFrame {
           SwingUtilities.invokeLater(new Runnable() {
       public void run() {
       
-          Web a=new Web("http://www.google.lk");
+          Web a=new Web("C:\\html\\First.html");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);
