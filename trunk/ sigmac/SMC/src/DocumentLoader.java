@@ -32,7 +32,7 @@ public class DocumentLoader {
    
    
    
-   public int insidefol(String paths,MapAdjust mpa,final java.awt.Component c) throws Exception{
+   public int insidefol(String paths,MapAdjust mpa,final java.awt.Component c,int noOfAllFiles,int noOfFiles) throws Exception{
 
        int noFiles=0;
        String path = paths; 
@@ -52,11 +52,14 @@ public class DocumentLoader {
                   if(dotPos>-1){
                            try {
                                 extension = filess.substring(dotPos);
-                                JTextArea jt=(JTextArea) c;
-                                jt.append(newfilepath.trim()+"\n");
-                                getLabelOne(c).setText("Processing file : "+filess);
-                                noFiles+=1;
-                                filepath(newfilepath,extension,mpa,c);
+                                if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
+                                    noFiles+=1;
+                                    JTextArea jt=(JTextArea) c;
+                                    jt.append(newfilepath.trim()+"\n");
+                                    getLabelAll(c).setText("Processing " + (noOfFiles+noFiles) + " out of " + noOfAllFiles);
+                                    getLabelOne(c).setText("Processing file : "+filess);
+                                    filepath(newfilepath,extension,mpa,c);
+                                }
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -68,7 +71,7 @@ public class DocumentLoader {
              else{
                   foldername=listOfFiles[j].getName(); // if it is a folder
                   String newpath=path+"\\"+foldername;
-                  insidefol(newpath,mpa,c);                  //recall to the same function itselef
+                  insidefol(newpath,mpa,c,noOfAllFiles,noOfFiles);                  //recall to the same function itselef
                  }
         }
        return noFiles;
@@ -131,7 +134,7 @@ public class DocumentLoader {
        }
    }
 
-   private JLabel getLabelAll(final java.awt.Component c){
+   public JLabel getLabelAll(final java.awt.Component c){
        JTextArea jt=(JTextArea)c;
        ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
         for (Component jb : jt.getParent().getComponents()){
@@ -149,7 +152,7 @@ public class DocumentLoader {
         return jlAll;
    }
 
-    private JLabel getLabelOne(final java.awt.Component c){
+    public JLabel getLabelOne(final java.awt.Component c){
        JTextArea jt=(JTextArea)c;
        ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
         for (Component jb : jt.getParent().getComponents()){
@@ -167,7 +170,7 @@ public class DocumentLoader {
         return jlOne;
    }
 
-       private JProgressBar getProgressAll(final java.awt.Component c){
+   public JProgressBar getProgressAll(final java.awt.Component c){
        JTextArea jt=(JTextArea)c;
        ArrayList<JProgressBar> jProgressBars=new ArrayList<JProgressBar>();
         for (Component jb : jt.getParent().getComponents()){
@@ -186,7 +189,7 @@ public class DocumentLoader {
         return jpAll;
    }
 
-          private JProgressBar getProgressOne(final java.awt.Component c){
+   public JProgressBar getProgressOne(final java.awt.Component c){
        JTextArea jt=(JTextArea)c;
        ArrayList<JProgressBar> jProgressBars=new ArrayList<JProgressBar>();
         for (Component jb : jt.getParent().getComponents()){
