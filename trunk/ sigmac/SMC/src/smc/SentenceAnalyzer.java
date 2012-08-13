@@ -157,7 +157,7 @@ public class SentenceAnalyzer {
                     //Concept c=cMap.get(concept);
                     //c.modifyFreequency(1);
                 }else{
-                    if(concept.equalsIgnoreCase("")){
+                    if(!concept.equalsIgnoreCase("")){
                         cMap.put(concept, new Concept(concept));
                     }
                 }
