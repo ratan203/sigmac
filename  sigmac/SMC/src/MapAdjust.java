@@ -213,15 +213,15 @@ public class MapAdjust extends javax.swing.JFrame {
        System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
        
        Document doc = documents.get(jList1.getSelectedIndex());
-       JSCreator jsc = new JSCreator();
-       
-        try {
-           jsc.CreateJS(doc);
-           
-            
-        } catch (IOException ex) {
-            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//       JSCreator jsc = new JSCreator();
+//
+//        try {
+//           jsc.CreateJS(doc);
+//
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         
         NativeInterface.open();

@@ -43,60 +43,7 @@ public class FirstPage extends javax.swing.JFrame  {
             // handle exception
         }
     }
-
-    private int noOFFiles(java.io.File[] files){
-        int noFiles=0;
-        for( int i = 0; i < files.length; i++ ){
-            try{
-            String filenameExtension = files[i].getCanonicalPath();
-            int dotPos = filenameExtension.lastIndexOf(".");
-                if(dotPos>-1){
-                    try {
-                        noFiles+=1;
-                    } catch (Exception ex) {
-                        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                else{
-                    try {
-                        noFiles+=traverseFolder(files[i]);
-                    } catch (Exception ex) {
-                        Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                }
-            }
-            catch( java.io.IOException e ) {}
-        }
-        return noFiles;
-    }
-
-    private int traverseFolder(File file){
-        int noFiles = 0;
-       String filess,foldername;
-       File folder = file;
-       File[] listOfFiles = folder.listFiles(); 
-
-       for (int j = 0; j < listOfFiles.length; j++) {
-
-           if (listOfFiles[j].isFile())  {    
-                  filess = listOfFiles[j].getName();  
-                  int dotPos1 = filess.lastIndexOf(".");
-                  if(dotPos1>-1){
-                           try {
-                                noFiles+=1;
-                            } catch (Exception ex) {
-                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                      }
-           }
-         else{
-              traverseFolder(file);
-             }
-        }
-       return noFiles;
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,7 +139,7 @@ public class FirstPage extends javax.swing.JFrame  {
         String path;
         final javax.swing.JFrame frame = new javax.swing.JFrame( "SigmaC File Drop" );
 
-        JButton jButton1  = new JButton();
+        final JButton jButton1  = new JButton();
         jButton1.setText("Next");
         jButton1.setBounds(170, 370, 70, 25);
         jButton1.setOpaque(true);
@@ -253,14 +200,13 @@ public class FirstPage extends javax.swing.JFrame  {
         text.setWrapStyleWord(true);
         text.setBackground(Color.lightGray);
         frame.getContentPane().add(text);
+
         JTextPane jtp=new JTextPane();
-        jtp.setEditable(false);
-        
+        jtp.setEditable(false);        
         frame.getContentPane().add(jtp);
         
          final MapAdjust mpa =new MapAdjust();
          jButton1.addActionListener(new ActionListener() {
- 
             public void actionPerformed(ActionEvent e)
             {
                 try {
@@ -278,73 +224,16 @@ public class FirstPage extends javax.swing.JFrame  {
         FileDrop fileDrop = new FileDrop(System.out, text, new FileDrop.Listener() {
 
             public void filesDropped(java.io.File[] files) {
-                text.setText(null);
-                int noOfAllFiles = noOFFiles(files);                
-                int noOfFiles = 0;
-                jp.setMinimum(0);
-                jp.setMaximum(noOfAllFiles * 100);
-//                ProgressLoader pl=new ProgressLoader(jp, noOfAllFiles);
-//                Thread t=new Thread(pl);
-//                t.start();
-                
-                test tet=new test(files,text,mpa);
+                jButton1.setEnabled(false);
+                jl2.setText("Single File Processing Progress");
+                jl1.setText("All Files Processing Progress");
+                jp.setValue(0);
+                jp1.setValue(0);
+                DragFileProcessor tet=new DragFileProcessor(files,text,mpa);
                 Thread tt=new Thread(tet);
                 tt.start();
-                
-                
-               
-                
-//                for (int i = 0; i < files.length; i++) {
-//                    try {
-//                        
-//                        // mpa.showLocation(files[i].getCanonicalPath());
-//                        // mpa.showLocation(files[i].getCanonicalPath());
-//                        final String filenameExtension = files[i].getCanonicalPath();
-//                        frame.setTitle(filenameExtension);
-//                        
-//                        jl3.setText(filenameExtension);
-//                        
-//                        
-//                        File filename = new File(filenameExtension);
-//                        String extension;
-//                        int dotPos = filenameExtension.lastIndexOf(".");
-//                        extension = null;
-//                        DocumentLoader inside = new DocumentLoader();
-//                        if (dotPos > -1) {
-//                            extension = filenameExtension.substring(dotPos);
-//                            try {
-//                                text.append(files[i].getCanonicalPath() + "\n");
-//                                noOfFiles += 1;
-//                                jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles);
-//                                jl2.setText("Processing file : " + files[i].getName());
-//                                inside.filepath(filenameExtension, extension, mpa, text);
-//                            } catch (Exception ex) {
-//                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                        } else {
-//                            try {
-//                                // Directory path here
-//                                // Directory path here
-//                                noOfFiles += inside.insidefol(files[i].getCanonicalPath(), mpa, text);
-//                            } catch (Exception ex) {
-//                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                        }
-//                    } // end try
-//                    // end try
-//                    catch (java.io.IOException e) {
-//                    }
-//                } // end for: through each dropped file
-                // end for: through each dropped file
-                // end for: through each dropped file
-                // end for: through each dropped file
-                
-//                text.append("\n You have added " + noOfFiles + " files \n\n");
-//                text.append("Drop your files here \n");
-            } // end filesDropped
-            // end FileDrop.Listener
-            // end filesDropped
-            // end filesDropped
+                jButton1.setEnabled(true);
+            } 
         });
 
         frame.setBounds( 100, 100, 400, 450 );

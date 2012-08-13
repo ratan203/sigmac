@@ -75,7 +75,7 @@ frame.getContentPane().add(jButton1);
                             try {
                                 // Directory path here
                                 
-                                      inside.insidefol(files[i].getCanonicalPath(),mpa,text);
+                                      inside.insidefol(files[i].getCanonicalPath(),mpa,text,1,2);
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                             }
