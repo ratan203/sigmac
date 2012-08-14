@@ -45,7 +45,7 @@ public class HTMLAdapter {
             for(Element h : h1){
                 String text=h.text();
                 if(text.length()>2){
-                    Title title=new Title(h.text(),6-i);
+                    Title title=new Title(purifyTitle(h.text()),6-i);
                     titles.add(title);
                 }
             }
@@ -53,14 +53,20 @@ public class HTMLAdapter {
         }
         Elements links = doc.select("a");
         for(Element link : links){
-            Title title=new Title(link.text(), 1);
+            Title title=new Title(purifyTitle(link.text()), 1);
             titles.add(title);
         }
         Elements bolds = doc.select("b");
         for(Element bold : bolds){
-            Title title=new Title(bold.text(),1);
+            Title title=new Title(purifyTitle(bold.text()),1);
             titles.add(title);
         }
         return titles;
+    }
+
+    private String purifyTitle(String title){
+        String cleaned="";
+        cleaned = title.replaceAll("[^A-Za-z]+$", "");
+        return cleaned;
     }
 }
