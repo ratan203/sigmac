@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
@@ -56,7 +57,7 @@ public class DocumentLoader {
                                     noFiles+=1;
                                     JTextArea jt=(JTextArea) c;
                                     jt.append(newfilepath.trim()+"\n");
-                                    getLabelAll(c).setText("Processing " + (noOfFiles+noFiles) + " out of " + noOfAllFiles);
+                                    getLabelAll(c).setText("Processing " + (noOfFiles+noFiles) + " out of " + noOfAllFiles+" files");
                                     getLabelOne(c).setText("Processing file : "+filess);
                                     filepath(newfilepath,extension,mpa,c);
                                 }
@@ -207,7 +208,23 @@ public class DocumentLoader {
         }
         return jpOne;
    }
-   
-   
-   
+
+   public JButton getNextButton(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JButton> jbutton=new ArrayList<JButton>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JButton) ){
+                    JButton jp = (JButton)jb;
+                    jbutton.add(jp);
+            }
+        }
+
+        JButton jpOne = null;
+        for(JButton jl:jbutton){
+               if(jl.getName().equals("next")){
+                jpOne=jl;
+            }
+        }
+        return jpOne;
+   }   
 }
