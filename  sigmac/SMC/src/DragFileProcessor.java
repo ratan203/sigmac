@@ -104,7 +104,7 @@ int noOfAllFiles;
         JProgressBar jp=dl.getProgressAll(text);
         JProgressBar jp1=dl.getProgressOne(text);
         jp.setMinimum(0);
-        jp.setMaximum(noOfAllFiles * 100);
+        jp.setMaximum(noOfAllFiles * 1000);
 
         JLabel jl1=dl.getLabelAll(text);
         JLabel jl2=dl.getLabelOne(text);
@@ -126,8 +126,8 @@ int noOfAllFiles;
                                 text.append(files[i].getCanonicalPath() + "\n");
                                 noOfFiles += 1;
                                 jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles+" files");
-                                jl2.setText("Processing file : " + files[i].getName());
-                                inside.filepath(filenameExtension, extension, mpa, text);
+                                jl2.setText("Processing file ");
+                                inside.filepath(filenameExtension, extension, mpa, text,noOfFiles);
                             }
                         } catch (Exception ex) {
                             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,8 +148,9 @@ int noOfAllFiles;
             text.append("Drop your files here \n");
             jl1.setText("All files succesfully processed");
             jl2.setText(jl2.getText().replace("Processing", "Processed"));
-            jp.setValue(noOfAllFiles * 100);
-            jp1.setValue(100);
+//            jp.setValue(noOfAllFiles * 100);
+//            jp1.setValue(100);
             jb.setEnabled(true);
     }
 }
+

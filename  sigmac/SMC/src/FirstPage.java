@@ -174,7 +174,7 @@ public class FirstPage extends javax.swing.JFrame  {
         jl2.setVisible(true);
         frame.getContentPane().add(jl2);
 
-        final JProgressBar jp1=new JProgressBar(0, 100);
+        final JProgressBar jp1=new JProgressBar(0, 1000);
         jp1.setForeground(Color.GREEN);
         jp1.setBounds(25, 295, 340, 18);
         jp1.setIndeterminate(true);

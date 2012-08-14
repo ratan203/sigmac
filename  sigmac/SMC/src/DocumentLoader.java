@@ -58,8 +58,8 @@ public class DocumentLoader {
                                     JTextArea jt=(JTextArea) c;
                                     jt.append(newfilepath.trim()+"\n");
                                     getLabelAll(c).setText("Processing " + (noOfFiles+noFiles) + " out of " + noOfAllFiles+" files");
-                                    getLabelOne(c).setText("Processing file : "+filess);
-                                    filepath(newfilepath,extension,mpa,c);
+                                    getLabelOne(c).setText("Processing file");
+                                    filepath(newfilepath,extension,mpa,c,(noOfFiles+noFiles));
                                 }
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,10 +82,21 @@ public class DocumentLoader {
    
    
    
-   public void filepath(String path, String extension,MapAdjust mpa,final java.awt.Component c) throws Exception{
+   public void filepath(String path, String extension,MapAdjust mpa,final java.awt.Component c,int fileNo) throws Exception{
 
        
        //System.out.println("File Path ="+path+"   Extension is ="+extension);
+       JTextArea jt=(JTextArea) c;
+       JProgressBar jp=getProgressAll(jt);
+       JProgressBar jp1=getProgressOne(jt);
+       JLabel jl2=getLabelOne(jt);
+       int limit=0;
+       String name=jl2.getText().replace("Processing file : ", "");
+
+       jl2.setText("Preprocessing file");
+       ProgressSetter ps=new ProgressSetter(jp,jp1,100,fileNo);
+       Thread progThrd=new Thread(ps);
+       progThrd.start();
        SCDocument doc = null;
        if(extension.equalsIgnoreCase(".doc")){
              DocReader docreader = new DocReader();
@@ -111,7 +122,13 @@ public class DocumentLoader {
              OdsExtractor odt = new OdsExtractor();
              doc=odt.getDocument(path);
        }
-//       
+       ps.stopProgress();
+       progThrd.stop();
+
+       jl2.setText("Creating intermediate XML");
+       ps.setLimit(150);
+       progThrd=new Thread(ps);
+       progThrd.start();
        if(doc!=null){
             mpa.showLocation(path);
             InXMLCreator xmlcreater=new InXMLCreator();
@@ -120,18 +137,42 @@ public class DocumentLoader {
             
             xmlcreater.createXML(doc, "InterXML//"+timestamp+".xml",path);
             String XMLPath="InterXML//"+timestamp+".xml";
+
+            ps.stopProgress();
+            progThrd.stop();
+
+            jl2.setText("Extracting concepts/relationships ");
+            ps.setLimit(400);
+            progThrd=new Thread(ps);
+            progThrd.start();
             Parser p=new Parser("grammar/englishPCFG.ser.gz");
             smc.Document doc2=p.parse(XMLPath, DocType.XML, "body");
-            
+
+            ps.stopProgress();
+            progThrd.stop();
+
+            jl2.setText("Optimizing concepts/relationships ");
+            ps.setLimit(600);
+            progThrd=new Thread(ps);
+            progThrd.start();
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
             mpa.setDocumentsObjects(doc1);
             
+            ps.stopProgress();
+            progThrd.stop();
 
+            jl2.setText("Storing concepts/relationships to database ");
+            ps.setLimit(1000);
+            progThrd=new Thread(ps);
+            progThrd.start();
             DBConnector db1=new DBConnector();
             DBManager dbm=new DBManager();
             Connection conn=(Connection) db1.getConnection();
             dbm.updateDB(conn, doc1);
+
+            ps.stopProgress();
+            progThrd.stop();
        }
    }
 
