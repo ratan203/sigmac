@@ -60,7 +60,7 @@ public class SentenceAnalyzer {
         matchedRelTypes.clear();
         if(concepts.size()<2){
             concepts.clear();
-        }		
+        }
         return concepts;
     }
 
@@ -160,7 +160,7 @@ public class SentenceAnalyzer {
                     //Concept c=cMap.get(concept);
                     //c.modifyFreequency(1);
                 }else{
-                    if(!concept.equalsIgnoreCase("")){
+                    if(concept.length()>2){
                         cMap.put(concept, new Concept(concept));
                     }
                 }
