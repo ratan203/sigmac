@@ -2,6 +2,7 @@
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
@@ -98,6 +99,8 @@ int noOfAllFiles;
         text.setText(null);
         int noOfFiles = 0;
         DocumentLoader dl=new DocumentLoader();
+        JButton jb=dl.getNextButton(text);
+        jb.setEnabled(false);
         JProgressBar jp=dl.getProgressAll(text);
         JProgressBar jp1=dl.getProgressOne(text);
         jp.setMinimum(0);
@@ -122,7 +125,7 @@ int noOfAllFiles;
                             if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
                                 text.append(files[i].getCanonicalPath() + "\n");
                                 noOfFiles += 1;
-                                jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles);
+                                jl1.setText("Processing " + noOfFiles + " out of " + noOfAllFiles+" files");
                                 jl2.setText("Processing file : " + files[i].getName());
                                 inside.filepath(filenameExtension, extension, mpa, text);
                             }
@@ -147,5 +150,6 @@ int noOfAllFiles;
             jl2.setText(jl2.getText().replace("Processing", "Processed"));
             jp.setValue(noOfAllFiles * 100);
             jp1.setValue(100);
+            jb.setEnabled(true);
     }
 }

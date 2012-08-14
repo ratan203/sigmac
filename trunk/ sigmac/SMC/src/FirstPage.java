@@ -142,6 +142,8 @@ public class FirstPage extends javax.swing.JFrame  {
         final JButton jButton1  = new JButton();
         jButton1.setText("Next");
         jButton1.setBounds(170, 370, 70, 25);
+        jButton1.setName("next");
+        jButton1.setEnabled(false);
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
         frame.getContentPane().add(jButton1);
@@ -224,7 +226,6 @@ public class FirstPage extends javax.swing.JFrame  {
         FileDrop fileDrop = new FileDrop(System.out, text, new FileDrop.Listener() {
 
             public void filesDropped(java.io.File[] files) {
-                jButton1.setEnabled(false);
                 jl2.setText("Single File Processing Progress");
                 jl1.setText("All Files Processing Progress");
                 jp.setValue(0);
@@ -232,7 +233,6 @@ public class FirstPage extends javax.swing.JFrame  {
                 DragFileProcessor tet=new DragFileProcessor(files,text,mpa);
                 Thread tt=new Thread(tet);
                 tt.start();
-                jButton1.setEnabled(true);
             } 
         });
 
