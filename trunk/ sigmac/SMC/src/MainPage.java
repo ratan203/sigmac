@@ -65,7 +65,7 @@ frame.getContentPane().add(jButton1);
                             if(dotPos>-1){
                                     extension = filenameExtension.substring(dotPos);
                             try {
-                                inside.filepath(filenameExtension,extension,mpa,text);
+                                inside.filepath(filenameExtension,extension,mpa,text,2);
                                 
                             } catch (Exception ex) {
                                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
