@@ -292,12 +292,14 @@ public class SentenceAnalyzer {
     // this dose not have any effect on concepts returned by relationship patterns
     private String filterConcept(String concept){
         String cp="";
-        if(!(concept.length()<2)){
+        if(concept.length()>2){
             cp=concept;
             if(concept.endsWith("\'s") || concept.endsWith("s\'")){
                 cp=concept.substring(0, concept.length()-2);
             }
         }
+        cp=cp.replaceAll("^[^A-Za-z]", "");
+        cp=cp.replaceAll("[^A-Za-z]$", "");
         return cp;
     }
 }
