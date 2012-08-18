@@ -157,4 +157,22 @@ public class Concept implements Serializable {
             }
         }
     }
+	
+	public int getTotalOutboundCount(){
+        int value=0;
+        Set<String> keySet=this.relationships.keySet();
+        for(String key : keySet){
+            value+=getOutboundCountTo(key);
+        }
+        return value;
+    }
+	
+	public int getOutboundCountTo(String concept){
+        int value=0;
+        ArrayList<RelatedConcept> rels = this.relationships.get(concept);
+        for(RelatedConcept rel : rels){
+            value+=rel.getValue();
+        }
+        return value;
+    }
 }
