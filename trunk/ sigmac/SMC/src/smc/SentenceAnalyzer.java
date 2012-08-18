@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -85,6 +84,7 @@ public class SentenceAnalyzer {
                     for(LabeledScoredTreeNode leave : leaves){
                         hConcept+=leave.nodeString()+" ";
                     }
+                    hConcept=filterConcept(hConcept);
                     if(cMap.containsKey(hConcept)){
                         //Concept c=cMap.get(hConcept);
                         //c.modifyFreequency(1);
@@ -114,6 +114,7 @@ public class SentenceAnalyzer {
                     for(LabeledScoredTreeNode leave : leaves){
                         dConcept+=leave.nodeString()+" ";
                     }
+                    dConcept=filterConcept(dConcept);
                     if(cMap.containsKey(dConcept)){
                         //Concept c=cMap.get(dConcept);
                         //c.modifyFreequency(1);
@@ -169,15 +170,19 @@ public class SentenceAnalyzer {
     }
 
     private void addAssociations(){
+//        System.out.println("Adding association");
         Set<String> keySet = cMap.keySet();
         for(String key : keySet){
             for(String aso : keySet){
                 if(!key.equals(aso)){
                     Concept con = cMap.get(key);
                     con.addRelatedConcept(aso, "aso", true, 1);
+                }else{
+//                    System.out.println("###################################"+key);
                 }
             }
         }
+//        System.out.println("end adding associations");
     }
 
     private void tmpMethod1(){
