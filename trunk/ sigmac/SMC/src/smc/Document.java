@@ -63,7 +63,11 @@ public class Document implements Serializable {
             if(doc.containsKey(c.getName())){
                 Concept con=doc.get(c.getName());
                 doc.remove(c.getName());
-                con.modifyFreequency(c.getStrength());
+                if(con.getFreequency()<=0){
+                    con.modifyFreequency(1);
+                }else{
+                    con.modifyFreequency(c.getFreequency());
+                }
                 con.addRelatedConcepts(c.getRelationships());
                 doc.put(c.getName(), con);
             }else{
