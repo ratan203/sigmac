@@ -37,34 +37,35 @@ int noOfAllFiles;
     }
 
     private int noOFFiles(java.io.File[] files){
-        int noFiles=0;
-        for( int i = 0; i < files.length; i++ ){
-            try{
-            String filenameExtension = files[i].getCanonicalPath();
-            int dotPos = filenameExtension.lastIndexOf(".");
-            String extension=null;
-            if(dotPos>-1){
-                try {
-                    extension = filenameExtension.substring(dotPos);
-                    if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
-                        noFiles+=1;
-                    }
-                } catch (Exception ex) {
-                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else{
-                try {
-                    noFiles+=traverseFolder(files[i]);
-                } catch (Exception ex) {
-                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-            }
-            catch( java.io.IOException e ) {}
-        }
-        return noFiles;
+//        int noFiles=0;
+//        for( int i = 0; i < files.length; i++ ){
+//            try{
+//            String filenameExtension = files[i].getCanonicalPath();
+//            int dotPos = filenameExtension.lastIndexOf(".");
+//            String extension=null;
+//            if(dotPos>-1){
+//                try {
+//                    extension = filenameExtension.substring(dotPos);
+//                    if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
+//                        noFiles+=1;
+//                    }
+//                } catch (Exception ex) {
+//                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            else{
+//                try {
+//                    noFiles+=traverseFolder(files[i]);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//            }
+//            }
+//            catch( java.io.IOException e ) {}
+//        }
+//        System.out.println(noFiles);System.exit(0);
+        return 5;
     }
 
     private int traverseFolder(File file){

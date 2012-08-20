@@ -100,30 +100,30 @@ public class DocumentLoader {
        Thread progThrd=new Thread(ps);
        progThrd.start();
        SCDocument doc = null;
-       if(extension.equalsIgnoreCase(".doc")){
-             DocReader docreader = new DocReader();
-             doc=docreader.getDocument(path);    
-       }
-       else if(extension.equalsIgnoreCase(".ppt")){
-             pptreader pptreader = new pptreader();
-             doc=pptreader.getDocument(path);
-       }
-       else if(extension.equalsIgnoreCase(".pdf")){
-            File f=new File(path);
-            PDFAdapter adapter=new PDFAdapter(f);
-            doc=adapter.getDocument();
-       }else if(extension.equalsIgnoreCase(".pptx")){
-             PpptxSCD pptx = new PpptxSCD();
-             doc=pptx.getDocument(path);
-       }
-       else if(extension.equalsIgnoreCase(".docx")){
+//       if(extension.equalsIgnoreCase(".doc")){
+//             DocReader docreader = new DocReader();
+//             doc=docreader.getDocument(path);    
+//       }
+//       else if(extension.equalsIgnoreCase(".ppt")){
+//             pptreader pptreader = new pptreader();
+//             doc=pptreader.getDocument(path);
+//       }
+//       else if(extension.equalsIgnoreCase(".pdf")){
+//            File f=new File(path);
+//            PDFAdapter adapter=new PDFAdapter(f);
+//            doc=adapter.getDocument();
+//       }else if(extension.equalsIgnoreCase(".pptx")){
+//             PpptxSCD pptx = new PpptxSCD();
+//             doc=pptx.getDocument(path);
+//       }
+        if(extension.equalsIgnoreCase(".docx")){
              DocxSCD docx = new DocxSCD();
              doc=docx.getDocument(path);
        }
-       else if(extension.equalsIgnoreCase(".odt")){
-             OdsExtractor odt = new OdsExtractor();
-             doc=odt.getDocument(path);
-       }
+//       else if(extension.equalsIgnoreCase(".odt")){
+//             OdsExtractor odt = new OdsExtractor();
+//             doc=odt.getDocument(path);
+//       }
        ps.stopProgress();
        progThrd.stop();
 
