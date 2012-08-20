@@ -28,7 +28,7 @@ public class ProgressSetter implements Runnable{
             jp.repaint();
             jp1.setValue(jp1.getValue()+i/10);
             jp1.repaint();
-            try{Thread.sleep(200);}
+            try{Thread.sleep(1000);}
             catch (InterruptedException err){}
         }
     }
