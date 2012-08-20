@@ -42,6 +42,7 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationshipJoin(doc.get(con).getRelationships());            
 
             concept.setRelationships(relationships1);
+            concept.setStrength(concept.getFreequency()/docc.getSize()+concept.getTitleStrength()/docc.getTitleInfo().size());
             doc1.remove(morphRoot);
             doc1.put(morphRoot, concept);
         }else{
@@ -49,6 +50,7 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
             relationshipJoin(doc.get(con).getRelationships());
             doc.get(con).setRelationships(relationships1);
+            doc.get(con).setStrength(doc.get(con).getFreequency()/docc.getSize()+doc.get(con).getTitleStrength()/docc.getTitleInfo().size());
             doc1.put(morphRoot,doc.get(con));
         }
     }
@@ -70,15 +72,14 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                     relList.add(re);
                 }
                 for(RelatedConcept rc:relListCommon){
+                    rc.setRelatedConcept(morphRootRel);
                     for(int i=0;i<relList.size();i++){
                         if(relList.get(i).getType().equals(rc.getType())){
                             relList.get(i).setFreequency(relList.get(i).getFreequency()+rc.getFreequency());
+                        }else if(!relList.contains(rc)){
+                            relList.add(rc);
                         }
-                    }
-                    if(!relList.contains(rc)){
-                        rc.setRelatedConcept(morphRootRel);
-                        relList.add(rc);
-                    }
+                    }                    
                 }
             }
         }else{
@@ -158,7 +159,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
             int totTitleStr=0;
             for(String a:titleList.keySet()){
                 if(titleList.get(a).getTitleSet().contains(con)){
-                    totTitleStr+=titleList.get(a).getTitleStrength();
+                    totTitleStr+=titleList.get(a).getTitleStrength()*(con.trim().split(" ").length/a.trim().split(" ").length);
                 }
             }
             dd1.get(con).setTitleStrength(totTitleStr);
