@@ -1,3 +1,5 @@
+package clientGUI;
+
 
 import XMLParser.InXMLCreator;
 import adaptors.*;
@@ -162,14 +164,11 @@ public class DocumentLoader {
             ps.stopProgress();
             progThrd.stop();
 
-            jl2.setText("Storing concepts/relationships to database ");
-            ps.setLimit(1000);
-            progThrd=new Thread(ps);
-            progThrd.start();
-            DBConnector db1=new DBConnector();
-            DBManager dbm=new DBManager();
-            Connection conn=(Connection) db1.getConnection();
-            dbm.updateDB(conn, doc1);
+//            DBConnector db1=new DBConnector();
+//            DBManager dbm=new DBManager();
+//            Connection conn=(Connection) db1.getConnection();
+//            dbm.updateDB(conn, doc1);
+
 
             ps.stopProgress();
             progThrd.stop();

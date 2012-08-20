@@ -1,3 +1,5 @@
+package clientGUI;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -64,10 +66,10 @@ public class FirstPage extends javax.swing.JFrame  {
         setTitle("SigmaC");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 24));
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 24)); // NOI18N
         jLabel1.setText("SigmaC");
 
-        jLabel2.setFont(new java.awt.Font("Khmer UI", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Khmer UI", 1, 14)); // NOI18N
         jLabel2.setText("Document Analysis Based Automatic Generation of Concpet Map for Enterprices");
 
         jButton1.setText("Browse Map");
@@ -86,26 +88,26 @@ public class FirstPage extends javax.swing.JFrame  {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(jLabel3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)
-                        .addComponent(jButton2))
+                        .addGap(167, 167, 167)
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(156, 156, 156)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4))))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
+                        .addGap(342, 342, 342)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(jLabel2)))
                 .addContainerGap(167, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(130, 130, 130))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(342, 342, 342)
-                .addComponent(jLabel1)
-                .addContainerGap(368, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +119,7 @@ public class FirstPage extends javax.swing.JFrame  {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(143, 143, 143))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -142,10 +144,9 @@ public class FirstPage extends javax.swing.JFrame  {
         final JButton jButton1  = new JButton();
         jButton1.setText("Next");
         jButton1.setBounds(170, 370, 70, 25);
-        jButton1.setName("next");
-        jButton1.setEnabled(false);
         jButton1.setOpaque(true);
         jButton1.setVisible(true);
+        jButton1.setEnabled(false);
         frame.getContentPane().add(jButton1);
 
         //for all files
@@ -174,7 +175,7 @@ public class FirstPage extends javax.swing.JFrame  {
         jl2.setVisible(true);
         frame.getContentPane().add(jl2);
 
-        final JProgressBar jp1=new JProgressBar(0, 1000);
+        final JProgressBar jp1=new JProgressBar(0, 100);
         jp1.setForeground(Color.GREEN);
         jp1.setBounds(25, 295, 340, 18);
         jp1.setIndeterminate(true);
@@ -226,13 +227,11 @@ public class FirstPage extends javax.swing.JFrame  {
         FileDrop fileDrop = new FileDrop(System.out, text, new FileDrop.Listener() {
 
             public void filesDropped(java.io.File[] files) {
-                jl2.setText("Single File Processing Progress");
-                jl1.setText("All Files Processing Progress");
-                jp.setValue(0);
-                jp1.setValue(0);
+           
                 DragFileProcessor tet=new DragFileProcessor(files,text,mpa);
                 Thread tt=new Thread(tet);
                 tt.start();
+                jButton1.setEnabled(true);
             } 
         });
 

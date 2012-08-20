@@ -1,3 +1,5 @@
+package clientGUI;
+
 
 import javax.swing.JProgressBar;
 
@@ -23,12 +25,12 @@ public class ProgressSetter implements Runnable{
     }
 
     public void run(){
-        for (int i=0; i<=(limit-jp1.getValue())*10; i++){
-            jp.setValue(jp.getValue()+i/10);
+        for (int i=0; i<=(limit-jp1.getValue()); i++){
+            jp.setValue(jp.getValue()+i);
             jp.repaint();
-            jp1.setValue(jp1.getValue()+i/10);
+            jp1.setValue(jp1.getValue()+i);
             jp1.repaint();
-            try{Thread.sleep(1000);}
+            try{Thread.sleep(500);}
             catch (InterruptedException err){}
         }
     }

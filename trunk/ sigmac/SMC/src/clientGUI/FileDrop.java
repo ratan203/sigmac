@@ -1,3 +1,5 @@
+package clientGUI;
+
 
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;

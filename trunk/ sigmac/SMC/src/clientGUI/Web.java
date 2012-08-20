@@ -1,3 +1,5 @@
+package clientGUI;
+
 /*
  * Christopher Deckers (chrriis@nextencia.net)
  * http://www.nextencia.net
@@ -30,9 +32,7 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
   public Web(String path) {
     super(new BorderLayout());
     JPanel webBrowserPanel = new JPanel(new BorderLayout());
- //   webBrowserPanel.setBorder(BorderFactory.createTitledBorder("Native Web Browser component"));
     final JWebBrowser webBrowser = new JWebBrowser();
-    //webBrowser.setStatusBarVisible(false);
     webBrowser.setLocationBarVisible(false);
     webBrowser.setMenuBarVisible(false);
     
@@ -40,8 +40,7 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
     webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
     add(webBrowserPanel, BorderLayout.CENTER);
     webBrowserPanel.setVisible(true);
-  //  webBrowserPanel.setBounds(20, 20, 300, 300);
-   
+  
   }
 
 }

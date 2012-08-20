@@ -1,8 +1,15 @@
+package clientGUI;
+
 
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+import de.schlichtherle.io.FileReader;
+import de.schlichtherle.io.FileWriter;
 import java.awt.BorderLayout;
 import java.awt.geom.Path2D;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,12 +34,23 @@ public class MapAdjust extends javax.swing.JFrame {
     /**
      * Creates new form MapAdjust
      */
+    //tt
     List paths;
+    String absolutePath;
     ArrayList<Document> documents;
     public MapAdjust() {
         initComponents();
          paths=new ArrayList();
          documents=new ArrayList<Document>();
+         try {
+                    String temp=new File("oo").getCanonicalPath();
+                    int a=temp.lastIndexOf("\\");
+                    absolutePath=temp.substring(0,a);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+                }
+         
     }
 
     /**
@@ -55,6 +73,7 @@ public class MapAdjust extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         panel1 = new java.awt.Panel();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adjust Frame");
@@ -113,6 +132,13 @@ public class MapAdjust extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Update the Map");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,12 +147,12 @@ public class MapAdjust extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addContainerGap())
+                        .addContainerGap(889, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -149,6 +175,10 @@ public class MapAdjust extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(526, 526, 526)
+                .addComponent(jButton6)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +207,9 @@ public class MapAdjust extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,30 +238,38 @@ public class MapAdjust extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1ValueChanged
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        // TODO add your handling code here:
-       
-      System.out.println(jList1.getSelectedIndex()); 
+        try {
+             //TODO add your handling code here:
+           
+           FileWriter f1 = new FileWriter(absolutePath+"\\visual\\rnodes.dpi");
+           f1.write("");
+           f1.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       System.out.println(jList1.getSelectedIndex()); 
        System.out.println("You have selected "+paths.get(jList1.getSelectedIndex()));
-       System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
-       
+    //   System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
+       String actualpath=(String) paths.get(jList1.getSelectedIndex());
        Document doc = documents.get(jList1.getSelectedIndex());
-//       JSCreator jsc = new JSCreator();
-//
-//        try {
-//           jsc.CreateJS(doc);
-//
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+       JSCreator jsc = new JSCreator();
+
+        try {
+           jsc.CreateJS(doc,actualpath);
+
+
+        } catch (IOException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         NativeInterface.open();
         panel1.removeAll();
           SwingUtilities.invokeLater(new Runnable() {
       public void run() {
-          
-          Web a=new Web("D:\\Project_clone\\SMC\\example2.html");
+                
+
+          Web a=new Web(absolutePath+"\\visual\\example2.html");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);
@@ -240,6 +280,32 @@ public class MapAdjust extends javax.swing.JFrame {
       }
     });
     }//GEN-LAST:event_jList1MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        FileReader fr = null;
+        ArrayList<String> deletedConcepts=new ArrayList<String>();
+        
+        try {
+            fr = new FileReader(absolutePath+"\\visual\\rnodes.dpi");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      BufferedReader in = new BufferedReader(fr);
+      String line;
+        try {
+            while ((line = in.readLine()) != null)
+              deletedConcepts.add(line);
+        } catch (IOException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        System.out.println("Deleted concpets ="+deletedConcepts);
+        Document doc = documents.get(jList1.getSelectedIndex());
+        
+        doc.printDoc();
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public void showLocation(String file){
         
@@ -267,7 +333,7 @@ public class MapAdjust extends javax.swing.JFrame {
           SwingUtilities.invokeLater(new Runnable() {
       public void run() {
       
-          Web a=new Web("C:\\html\\First.html");
+          Web a=new Web(absolutePath+"\\visual\\html\\First.html");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);
@@ -294,6 +360,7 @@ public class MapAdjust extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
