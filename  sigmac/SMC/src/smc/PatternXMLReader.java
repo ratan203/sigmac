@@ -4,7 +4,6 @@
  */
 package smc;
 
-import edu.stanford.nlp.trees.tregex.TregexPattern;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

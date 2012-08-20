@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  *
- * @author user
+ * @author COMPAQ
  */
 public class SentenceAnalyzer {
     private ArrayList<Pattern> patterns;
@@ -39,7 +39,7 @@ public class SentenceAnalyzer {
         ArrayList<Concept> concepts=new ArrayList<Concept>();
         for(Pattern p : patterns){
 //            System.out.println(p.getTregexPattern());
-            Tree tree=parse.deepCopy();
+            Tree tree=parse.deepCopy();            
             TregexMatcher matcher=p.getTregexPattern().matcher(tree);
             if(p.getType().equals("none")){
                 analyzeConceptPatterns(p,matcher);
@@ -64,7 +64,7 @@ public class SentenceAnalyzer {
     }
 
     private void analyzeRelationshipPatterns(Pattern p,TregexMatcher matcher){
-            while(matcher.find()){
+            if(matcher.find()){
                 ArrayList<String> hd=new ArrayList<String>();
                 ArrayList<String> dp=new ArrayList<String>();
                 for(String key : p.getHeadKeys()){

@@ -21,28 +21,33 @@ Range range = null;
 HWPFDocument doc=null;
 
 try {
-    docFile = new File(path);
-    //A FileInputStream obtains input bytes from a file. 
-    FileInputStream fis=new FileInputStream(docFile.getAbsolutePath());
- 
-    doc=new HWPFDocument(fis);
- 
-    docExtractor = new WordExtractor(doc);
-    
+        docFile = new File(path);
+        FileInputStream fis=new FileInputStream(docFile.getAbsolutePath());
+        doc=new HWPFDocument(fis);
+        docExtractor = new WordExtractor(doc);
+  
     }
-    catch(Exception exep)
-    {
+    catch(Exception exep) {
         System.out.println(exep.getMessage());
     }
 
-   
-
     String all=docExtractor.getText();
-   
+    //titles.add(new Title(null));
     Range overall=doc.getOverallRange();
     DocReaderAnalizer dra=new DocReaderAnalizer();
     Object BodyFONTsize=dra.getBodyFont(overall, doc, range, cr);
     Integer bodyfontsize = new Integer(BodyFONTsize.toString());
+    
+ 
+    System.out.println(all); 
+    for(int i = 0; i < overall.getEndOffset()-1; i++ ){
+                    int startIndex = i;
+                    int endIndex = i + 1;
+                    Range ranges = new Range(startIndex, endIndex, doc);
+                    CharacterRun crr = ranges.getCharacterRun(0);
+                    System.out.println(crr.text());
+                    
+    }
     
    
     for (int i = 0; i < overall.getEndOffset()-1; i++) {
@@ -63,6 +68,7 @@ try {
                     }
 
                 }
+  
     body=all;
     for(int i=0;i<titles.size();i++){
         String kk=(String) titles.get(i).getTitleText();

@@ -42,8 +42,12 @@ public class Parser {
         p.setElementDelimiter(delimeter);
         Document doc=new Document(fileName);
         int sentenceCount=0;
+       
+        
         for (List<HasWord> sentence : p){
             sentenceCount++;
+            
+            try{
             Tree parse = lp.apply(sentence);
             ArrayList<Concept> cons=analyzer.analyze(parse);
 //            for(Concept con : cons){
@@ -51,6 +55,10 @@ public class Parser {
 //            }
 //            System.out.println("ddssssssssssssssss");
             doc.addConcepts(cons);
+            } catch(Exception e){
+                System.out.println("file not executed");
+            }
+            
         }
 
         XMLFormattingExtractor xe=new XMLFormattingExtractor();

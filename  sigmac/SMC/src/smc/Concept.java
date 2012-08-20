@@ -141,6 +141,7 @@ public class Concept implements Serializable {
     }
 
     public void printConcept(){
+        
         System.out.println("Concept : "+ name);
         System.out.println("Freequency : "+ freequency);
         System.out.println("Strength : "+strength);

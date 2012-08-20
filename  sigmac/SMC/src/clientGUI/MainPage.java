@@ -1,3 +1,5 @@
+package clientGUI;
+
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;

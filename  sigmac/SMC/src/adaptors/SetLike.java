@@ -41,7 +41,6 @@ public class SetLike {
                    RichTextRun[] richTextRuns = txt[k].getRichTextRuns();
            
                      for (int l = 0; l < richTextRuns.length; l++) {
-                        //System.out.println( richTextRuns[l].getText()+richTextRuns[l].getFontSize());
                          if(richTextRuns[l].getFontSize()>bodyfontsize){
                             titles.add(new Title(richTextRuns[l].getText()));
                          }
