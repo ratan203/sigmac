@@ -42,7 +42,11 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationshipJoin(doc.get(con).getRelationships());            
 
             concept.setRelationships(relationships1);
-            concept.setStrength(concept.getFreequency()/docc.getSize()+concept.getTitleStrength()/docc.getTitleInfo().size());
+            if(!docc.getTitleInfo().isEmpty()){
+                concept.setStrength((concept.getFreequency()/docc.getSize())+(concept.getTitleStrength()/docc.getTitleInfo().size()));
+            }else{
+                concept.setStrength(concept.getFreequency()/docc.getSize());
+            }
             doc1.remove(morphRoot);
             doc1.put(morphRoot, concept);
         }else{
@@ -50,7 +54,11 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationships1=new HashMap<String, ArrayList<RelatedConcept>>();
             relationshipJoin(doc.get(con).getRelationships());
             doc.get(con).setRelationships(relationships1);
-            doc.get(con).setStrength(doc.get(con).getFreequency()/docc.getSize()+doc.get(con).getTitleStrength()/docc.getTitleInfo().size());
+            if(!docc.getTitleInfo().isEmpty()){
+                doc.get(con).setStrength((doc.get(con).getFreequency()/docc.getSize())+(doc.get(con).getTitleStrength()/docc.getTitleInfo().size()));
+            }else{
+                doc.get(con).setStrength(doc.get(con).getFreequency()/docc.getSize());
+            }
             doc1.put(morphRoot,doc.get(con));
         }
     }
@@ -104,17 +112,22 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                             if(wn.assertIsRel(con, g.getRelatedConcept())){
                                 g.setType("is a");
                                 g.setIsStrength(1);
+                                g.setStrength(1);
                                 g.setHead(Boolean.FALSE);
                             }else if(wn.assertIsRel(g.getRelatedConcept(), con)){
                                 g.setType("is a");
                                 g.setIsStrength(1);
+                                g.setStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }
                         }else if(g.getType().equals("is a")){
+                            g.setStrength(1);
                             if(wn.assertIsRel(con, g.getRelatedConcept())){
                                 g.setIsStrength(1);
+                                g.setStrength(2);
                             }else if(wn.assertIsRel(g.getRelatedConcept(), con)){
                                 g.setIsStrength(1);
+                                g.setStrength(2);
                             }
                         }
 
@@ -122,17 +135,22 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                         if(wn.assertPartOfRel(con, g.getRelatedConcept())){
                                 g.setType("part of");
                                 g.setPartStrength(1);
+                                g.setStrength(1);
                                 g.setHead(Boolean.FALSE);
                             }else if(wn.assertPartOfRel(g.getRelatedConcept(), con)){
                                 g.setType("part of");
                                 g.setPartStrength(1);
+                                g.setStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }
                         }else if(g.getType().equals("part of")){
+                            g.setStrength(1);
                             if(wn.assertPartOfRel(con, g.getRelatedConcept())){
                                 g.setPartStrength(1);
+                                g.setStrength(2);
                             }else if(wn.assertPartOfRel(g.getRelatedConcept(), con)){
                                 g.setPartStrength(1);
+                                g.setStrength(2);
                             }
                         }
                     }
@@ -146,6 +164,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
 
     private Document optimizeConcept(Document d1) throws FileNotFoundException, JWNLException{
         HashMap<String,Title> titleList=d1.getTitleInfo();
+        if(!titleList.isEmpty()){
         for(String a:titleList.keySet()){
             Set<String> titlSet=new HashSet<String>();
             for(String b:titleList.get(a).getTitleSet()){
@@ -163,6 +182,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                 }
             }
             dd1.get(con).setTitleStrength(totTitleStr);
+        }
         }
         return d1;
     }
