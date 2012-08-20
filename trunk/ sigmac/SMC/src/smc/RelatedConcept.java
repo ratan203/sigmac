@@ -45,6 +45,10 @@ public class RelatedConcept implements Serializable {
         return strength;
     }
 
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
     public int getValue(){
         if(this.type.equals("aso")){
             return this.strength+this.freequency;
