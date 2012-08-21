@@ -21,6 +21,7 @@ public class Concept implements Serializable {
     private int titleStrength;
     private int strength;
     private float importance;
+    private float value;
     public static final int FREEQUENCY_STRENTH_MULTIPLIER=1;
 
     public Concept(String name){
@@ -28,6 +29,7 @@ public class Concept implements Serializable {
         relationships=new HashMap<String, ArrayList<RelatedConcept>>();
         freequency=1;
         strength=0;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public int getFreequency() {
@@ -36,6 +38,7 @@ public class Concept implements Serializable {
 
     public void setFreequency(int freequency) {
         this.freequency = freequency;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
 
@@ -43,13 +46,14 @@ public class Concept implements Serializable {
     public void modifyFreequency(int amount){
         //System.out.println("Test2");
         freequency+=amount;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public void modifyImprotance(float amount){
         importance+=amount;
-        System.out.println("modify importance of");
-        System.out.println(this.name);
-        System.out.println(importance);
+//        System.out.println("modify importance of");
+//        System.out.println(this.name);
+//        System.out.println(importance);
     }
 
     public float getImportance(){
@@ -64,16 +68,26 @@ public class Concept implements Serializable {
         return this.strength;
     }
 
-    public int getValue(){
-        return this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
+    public float getValue(){
+        return this.value;
+    }
+
+    public void modifyValue(float amount){
+        this.value+=amount;
+    }
+
+    public void resetValue(){
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public void setStrength(int strength){
         this.strength=strength;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public void updateStrength(int amount){
         this.strength+=amount;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public void setTitleStrength(int tStrength){
