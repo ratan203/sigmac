@@ -64,7 +64,7 @@ public class Parser {
         XMLFormattingExtractor xe=new XMLFormattingExtractor();
         doc.setTitleInfo(xe.getXMLFormatting(doc.getUri()));
 //        System.out.println("done");
-        calc.calculateImportance(doc);
+//        calc.calculateImportance(doc);
 //        doc.printDoc();
         doc.setSize(sentenceCount);
         return doc;

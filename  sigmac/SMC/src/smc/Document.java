@@ -101,8 +101,8 @@ public class Document implements Serializable {
         this.size=size;
     }
 
-    public int getTotalDocumentStrength(){
-        int val=0;
+    public float getTotalDocumentValue(){
+        float val=0;
         Set<String> keys=doc.keySet();
         for(String key : keys){
             val+=doc.get(key).getValue();
