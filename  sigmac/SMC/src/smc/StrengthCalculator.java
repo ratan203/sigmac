@@ -21,7 +21,7 @@ public class StrengthCalculator {
 
     public void calculateImportance(Document doc){
         HashMap<String, Concept> conceptMap = doc.getDoc();
-        int totalDocStrength=doc.getTotalDocumentStrength();
+        float totalDocStrength=doc.getTotalDocumentValue();
         Set<String> keySet = conceptMap.keySet();
         for(String key : keySet){
             Concept concept=conceptMap.get(key);
