@@ -46,6 +46,8 @@ public class MapAdjust extends javax.swing.JFrame {
                     String temp=new File("oo").getCanonicalPath();
                     int a=temp.lastIndexOf("\\");
                     absolutePath=temp.substring(0,a);
+                    System.out.println(absolutePath);
+//                    System.exit(0);
                     
                 } catch (IOException ex) {
                     Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
@@ -323,7 +325,7 @@ public class MapAdjust extends javax.swing.JFrame {
     
     public void showPaths() throws IOException{
         System.out.println(paths);
-       
+      
         jList1.setListData(paths.toArray());
         
   
@@ -333,13 +335,13 @@ public class MapAdjust extends javax.swing.JFrame {
           SwingUtilities.invokeLater(new Runnable() {
       public void run() {
       
-          Web a=new Web(absolutePath+"\\visual\\html\\First.html");
+          Web a=new Web("http://www.google.lk");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);
           
         panel1.add(a);
-          
+          System.out.println("added");
        
       }
     });
