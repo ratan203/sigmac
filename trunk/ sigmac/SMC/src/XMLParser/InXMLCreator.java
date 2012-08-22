@@ -30,7 +30,7 @@ public class InXMLCreator {
 
 //                Anaphora ana=new Anaphora();
 //                String tmpFile="anaphora//test1.txt";
-//                String ana1=document.getBody().replace("(", " ").replace(")", " ");
+//                String ana1=document.getBody();
 //                String anaRes=ana.resolveAnaph(ana1.replace("\n", "").replace("\r", ""),tmpFile);
 
                 Element rootElement = doc.createElement("document");
@@ -45,6 +45,7 @@ public class InXMLCreator {
 		// body elements
 		Element body = doc.createElement("body");
                 rootElement.appendChild(body);
+//		body.appendChild(doc.createTextNode(anaRes);                
 		body.appendChild(doc.createTextNode(document.getBody()));
  
 		//Title elements
