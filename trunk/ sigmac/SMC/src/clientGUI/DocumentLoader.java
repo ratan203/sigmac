@@ -144,7 +144,7 @@ public class DocumentLoader {
             progThrd.stop();
 
             jl2.setText("Extracting concepts/relationships ");
-            ps.setLimit(400);
+            ps.setLimit(600);
             progThrd=new Thread(ps);
             progThrd.start();
             Parser p=new Parser("grammar/englishPCFG.ser.gz");
@@ -154,7 +154,7 @@ public class DocumentLoader {
             progThrd.stop();
 
             jl2.setText("Optimizing concepts/relationships ");
-            ps.setLimit(600);
+            ps.setLimit(1000);
             progThrd=new Thread(ps);
             progThrd.start();
             Optimizer opti=new Optimizer();
@@ -164,14 +164,14 @@ public class DocumentLoader {
             ps.stopProgress();
             progThrd.stop();
 
-//            DBConnector db1=new DBConnector();
-//            DBManager dbm=new DBManager();
-//            Connection conn=(Connection) db1.getConnection();
-//            dbm.updateDB(conn, doc1);
+            DBConnector db1=new DBConnector();
+            DBManager dbm=new DBManager();
+            Connection conn=(Connection) db1.getConnection();
+            dbm.updateDB(conn, doc1);
 
+            JButton jb=getNextButton(jt);
+            jb.setEnabled(true);
 
-            ps.stopProgress();
-            progThrd.stop();
        }
    }
 
