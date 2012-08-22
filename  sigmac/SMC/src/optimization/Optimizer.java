@@ -27,10 +27,11 @@ public class Optimizer {
  private JwnlOperations wn=new JwnlOperations();
 
 private Document optimizeDocument(Document docc) throws FileNotFoundException, JWNLException{
+    float conceptStrength;
+    String morphRoot;
     doc=docc.getDoc();
     HashMap<String,Concept> doc1 = new HashMap<String, Concept>();
     for(String con:doc.keySet()){
-        String morphRoot;
         morphRoot=wn.getMorphologicalRoot(con);
         if(doc1.containsKey(morphRoot)){
             concept=doc1.get(morphRoot);
@@ -43,10 +44,11 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
 
             concept.setRelationships(relationships1);
             if(!docc.getTitleInfo().isEmpty()){
-                concept.setStrength((concept.getFreequency()/docc.getSize())+(concept.getTitleStrength()/docc.getTitleInfo().size()));
+                conceptStrength=(concept.getFreequency()/docc.getSize())+(concept.getTitleStrength()/docc.getTitleInfo().size());
             }else{
-                concept.setStrength(concept.getFreequency()/docc.getSize());
+                conceptStrength=concept.getFreequency()/docc.getSize();
             }
+            concept.setStrength(conceptStrength);
             doc1.remove(morphRoot);
             doc1.put(morphRoot, concept);
         }else{
@@ -55,9 +57,9 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationshipJoin(doc.get(con).getRelationships());
             doc.get(con).setRelationships(relationships1);
             if(!docc.getTitleInfo().isEmpty()){
-                doc.get(con).setStrength((doc.get(con).getFreequency()/docc.getSize())+(doc.get(con).getTitleStrength()/docc.getTitleInfo().size()));
+                doc.get(con).setStrength((float)(doc.get(con).getFreequency()/(float)docc.getSize())+((float)doc.get(con).getTitleStrength()/(float)docc.getTitleInfo().size()));
             }else{
-                doc.get(con).setStrength(doc.get(con).getFreequency()/docc.getSize());
+                doc.get(con).setStrength((float)doc.get(con).getFreequency()/(float)docc.getSize());
             }
             doc1.put(morphRoot,doc.get(con));
         }
@@ -69,8 +71,9 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
 private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relationshipsCommon) throws FileNotFoundException, JWNLException{
     ArrayList<RelatedConcept> relListCommon=new ArrayList<RelatedConcept>();
     ArrayList<RelatedConcept> relList;
+    String morphRootRel;
     for(String rel:relationshipsCommon.keySet()){
-        String morphRootRel=wn.getMorphologicalRoot(rel);
+        morphRootRel=wn.getMorphologicalRoot(rel);
         if(relationships1.containsKey(morphRootRel)){
             relList = new ArrayList<RelatedConcept>();
             relListCommon=relationships1.get(morphRootRel);
@@ -119,6 +122,8 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                                 g.setIsStrength(1);
                                 g.setStrength(1);
                                 g.setHead(Boolean.TRUE);
+                            }else if(g.getFreequency()!=0&&d1.getSize()!=0){
+                                g.setStrength(((float)Math.pow(10, (1/((double)g.getFreequency()/(double)d1.getSize()))))/10);
                             }
                         }else if(g.getType().equals("is a")){
                             g.setStrength(1);
@@ -163,6 +168,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
     }
 
     private Document optimizeConcept(Document d1) throws FileNotFoundException, JWNLException{
+        float totTitleStr;
         HashMap<String,Title> titleList=d1.getTitleInfo();
         if(!titleList.isEmpty()){
         for(String a:titleList.keySet()){
@@ -175,7 +181,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
 
         HashMap<String, Concept> dd1=d1.getDoc();
         for(String con:dd1.keySet()){
-            int totTitleStr=0;
+            totTitleStr=0;
             for(String a:titleList.keySet()){
                 if(titleList.get(a).getTitleSet().contains(con)){
                     totTitleStr+=titleList.get(a).getTitleStrength()*(con.trim().split(" ").length/a.trim().split(" ").length);

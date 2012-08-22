@@ -89,11 +89,11 @@ public class JWNLOps {
         return partConf;
     }
 
-    private Set<String> getHypernyms(String lexicalForm) throws FileNotFoundException, JWNLException{
+    Set<String> getHypernyms(String lexicalForm) throws FileNotFoundException, JWNLException{
         return lookupWordsFollowingPointer(lexicalForm, PointerType.HYPERNYM);
     }
 
-    private Set<String> getHyponyms(String lexicalForm) throws FileNotFoundException, JWNLException{
+    Set<String> getHyponyms(String lexicalForm) throws FileNotFoundException, JWNLException{
         return lookupWordsFollowingPointer(lexicalForm, PointerType.HYPONYM);
     }
 

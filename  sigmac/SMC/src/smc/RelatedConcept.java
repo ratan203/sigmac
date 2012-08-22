@@ -16,7 +16,7 @@ public class RelatedConcept implements Serializable {
     private String rConcept;
     private boolean isHead;
     private int freequency;
-    private int strength;
+    private float strength;
     private int isStrength;
     private int partStrength;
     public static final int headStrengthMultiplier=2;
@@ -41,15 +41,15 @@ public class RelatedConcept implements Serializable {
         return freequency;
     }
 
-    public int getStrength(){
+    public float getStrength(){
         return strength;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength(float strength) {
         this.strength = strength;
     }
 
-    public int getValue(){
+    public float getValue(){
         if(this.type.equals("aso")){
             return this.strength+this.freequency;
         }
