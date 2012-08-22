@@ -10,7 +10,9 @@ import smc.Title;
 import smc.XMLFormattingExtractor;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import net.didion.jwnl.JWNLException;
 
 /**
@@ -24,9 +26,9 @@ public class testMain {
      */
     public static void main(String[] args) throws JWNLException, FileNotFoundException{
         // TODO code application logic here
-        JwnlOperations jnw=new JwnlOperations();
+        JWNLOps jnw=new JWNLOps();
         String s1;
-        s1=jnw.getMorphologicalRoot("  mobile applications ");
+        s1=jnw.getMorphologicalRoot("  object-oriented programming languages ");
         Boolean is=jnw.assertIsRel("java", "object-oriented programming languages");
         Boolean part=jnw.assertPartOfRel("horn", "car");
 
@@ -38,13 +40,13 @@ public class testMain {
 //        if(s1.size()>0){
 //        for(String s : s1){
 ////            System.out.println("Morphological Root : "+s);
-//            Set<String> s2=new HashSet<String>();
-//            s2=jnw.getMeronym("car");
-//            if(s2.size()>0){
-//                for(String s3 : s2){
-//                    System.out.println("Meronyms (Has parts) : "+s3);
-//                }
-//            }
+            Set<String> s2=new HashSet<String>();
+            s2=jnw.getHypernyms("java");
+            if(s2.size()>0){
+                for(String s3 : s2){
+                    System.out.println("Meronyms (Has parts) : "+s3);
+                }
+            }
 //        }
 //        }else{
 //            System.out.println("No Result");

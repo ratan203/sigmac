@@ -76,9 +76,9 @@ public void updateDB(Connection con, Document doc){
             insertConceptDoc.setInt(1, temp);
             insertConceptDoc.setInt(2, docId);
             insertConceptDoc.setInt(3, concept.get(e).getFreequency());
-            insertConceptDoc.setInt(4, concept.get(e).getTitleStrength());
+            insertConceptDoc.setFloat(4, concept.get(e).getTitleStrength());
             insertConceptDoc.setFloat(5, concept.get(e).getImportance());
-            insertConceptDoc.setInt(6, concept.get(e).getStrength());
+            insertConceptDoc.setFloat(6, concept.get(e).getStrength());
             insertConceptDoc.executeUpdate();
             con.commit();
         }
@@ -111,7 +111,7 @@ public void updateDB(Connection con, Document doc){
                             insertRelDoc.setInt(2, g.getFreequency());
                             insertRelDoc.setInt(3, g.getIsStrength());
                             insertRelDoc.setInt(4, g.getPartStrength());
-                            insertRelDoc.setInt(5, g.getStrength());
+                            insertRelDoc.setFloat(5, g.getStrength());
                             int conceptId=0;
                             if(conceptMap.get(f)!=null){
                                 conceptId=conceptMap.get(f);

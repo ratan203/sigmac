@@ -18,8 +18,8 @@ public class Concept implements Serializable {
     private String name;
     private HashMap<String,ArrayList<RelatedConcept>> relationships;
     private int freequency;
-    private int titleStrength;
-    private int strength;
+    private float titleStrength;
+    private float strength;
     private float importance;
     private float value;
     public static final int FREEQUENCY_STRENTH_MULTIPLIER=1;
@@ -64,7 +64,7 @@ public class Concept implements Serializable {
         return name;
     }
 
-    public int getStrength(){
+    public float getStrength(){
         return this.strength;
     }
 
@@ -80,21 +80,21 @@ public class Concept implements Serializable {
         value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
-    public void setStrength(int strength){
+    public void setStrength(float strength){
         this.strength=strength;
         value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
-    public void updateStrength(int amount){
+    public void updateStrength(float amount){
         this.strength+=amount;
         value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
-    public void setTitleStrength(int tStrength){
+    public void setTitleStrength(float tStrength){
         this.titleStrength=tStrength;
     }
 
-    public int getTitleStrength(){
+    public float getTitleStrength(){
         return this.titleStrength;
     }
 

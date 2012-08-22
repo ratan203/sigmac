@@ -325,7 +325,7 @@ public class MapAdjust extends javax.swing.JFrame {
     
     public void showPaths() throws IOException{
         System.out.println(paths);
-      
+       
         jList1.setListData(paths.toArray());
         
   
@@ -335,14 +335,14 @@ public class MapAdjust extends javax.swing.JFrame {
           SwingUtilities.invokeLater(new Runnable() {
       public void run() {
       
-          Web a=new Web("http://www.google.lk");
+          Web a=new Web(absolutePath+"\\visual\\html\\First.html");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);
           
         panel1.add(a);
           System.out.println("added");
-       
+          
       }
     });
 //    NativeInterface.runEventPump();
