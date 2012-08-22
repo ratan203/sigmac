@@ -22,6 +22,7 @@ public class DragFileProcessor implements Runnable{
 java.io.File[] files;
 JTextArea text;
 MapAdjust mpa;
+int noFiles=0;
 int noOfAllFiles;
 
 
@@ -37,39 +38,36 @@ int noOfAllFiles;
     }
 
     private int noOFFiles(java.io.File[] files){
-//        int noFiles=0;
-//        for( int i = 0; i < files.length; i++ ){
-//            try{
-//            String filenameExtension = files[i].getCanonicalPath();
-//            int dotPos = filenameExtension.lastIndexOf(".");
-//            String extension=null;
-//            if(dotPos>-1){
-//                try {
-//                    extension = filenameExtension.substring(dotPos);
-//                    if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
-//                        noFiles+=1;
-//                    }
-//                } catch (Exception ex) {
-//                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            else{
-//                try {
-//                    noFiles+=traverseFolder(files[i]);
-//                } catch (Exception ex) {
-//                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//            }
-//            }
-//            catch( java.io.IOException e ) {}
-//        }
-//        System.out.println(noFiles);System.exit(0);
-        return 5;
+        for( int i = 0; i < files.length; i++ ){
+            try{
+            String filenameExtension = files[i].getCanonicalPath();
+            int dotPos = filenameExtension.lastIndexOf(".");
+            String extension=null;
+            if(dotPos>-1){
+                try {
+                    extension = filenameExtension.substring(dotPos);
+                    if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
+                        noFiles+=1;
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                try {
+                    traverseFolder(files[i]);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            }
+            catch( java.io.IOException e ) {}
+        }
+        return noFiles;
     }
 
     private int traverseFolder(File file){
-        int noFiles = 0;
        String filess;
        File folder = file;
        File[] listOfFiles = folder.listFiles();
@@ -102,8 +100,8 @@ int noOfAllFiles;
         text.setText(null);
         int noOfFiles = 0;
         DocumentLoader dl=new DocumentLoader();
-       // JButton jb=dl.getNextButton(text);
-        //jb.setEnabled(false);
+        JButton jb=dl.getNextButton(text);
+        jb.setEnabled(false);
         JProgressBar jp=dl.getProgressAll(text);
         JProgressBar jp1=dl.getProgressOne(text);
         jp.setMinimum(0);
