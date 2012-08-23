@@ -21,6 +21,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 import optimization.Optimizer;
+import smc.ConceptRanker;
 import smc.Parser;
 /*
  * To change this template, choose Tools | Templates
@@ -159,6 +160,8 @@ public class DocumentLoader {
             progThrd.start();
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
+            smc.ConceptRanker ranker=new ConceptRanker();
+            ranker.rankConcepts(doc1);
             mpa.setDocumentsObjects(doc1);
             
             ps.stopProgress();
