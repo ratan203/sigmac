@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import net.didion.jwnl.JWNLException;
@@ -37,10 +38,16 @@ public class Main {
         Document doc1=opti.optimizeDoc(doc);
         ConceptRanker ranker=new ConceptRanker();
         ranker.rankConcepts(doc1);
+//        doc1.resetImportance();
+//        ArrayList<Concept> sortedConceptList = doc1.getSortedConceptList();
+//        for(Concept c : sortedConceptList){
+//            System.out.println("+++++"+c.getName()+"+++++++++");
+//            c.printConcept();
+//        }
         //doc1.printDoc();
         //doc1.deleteConcept("java");
         //doc1.printDoc();
-        //System.exit(0);
+        System.exit(0);
 
         DBConnector db1=new DBConnector();
         DBManager dbm=new DBManager();
