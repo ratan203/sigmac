@@ -118,4 +118,16 @@ public class Document implements Serializable {
             this.name=this.uri;
         }
     }
+
+    public void deleteConcept(String concept){
+        Concept con=this.doc.get(concept);
+        if(con==null){
+            return;
+        }
+        HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
+        Set<String> keySet = relationships.keySet();
+        for(String key : keySet){
+            
+        }
+    }
 }

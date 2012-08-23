@@ -40,2358 +40,373 @@ function init(){
   // init data
 var json = [
 	{
-		"id" : "follows",
-		"name" : "follows",
+		"id" : "document",
+		"name" : "document",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
 		{
-		"nodeTo" : "simple understanding",
-		"nodeFrom" : "follows",
+		"nodeTo" : "web page",
+		"nodeFrom" : "document",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "returned hash value",
-		"nodeFrom" : "follows",
+		"nodeTo" : "sigmac",
+		"nodeFrom" : "document",
 		"data" : {}
 		},
-		]
-	},
-	{
-		"id" : "2-bit int addition",
-		"name" : "2-bit int addition",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "length",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "2-bit int addition",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "hash function",
-		"name" : "hash function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "execution time and number",
-		"nodeFrom" : "hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "00 000 and 700 000 strings",
-		"nodeFrom" : "hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "hash function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "count",
-		"name" : "count",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "int",
-		"nodeFrom" : "count",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "for",
-		"name" : "for",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "i -lrb- = l ; i -lrb-",
-		"nodeFrom" : "for",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "int i",
-		"nodeFrom" : "for",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "char val -lrb- -rrb-",
-		"name" : "char val -lrb- -rrb-",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "value",
-		"nodeFrom" : "char val -lrb- -rrb-",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "public int aphash",
-		"name" : "public int aphash",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "string str",
-		"nodeFrom" : "public int aphash",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "current java hashcode function",
-		"name" : "current java hashcode function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "modification",
-		"nodeFrom" : "current java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "current java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "iteration",
-		"nodeFrom" : "current java hashcode function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "ap hash function",
-		"name" : "ap hash function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "java hash code function",
-		"nodeFrom" : "ap hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "ap hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "same inputs",
-		"nodeFrom" : "ap hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hashcode function",
-		"nodeFrom" : "ap hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "much time",
-		"nodeFrom" : "ap hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution",
-		"nodeFrom" : "ap hash function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "lrb- int i = 0",
-		"name" : "lrb- int i = 0",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "i -lrb- str",
-		"nodeFrom" : "lrb- int i = 0",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "function",
-		"name" : "function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "existing java hashcode function",
-		"nodeFrom" : "function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java",
-		"nodeFrom" : "function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hashcode function",
-		"nodeFrom" : "function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "table",
-		"nodeFrom" : "function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "iteration",
-		"name" : "iteration",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "modification",
-		"nodeFrom" : "iteration",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "iteration",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "calculation",
-		"name" : "calculation",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "calculation",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "calculation",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "rrb-",
-		"name" : "rrb-",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "length",
-		"nodeFrom" : "rrb-",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "i + +",
-		"nodeFrom" : "rrb-",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "rrb- \*",
-		"name" : "rrb- \*",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "-rcb-",
-		"nodeFrom" : "rrb- \*",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "charat",
-		"nodeFrom" : "rrb- \*",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "hash",
-		"nodeFrom" : "rrb- \*",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "existing java hashcode function",
-		"name" : "existing java hashcode function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "function",
-		"nodeFrom" : "existing java hashcode function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "value",
-		"name" : "value",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "value",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "i -lrb- str",
-		"name" : "i -lrb- str",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "collision",
-		"name" : "collision",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution time and number",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "00 000 and 700 000 strings",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "length",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "table",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "collision",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "collisions and execution time",
-		"name" : "collisions and execution time",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "much performance",
-		"nodeFrom" : "collisions and execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "code function",
-		"nodeFrom" : "collisions and execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "other hash code functions",
-		"nodeFrom" : "collisions and execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "collisions and execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "cases java hash",
-		"nodeFrom" : "collisions and execution time",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "returned hash value",
-		"name" : "returned hash value",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "simple understanding",
-		"nodeFrom" : "returned hash value",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "sample java code",
-		"name" : "sample java code",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "sample java code",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "i + +",
-		"name" : "i + +",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "length",
-		"nodeFrom" : "i + +",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "len",
-		"nodeFrom" : "i + +",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "int i = 0",
-		"nodeFrom" : "i + +",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "current java hash function",
-		"name" : "current java hash function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "current java hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "current java hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java hash function",
-		"nodeFrom" : "current java hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "current java hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "current java hash function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "current java hash function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "other hash code functions",
-		"name" : "other hash code functions",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "code function",
-		"nodeFrom" : "other hash code functions",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "much performance",
-		"nodeFrom" : "other hash code functions",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "other hash code functions",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison java hash code",
-		"nodeFrom" : "other hash code functions",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collisions and execution time",
-		"nodeFrom" : "other hash code functions",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "cases java hash",
-		"nodeFrom" : "other hash code functions",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "hash",
-		"name" : "hash",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "-rcb-",
-		"nodeFrom" : "hash",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "charat",
-		"nodeFrom" : "hash",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "int",
-		"nodeFrom" : "hash",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "int",
-		"name" : "int",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "i -lrb- = l ; i -lrb-",
-		"name" : "i -lrb- = l ; i -lrb-",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "for",
-		"nodeFrom" : "i -lrb- = l ; i -lrb-",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "int i",
-		"nodeFrom" : "i -lrb- = l ; i -lrb-",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "number",
-		"name" : "number",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "modification",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "32 and 64 characters",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "idea",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "our comparison",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "current java hashcode function",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "number",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "table",
-		"name" : "table",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "table",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "function",
-		"nodeFrom" : "table",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "int i",
-		"name" : "int i",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "much time",
-		"name" : "much time",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "same inputs",
-		"nodeFrom" : "much time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hashcode function",
-		"nodeFrom" : "much time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ap hash function",
-		"nodeFrom" : "much time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution",
-		"nodeFrom" : "much time",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "comparison",
-		"name" : "comparison",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "function and ap function",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java hash function",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "reason key factor",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hash",
-		"nodeFrom" : "comparison",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "function and ap function",
-		"name" : "function and ap function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "function and ap function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "reason key factor",
-		"nodeFrom" : "function and ap function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "function and ap function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hash",
-		"nodeFrom" : "function and ap function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "our comparison",
-		"name" : "our comparison",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "32 and 64 characters",
-		"nodeFrom" : "our comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "idea",
-		"nodeFrom" : "our comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "our comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "our comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "our comparison",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "our comparison",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "modified java",
-		"name" : "modified java",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "function",
-		"nodeFrom" : "modified java",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "method invocation",
-		"name" : "method invocation",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "method invocation",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "table 2",
-		"name" : "table 2",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "table 2",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string length",
-		"nodeFrom" : "table 2",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "uniform distribution shifting",
-		"name" : "uniform distribution shifting",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "side",
-		"nodeFrom" : "uniform distribution shifting",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "uniform distribution shifting",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "much performance",
-		"name" : "much performance",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "code function",
-		"nodeFrom" : "much performance",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "other hash code functions",
-		"nodeFrom" : "much performance",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "much performance",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collisions and execution time",
-		"nodeFrom" : "much performance",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "cases java hash",
-		"nodeFrom" : "much performance",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "computer",
-		"name" : "computer",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "current java hash function",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java hash function",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "performance",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "computer",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "result",
-		"name" : "result",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "current java hash function",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java hash function",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "table 2",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string length",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "result",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "idea",
-		"name" : "idea",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "32 and 64 characters",
-		"nodeFrom" : "idea",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "our comparison",
-		"nodeFrom" : "idea",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "idea",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "idea",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "idea",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "idea",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "execution time",
-		"name" : "execution time",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "java hash code function",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "function and ap function",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "performance",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "reason key factor",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ap hash function",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hash",
-		"nodeFrom" : "execution time",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "charat",
-		"name" : "charat",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "-rcb-",
-		"nodeFrom" : "charat",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "hash",
-		"nodeFrom" : "charat",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "rrb- \*",
-		"nodeFrom" : "charat",
-		"data" : {}
-		},
-		{
-		"nodeTo" : ". -rcb- .",
-		"nodeFrom" : "charat",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "prime number",
-		"name" : "prime number",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "2-bit int addition",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "length",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "prime number",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "comparison java hash code",
-		"name" : "comparison java hash code",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "other hash code functions",
-		"nodeFrom" : "comparison java hash code",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "00 000 and 700 000 strings",
-		"name" : "00 000 and 700 000 strings",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "hash function",
-		"nodeFrom" : "00 000 and 700 000 strings",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution time and number",
-		"nodeFrom" : "00 000 and 700 000 strings",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "00 000 and 700 000 strings",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "java hashcode function",
-		"name" : "java hashcode function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "aphash",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "performance",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "same inputs",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ap hash function",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "much time",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "function",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution",
-		"nodeFrom" : "java hashcode function",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "int i = 0",
-		"name" : "int i = 0",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "len",
-		"nodeFrom" : "int i = 0",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "string length",
-		"name" : "string length",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "string length",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "bellow",
-		"name" : "bellow",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "other hash functions",
-		"nodeFrom" : "bellow",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "character",
-		"name" : "character",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "idea",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "32 and 64 characters",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "our comparison",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "side",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "character",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "algorithm",
-		"name" : "algorithm",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "32 and 64 characters",
-		"nodeFrom" : "algorithm",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "algorithm",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "me arash partow",
-		"nodeFrom" : "algorithm",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "execution",
-		"name" : "execution",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "same inputs",
-		"nodeFrom" : "execution",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "aphash",
-		"name" : "aphash",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "performance",
-		"nodeFrom" : "aphash",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "java hashcode function",
-		"nodeFrom" : "aphash",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "-rcb-",
-		"name" : "-rcb-",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "charat",
-		"nodeFrom" : "-rcb-",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "hash",
-		"nodeFrom" : "-rcb-",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "rrb- \*",
-		"nodeFrom" : "-rcb-",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "hash = h",
-		"nodeFrom" : "-rcb-",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "* h + s. charat",
-		"name" : "* h + s. charat",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "s. charat",
-		"nodeFrom" : "* h + s. charat",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "modification",
-		"name" : "modification",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "current java hashcode function",
-		"nodeFrom" : "modification",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "modification",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "iteration",
-		"nodeFrom" : "modification",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "side",
-		"name" : "side",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "uniform distribution shifting",
-		"nodeFrom" : "side",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "side",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "performance",
-		"name" : "performance",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "performance",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "aphash",
-		"nodeFrom" : "performance",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "performance",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "java hashcode function",
-		"nodeFrom" : "performance",
+		"nodeTo" : "individual concepts",
+		"nodeFrom" : "document",
 		"data" : {}
 		},
-		]
-	},
-	{
-		"id" : "same inputs",
-		"name" : "same inputs",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "java hashcode function",
-		"nodeFrom" : "same inputs",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "much time",
-		"nodeFrom" : "same inputs",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ap hash function",
-		"nodeFrom" : "same inputs",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "length",
-		"name" : "length",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		{
-		"nodeTo" : "2-bit int addition",
-		"nodeFrom" : "length",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "rrb-",
-		"nodeFrom" : "length",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "term",
-		"nodeFrom" : "length",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "length",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "length",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "string",
-		"nodeFrom" : "length",
+		"nodeTo" : "ranking concepts",
+		"nodeFrom" : "document",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "length",
+		"nodeTo" : "context",
+		"nodeFrom" : "document",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "length",
+		"nodeTo" : "web",
+		"nodeFrom" : "document",
 		"data" : {}
-		},
-		{
-		"nodeTo" : "i + +",
-		"nodeFrom" : "length",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "hash = h",
-		"name" : "hash = h",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "s. charat",
-		"name" : "s. charat",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "* h + val",
-		"name" : "* h + val",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
 		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "off + + -rrb-",
-		"nodeFrom" : "* h + val",
+		"nodeTo" : "given document",
+		"nodeFrom" : "document",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "core2duo 2.0 processor",
-		"name" : "core2duo 2.0 processor",
+		"id" : "web page",
+		"name" : "web page",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "core2duo 2.0 processor",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "core2duo 2.0 processor",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "current java hash function",
-		"nodeFrom" : "core2duo 2.0 processor",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java hash function",
-		"nodeFrom" : "core2duo 2.0 processor",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "core2duo 2.0 processor",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "core2duo 2.0 processor",
+		"nodeTo" : "document",
+		"nodeFrom" : "web page",
 		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "s. 31",
-		"name" : "s. 31",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
 		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "2-bit int addition",
-		"nodeFrom" : "s. 31",
+		"nodeTo" : "sigmac",
+		"nodeFrom" : "web page",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "term",
-		"nodeFrom" : "s. 31",
+		"nodeTo" : "individual concepts",
+		"nodeFrom" : "web page",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "s. 31",
+		"nodeTo" : "ranking concepts",
+		"nodeFrom" : "web page",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "s. 31",
+		"nodeTo" : "context",
+		"nodeFrom" : "web page",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "string",
-		"nodeFrom" : "s. 31",
+		"nodeTo" : "web",
+		"nodeFrom" : "web page",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "length",
-		"nodeFrom" : "s. 31",
+		"nodeTo" : "given document",
+		"nodeFrom" : "web page",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "cases java hash",
-		"name" : "cases java hash",
+		"id" : "sigmac",
+		"name" : "sigmac",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
 		{
-		"nodeTo" : "code function",
-		"nodeFrom" : "cases java hash",
+		"nodeTo" : "document",
+		"nodeFrom" : "sigmac",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "term",
-		"nodeFrom" : "cases java hash",
+		"nodeTo" : "web page",
+		"nodeFrom" : "sigmac",
 		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "code function",
-		"name" : "code function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
 		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "much performance",
-		"nodeFrom" : "code function",
+		"nodeTo" : "individual concepts",
+		"nodeFrom" : "sigmac",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "other hash code functions",
-		"nodeFrom" : "code function",
+		"nodeTo" : "ranking concepts",
+		"nodeFrom" : "sigmac",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "term",
-		"nodeFrom" : "code function",
+		"nodeTo" : "context",
+		"nodeFrom" : "sigmac",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "collisions and execution time",
-		"nodeFrom" : "code function",
+		"nodeTo" : "web",
+		"nodeFrom" : "sigmac",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "cases java hash",
-		"nodeFrom" : "code function",
+		"nodeTo" : "given document",
+		"nodeFrom" : "sigmac",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "th character",
-		"name" : "th character",
+		"id" : "individual concepts",
+		"name" : "individual concepts",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
 		{
-		"nodeTo" : "2-bit int addition",
-		"nodeFrom" : "th character",
+		"nodeTo" : "document",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "term",
-		"nodeFrom" : "th character",
+		"nodeTo" : "web page",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "th character",
+		"nodeTo" : "sigmac",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "string",
-		"nodeFrom" : "th character",
+		"nodeTo" : "ranking concepts",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "length",
-		"nodeFrom" : "th character",
+		"nodeTo" : "context",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "th character",
+		"nodeTo" : "web",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "th character",
+		"nodeTo" : "given document",
+		"nodeFrom" : "individual concepts",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "execution time and number",
-		"name" : "execution time and number",
+		"id" : "page rank algorithm",
+		"name" : "page rank algorithm",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "hash function",
-		"nodeFrom" : "execution time and number",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "00 000 and 700 000 strings",
-		"nodeFrom" : "execution time and number",
+		"nodeTo" : "concept ranking",
+		"nodeFrom" : "page rank algorithm",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "execution time and number",
+		"nodeTo" : "concept map",
+		"nodeFrom" : "page rank algorithm",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "reason key factor",
-		"name" : "reason key factor",
+		"id" : "ranking concepts",
+		"name" : "ranking concepts",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "function and ap function",
-		"nodeFrom" : "reason key factor",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "reason key factor",
+		"nodeTo" : "document",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "reason key factor",
+		"nodeTo" : "web page",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "java hash",
-		"nodeFrom" : "reason key factor",
+		"nodeTo" : "sigmac",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
 		},
-		]
-	},
-	{
-		"id" : "len",
-		"name" : "len",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "i + +",
-		"nodeFrom" : "len",
+		"nodeTo" : "individual concepts",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : ". -rcb- .",
-		"name" : ". -rcb- .",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "other hash functions",
-		"name" : "other hash functions",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "string str",
-		"name" : "string str",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "java hash code function",
-		"name" : "java hash code function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
 		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "execution time",
-		"nodeFrom" : "java hash code function",
+		"nodeTo" : "context",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "ap hash function",
-		"nodeFrom" : "java hash code function",
+		"nodeTo" : "web",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
 		},
-		]
-	},
-	{
-		"id" : "simple understanding",
-		"name" : "simple understanding",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "follows",
-		"nodeFrom" : "simple understanding",
+		"nodeTo" : "given document",
+		"nodeFrom" : "ranking concepts",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "32 and 64 characters",
-		"name" : "32 and 64 characters",
+		"id" : "context",
+		"name" : "context",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "idea",
-		"nodeFrom" : "32 and 64 characters",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "our comparison",
-		"nodeFrom" : "32 and 64 characters",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "string",
-		"nodeFrom" : "32 and 64 characters",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "32 and 64 characters",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "character",
-		"nodeFrom" : "32 and 64 characters",
+		"nodeTo" : "document",
+		"nodeFrom" : "context",
 		"data" : {}
-		},
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "32 and 64 characters",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "off + + -rrb-",
-		"name" : "off + + -rrb-",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
-		]
-	},
-	{
-		"id" : "modified java hash function",
-		"name" : "modified java hash function",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
 		},
-		"adjacencies" : [
 		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "modified java hash function",
+		"nodeTo" : "web page",
+		"nodeFrom" : "context",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "result",
-		"nodeFrom" : "modified java hash function",
+		"nodeTo" : "sigmac",
+		"nodeFrom" : "context",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "current java hash function",
-		"nodeFrom" : "modified java hash function",
+		"nodeTo" : "individual concepts",
+		"nodeFrom" : "context",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "ram",
-		"nodeFrom" : "modified java hash function",
+		"nodeTo" : "ranking concepts",
+		"nodeFrom" : "context",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "modified java hash function",
+		"nodeTo" : "web",
+		"nodeFrom" : "context",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "modified java hash function",
+		"nodeTo" : "given document",
+		"nodeFrom" : "context",
 		"data" : {}
 		},
 		]
 	},
 	{
-		"id" : "term",
-		"name" : "term",
+		"id" : "web",
+		"name" : "web",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "code function",
-		"nodeFrom" : "term",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "much performance",
-		"nodeFrom" : "term",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "2-bit int addition",
-		"nodeFrom" : "term",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "other hash code functions",
-		"nodeFrom" : "term",
+		"nodeTo" : "document",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "term",
+		"nodeTo" : "web page",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "term",
+		"nodeTo" : "sigmac",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "string",
-		"nodeFrom" : "term",
+		"nodeTo" : "individual concepts",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "length",
-		"nodeFrom" : "term",
+		"nodeTo" : "ranking concepts",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "term",
+		"nodeTo" : "context",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "term",
+		"nodeTo" : "given document",
+		"nodeFrom" : "web",
 		"data" : {}
 		},
-		{
-		"nodeTo" : "collisions and execution time",
-		"nodeFrom" : "term",
-		"data" : {}
-		},
 		]
 	},
 	{
-		"id" : "ram",
-		"name" : "ram",
+		"id" : "given document",
+		"name" : "given document",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "calculation",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "computer",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "result",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "current java hash function",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "modified java hash function",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "core2duo 2.0 processor",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "comparison",
-		"nodeFrom" : "ram",
-		"data" : {}
-		},
 		]
 	},
 	{
-		"id" : "string",
-		"name" : "string",
+		"id" : "concept ranking",
+		"name" : "concept ranking",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
 		},
 		"adjacencies" : [
-		{
-		"nodeTo" : "2-bit int addition",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "idea",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "prime number",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "th character",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "number",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "character",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "algorithm",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "32 and 64 characters",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
 		{
-		"nodeTo" : "term",
-		"nodeFrom" : "string",
+		"nodeTo" : "page rank algorithm",
+		"nodeFrom" : "concept ranking",
 		"data" : {}
 		},
 		{
-		"nodeTo" : "our comparison",
-		"nodeFrom" : "string",
+		"nodeTo" : "concept map",
+		"nodeFrom" : "concept ranking",
 		"data" : {}
 		},
-		{
-		"nodeTo" : "length",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "s. 31",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		{
-		"nodeTo" : "collision",
-		"nodeFrom" : "string",
-		"data" : {}
-		},
-		]
-	},
-	{
-		"id" : "me arash partow",
-		"name" : "me arash partow",
-		"data" : {
-		"$color" : "#83548B",
-		"$type" :  "circle" 
-		},
-		"adjacencies" : [
 		]
 	},
 	{
-		"id" : "java hash",
-		"name" : "java hash",
+		"id" : "concept map",
+		"name" : "concept map",
 		"data" : {
 		"$color" : "#83548B",
 		"$type" :  "circle" 
@@ -2475,7 +490,7 @@ var json = [
       //clicking the close button
       closeButton.onclick = function() {
 	  alert(node.name);
-var actualpath = "G:/Education/Level 4/Advanced Database/Database H2/Comparison Java Hash code function Other Hash Code function1.docx";	 
+var actualpath = "G:/Academic/L4S1/project/doc/Concept Ranking.docx";	 
 	  WriteToFile("visual\\rnodes.dpi",node.name,actualpath);
 	  
         node.setData('alpha', 0, 'end');

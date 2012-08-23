@@ -38,7 +38,7 @@ public class Main {
         ConceptRanker ranker=new ConceptRanker();
         ranker.rankConcepts(doc1);
         doc1.printDoc();
-        //System.exit(0);
+        System.exit(0);
 
         DBConnector db1=new DBConnector();
         DBManager dbm=new DBManager();
