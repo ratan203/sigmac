@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author user
  */
-public class Concept implements Serializable {
+public class Concept implements Serializable, Comparable<Concept> {
     private String name;
     private HashMap<String,ArrayList<RelatedConcept>> relationships;
     private int freequency;
@@ -58,6 +58,10 @@ public class Concept implements Serializable {
 
     public float getImportance(){
         return importance;
+    }
+
+    public void setImportance(float val){
+        this.importance=val;
     }
 
     public String getName() {
@@ -199,6 +203,16 @@ public class Concept implements Serializable {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public int compareTo(Concept o) { // this is to sort in decending order
+        if(this.importance==o.importance){
+            return 0;
+        }else if(this.importance>o.importance){
+            return -1;
+        }else{
+            return 1;
         }
     }
 }
