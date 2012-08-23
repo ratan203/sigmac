@@ -7,6 +7,8 @@ package smc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -135,6 +137,46 @@ public class Document implements Serializable {
                     deleteConcept(key);
                 }
             }
+        }
+    }
+
+    public void deleteRelationship(String c1,String c2){
+        Concept con1=this.doc.get(c1);
+        Concept con2=this.doc.get(c2);
+        boolean isolated1=con1.deleteRelationshipsToConcept(c2);
+        boolean isolated2=con2.deleteRelationshipsToConcept(c1);
+        if(isolated1){
+            deleteConcept(c1);
+        }
+        if(isolated2){
+            deleteConcept(c2);
+        }
+    }
+
+    public ArrayList<Concept> getSortedConceptList(){
+        ArrayList<Concept> concepts=getConcepList();
+        Collections.sort(concepts);
+        return concepts;
+    }
+
+    private ArrayList<Concept> getConcepList(){
+        ArrayList<Concept> concepts=new ArrayList<Concept>(this.doc.size());
+        Set<String> keySet = this.doc.keySet();
+        int index=0;
+        for(String key : keySet){
+            concepts.add(this.doc.get(key));
+        }
+        return concepts;
+    }
+
+    private void quickSort(){
+        
+    }
+
+    public void resetImportance(){ // this one for testing
+        Set<String> keySet = this.doc.keySet();
+        for(String key : keySet){
+            this.doc.get(key).setImportance(0);
         }
     }
 }
