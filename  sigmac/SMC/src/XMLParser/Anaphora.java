@@ -26,7 +26,18 @@ import reconcile.Resolver;
  * @author thilina
  */
 public class Anaphora {
-  
+
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String[] args) {
+//        Anaphora ana=new Anaphora();
+//        String txt= "Java is a programming language originally developed by James Gosling at Sun Microsystems released in 1995 as a core component of Sun Microsystems' Java platform. The language derives much of its syntax from C and C++ but has a simpler object model and fewer low-level facilities than either C or C++. Java application is typically compiled to bytecode. It can run on any Java Virtual Machine(JVM) regardless of computer architecture. Java is a general-purpose, concurrent, class-based, object-oriented language that is specifically designed to have as few implementation dependencies as possible. It is intended to let application developers 'write once, run anywhere' (WORA), meaning that code that runs on one platform does not need to be recompiled to run on another. Java is as of 2012 one of the most popular programming languages in use, particularly for client-server web applications, with a reported 10 million users.";
+//        String tmpFile="C:\\Users\\Thilina\\Documents\\NetBeansProjects\\AnaphoraRes\\temp file\\test.txt";
+//        String anaRes=ana.resolveAnaph(txt,tmpFile);
+//        System.out.println(anaRes);
+//    }
+
     /**
      * @param String (Which need to resolve)
      * @return String (Anaphora resolved)
@@ -62,6 +73,7 @@ public class Anaphora {
               int arrayIn;
               String corefid;
               String arrayCont;
+              String arrayCont1;
               String[] words;
               String[] lastWord;
               String[] tokens;
@@ -69,6 +81,7 @@ public class Anaphora {
               String[] corefArry = new String[10000];
               //Read File Line By Line
               while ((strLine = br.readLine()) != null) {                                      
+
                                      
                     tokens = StringUtils.substringsBetween(strLine, "<NP", "</NP>");
                     repArray=new String[10000];
@@ -77,7 +90,17 @@ public class Anaphora {
                         corefid=StringUtils.substringBetween(tokens[i], "CorefID=\"", "\">");
                         arrayIn=Integer.parseInt(corefid);
                         arrayCont=tokens[i].substring(tokens[i].indexOf(">")+1);
-                        if(corefArry[arrayIn]==null){
+                        arrayCont1=arrayCont;
+//                        if(arrayCont1.length()>=3&&arrayCont1.trim().substring(0, 2).equalsIgnoreCase("a ")){
+//                            arrayCont="The "+arrayCont.substring(3);
+//                        }else if(arrayCont1.length()>=4&&arrayCont1.trim().substring(0, 3).equalsIgnoreCase("an ")){
+//                            arrayCont="The "+arrayCont.substring(4);
+//                        }
+                        if(arrayCont.equalsIgnoreCase("he")||arrayCont.equalsIgnoreCase("she")||arrayCont.equalsIgnoreCase("it")||arrayCont.equalsIgnoreCase("his")||arrayCont.equalsIgnoreCase("her")||arrayCont.equalsIgnoreCase("its")||arrayCont.equalsIgnoreCase("they")||arrayCont.equalsIgnoreCase("them")||arrayCont.contains("The ")){
+                            if(corefArry[arrayIn]==null){
+                                corefArry[arrayIn]=arrayCont;
+                            }
+                        }else{
                             corefArry[arrayIn]=arrayCont;
                         }
                       words = resolveTxt.concat(strLine).split(tokens[i]);
