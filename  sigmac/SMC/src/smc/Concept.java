@@ -191,9 +191,14 @@ public class Concept implements Serializable {
         return value;
     }
 
-    public void deleteRelationshipsToConcept(String concept){
+    public boolean deleteRelationshipsToConcept(String concept){
         if(this.relationships.containsKey(concept)){
             this.relationships.remove(concept);
+        }
+        if(this.relationships.isEmpty()){
+            return true;
+        }else{
+            return false;
         }
     }
 }

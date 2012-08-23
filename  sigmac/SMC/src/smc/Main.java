@@ -37,8 +37,10 @@ public class Main {
         Document doc1=opti.optimizeDoc(doc);
         ConceptRanker ranker=new ConceptRanker();
         ranker.rankConcepts(doc1);
-        doc1.printDoc();
-        System.exit(0);
+        //doc1.printDoc();
+        //doc1.deleteConcept("java");
+        //doc1.printDoc();
+        //System.exit(0);
 
         DBConnector db1=new DBConnector();
         DBManager dbm=new DBManager();

@@ -124,10 +124,17 @@ public class Document implements Serializable {
         if(con==null){
             return;
         }
+        this.doc.remove(concept);
         HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
         Set<String> keySet = relationships.keySet();
         for(String key : keySet){
-            
+            Concept rel=doc.get(key);
+            if(rel!=null){
+                boolean isolated = rel.deleteRelationshipsToConcept(concept);
+                if(isolated){
+                    deleteConcept(key);
+                }
+            }
         }
     }
 }
