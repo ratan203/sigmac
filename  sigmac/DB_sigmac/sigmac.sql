@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 21, 2012 at 06:25 AM
+-- Generation Time: Aug 23, 2012 at 04:23 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -29,7 +29,7 @@ CREATE TABLE `concepts` (
   `conceptId` int(11) NOT NULL auto_increment,
   `conceptName` varchar(255) NOT NULL,
   PRIMARY KEY  (`conceptId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1253 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -41,9 +41,9 @@ CREATE TABLE `concept_doc` (
   `conceptId` int(11) NOT NULL,
   `docId` int(11) NOT NULL,
   `frequency` int(11) NOT NULL,
-  `titleStrength` int(11) NOT NULL,
+  `titleStrength` float NOT NULL,
   `importance` float NOT NULL,
-  `strength` int(11) NOT NULL
+  `strength` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,7 +58,7 @@ CREATE TABLE `documents` (
   `name` varchar(255) NOT NULL,
   `size` float NOT NULL,
   PRIMARY KEY  (`docId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -83,8 +83,8 @@ CREATE TABLE `relationships` (
   `frequency` int(11) NOT NULL,
   `is_aStrength` int(11) NOT NULL,
   `part_ofStrength` int(11) NOT NULL,
-  `strength` int(11) NOT NULL,
+  `strength` float NOT NULL,
   `conceptId` int(11) NOT NULL,
   `isHead` tinyint(1) NOT NULL,
   PRIMARY KEY  (`relId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7685 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;

@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import smc.Concept;
 import smc.Document;
@@ -35,24 +34,29 @@ public class DocumentFilter {
     }     
     
     private HashMap<String, Concept> sortHashMap(HashMap<String, Concept> input){
-    Map<Float,String> importanceMap = new TreeMap<Float, String>();
+    Map<String, Float> importanceMap = new HashMap<String, Float>();
     List<Concept> mapValues = new ArrayList<Concept>(input.values());
     for(Concept c:mapValues){
-        importanceMap.put( c.getStrength(),c.getName());
+        importanceMap.put(c.getName(), c.getStrength());
     }
-//    List<Float> mapValuesImp = new ArrayList<Float>(importanceMap.values());
-//    List<String> mapKeysImp = new ArrayList<String>(importanceMap.keySet());
+    List<Float> mapValuesImp = new ArrayList<Float>(importanceMap.values());
+    List<String> mapKeysImp = new ArrayList<String>(importanceMap.keySet());
     
     HashMap<String, Concept> sortedMap = new LinkedHashMap<String, Concept>();
-//    TreeSet<Float> sortedSet = new TreeSet<Float>(mapValuesImp);
-//            System.out.println(sortedSet.size());
-//
-//    Object[] sortedArray = sortedSet.toArray();
-//    int size = sortedArray.length;
-//        System.out.println(size);
-    for (String s:importanceMap.values()){
-        sortedMap.put(s,input.get(s));
+    conceptData[] cd=new conceptData[importanceMap.size()];
+    for(int i=0;i<importanceMap.size();i++){
+        
+    }
+    
+    TreeSet<Float> sortedSet = new TreeSet<Float>(mapValuesImp);
+    Object[] sortedArray = sortedSet.toArray();
+    int size = sortedArray.length;
+        System.out.println(size);
+    for (int i=0; i<size; i++){
+        sortedMap.put(mapKeysImp.get(mapValuesImp.indexOf(sortedArray[size-1-i])),input.get(mapKeysImp.get(mapValuesImp.indexOf(sortedArray[size-1-i]))));
     }
     return sortedMap;
 }
 }
+
+
