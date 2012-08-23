@@ -44,9 +44,9 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
 
             concept.setRelationships(relationships1);
             if(!docc.getTitleInfo().isEmpty()){
-                conceptStrength=(concept.getFreequency()/docc.getSize())+(concept.getTitleStrength()/docc.getTitleInfo().size());
+                conceptStrength=((float)concept.getFreequency()/(float)docc.getSize())+((float)concept.getTitleStrength()/(float)docc.getTitleInfo().size());
             }else{
-                conceptStrength=concept.getFreequency()/docc.getSize();
+                conceptStrength=(float)concept.getFreequency()/(float)docc.getSize();
             }
             concept.setStrength(conceptStrength);
             doc1.remove(morphRoot);
@@ -123,7 +123,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                                 g.setStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }else if(g.getFreequency()!=0&&d1.getSize()!=0){
-                                g.setStrength(((float)Math.pow(10, (1/((double)g.getFreequency()/(double)d1.getSize()))))/10);
+                                g.setStrength(((float)Math.pow(10, (1/((double)g.getFreequency()))))/d1.getSize());
                             }
                         }else if(g.getType().equals("is a")){
                             g.setStrength(1);

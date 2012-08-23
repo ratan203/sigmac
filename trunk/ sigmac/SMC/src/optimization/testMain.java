@@ -28,7 +28,7 @@ public class testMain {
         // TODO code application logic here
         JWNLOps jnw=new JWNLOps();
         String s1;
-        s1=jnw.getMorphologicalRoot("  object-oriented programming languages ");
+        s1=jnw.getMorphologicalRoot("programming languages ");
         Boolean is=jnw.assertIsRel("java", "object-oriented programming languages");
         Boolean part=jnw.assertPartOfRel("horn", "car");
 
