@@ -170,8 +170,8 @@ public class DocumentLoader {
 
             DBConnector db1=new DBConnector();
             DBManager dbm=new DBManager();
-            Connection conn=(Connection) db1.getConnection();
-            dbm.updateDB(conn, doc1);
+            //Connection conn=(Connection) db1.getConnection();
+            //dbm.updateDB(conn, doc1);
 
             JButton jb=getNextButton(jt);
             jb.setEnabled(true);
