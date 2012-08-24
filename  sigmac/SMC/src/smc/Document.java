@@ -203,6 +203,7 @@ public class Document implements Serializable {
     }
 
     public HashMap<String,Concept> getNewDoc(ArrayList<Concept> concepts, float coverage){
+        HashMap<String,Concept> newMap=new HashMap<String, Concept>();
         float covered=0.0f;
         int end=0;
         for(Concept c : concepts){
@@ -213,7 +214,12 @@ public class Document implements Serializable {
             }
             end++;
         }
-        return getNewDoc(concepts, end);
+        HashMap<String,Concept> map= getNewDoc(concepts, end);
+        Set<String> keySet = map.keySet();
+        for(String key : keySet){
+            newMap.put(key, map.get(key).getCopy());
+        }
+        return newMap;
     }
 
     private void reArrangeMap(HashMap<String,Concept> map){
