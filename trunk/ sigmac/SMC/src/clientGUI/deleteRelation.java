@@ -4,6 +4,7 @@
  */
 package clientGUI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import smc.Concept;
 
@@ -13,11 +14,14 @@ import smc.Concept;
  */
 public class deleteRelation extends javax.swing.JFrame {
 
+    
+       HashMap<String, Concept> node;
     /**
      * Creates new form deleteRelation
      */
     public deleteRelation() {
         initComponents();
+     
     }
 
     /**
@@ -99,9 +103,16 @@ public class deleteRelation extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ArrayList key1=new ArrayList();
+         for(int i=0;i<node.size();i++){
+            key1.add(node.keySet().toArray()[i]);
+        }
+        System.out.println( key1.get(jComboBox1.getSelectedIndex()));
+        System.out.println(key1.get(jComboBox2.getSelectedIndex()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void setNodeData(HashMap<String, Concept> node){
+        this.node=node;
         jComboBox1.removeAll();
         jComboBox2.removeAll();
         for(int i=0;i<node.size();i++){
