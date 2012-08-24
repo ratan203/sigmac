@@ -34,10 +34,11 @@ public class Main {
         // TODO code application logic here
         Parser p=new Parser("grammar/englishPCFG.ser.gz");        
         Document doc=p.parse("test.xml", DocType.XML, "body");
-        Optimizer opti=new Optimizer();
-        Document doc1=opti.optimizeDoc(doc);
+        //Optimizer opti=new Optimizer();
+        //Document doc1=opti.optimizeDoc(doc);
+        doc.printDoc();
         ConceptRanker ranker=new ConceptRanker();
-        ranker.rankConcepts(doc1);
+        //ranker.rankConcepts(doc1);
 //        doc1.resetImportance();
 //        ArrayList<Concept> sortedConceptList = doc1.getSortedConceptList();
 //        for(Concept c : sortedConceptList){
@@ -52,7 +53,7 @@ public class Main {
         DBConnector db1=new DBConnector();
         DBManager dbm=new DBManager();
         Connection conn=(Connection) db1.getConnection();
-        dbm.updateDB(conn, doc1);
+        //dbm.updateDB(conn, doc1);
 
         //for testing by TCH--Changed parse method of parser in order to return the Documrnt object
 //        FileOutputStream fo=new FileOutputStream(new File("C:\\Users\\Thilina\\Documents\\NetBeansProjects\\deserialize\\src\\abc.ser"));
