@@ -24,7 +24,7 @@ import smc.RelatedConcept;
 public class DocumentFilter {
     private HashMap<String,Concept> filteredConceptList=new HashMap<String, Concept>();
     private HashMap<String,Concept> conceptList=new HashMap<String, Concept>();
-    private String[] sortedConceptList;
+    private ArrayList<Concept> sortedConceptList;
     public Document filterDocument(Document doc,float percentage,float asoThresh){
         Document filterDoc = new Document();
         Concept concept;
@@ -32,51 +32,26 @@ public class DocumentFilter {
         float sumOfImportance=0;
         conceptList=doc.getDoc();
         //Sort concepts by importance value 
-        sortHashMap(conceptList);
+        sortedConceptList=doc.getSortedConceptList();
         
         //Add importance value until cover required percentage
-        for(String con:sortedConceptList){
+        for(Concept con:sortedConceptList){
             if(sumOfImportance<=requiredCoverage){
-                sumOfImportance+=conceptList.get(con).getImportance();
-                concept=filterRelationships(conceptList.get(con),asoThresh);
+                sumOfImportance+=conceptList.get(con.getName()).getImportance();
+                concept=filterRelationships(conceptList.get(con.getName()),asoThresh);
                 if(concept.getRelationships().size()>0){
-                    if(filteredConceptList.containsKey(con)){
-                        filteredConceptList.remove(con);
-                        filteredConceptList.put(con, concept);
+                    if(filteredConceptList.containsKey(con.getName())){
+                        filteredConceptList.remove(con.getName());
+                        filteredConceptList.put(con.getName(), concept);
                     }else{
-                        filteredConceptList.put(con, concept);
+                        filteredConceptList.put(con.getName(), concept);
                     }
                 }
             }
         }
         filterDoc.setDoc(filteredConceptList);
         return filterDoc;
-    }     
-    
-    private HashMap<String, Concept> sortHashMap(HashMap<String, Concept> input){
-    Map<String, Float> importanceMap = new HashMap<String, Float>();
-    List<Concept> mapValues = new ArrayList<Concept>(input.values());
-    for(Concept c:mapValues){
-        importanceMap.put(c.getName(), c.getStrength());
-    }
-    List<Float> mapValuesImp = new ArrayList<Float>(importanceMap.values());
-    List<String> mapKeysImp = new ArrayList<String>(importanceMap.keySet());
-    
-    HashMap<String, Concept> sortedMap = new LinkedHashMap<String, Concept>();
-
-    for(int i=0;i<importanceMap.size();i++){
-        
-    }
-    
-    TreeSet<Float> sortedSet = new TreeSet<Float>(mapValuesImp);
-    Object[] sortedArray = sortedSet.toArray();
-    int size = sortedArray.length;
-        System.out.println(size);
-    for (int i=0; i<size; i++){
-        sortedMap.put(mapKeysImp.get(mapValuesImp.indexOf(sortedArray[size-1-i])),input.get(mapKeysImp.get(mapValuesImp.indexOf(sortedArray[size-1-i]))));
-    }
-    return sortedMap;
-}
+    }         
 
     private Concept filterRelationships(Concept con, float asoLim) {
         String conceptName=con.getName();
