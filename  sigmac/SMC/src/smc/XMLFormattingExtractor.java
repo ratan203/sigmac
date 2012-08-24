@@ -24,6 +24,7 @@ public class XMLFormattingExtractor {
 
     private Document dom;
     private String XMLPath="";
+    private String docPath="";
     private Parser p=new Parser("grammar/englishPCFG.ser.gz");
     private HashMap<String,Title> titleInfo=new HashMap<String, Title>();
 
@@ -64,6 +65,16 @@ public class XMLFormattingExtractor {
                             
                     }
             }
+            
+            //get a nodelist of path
+            NodeList nl1 = docEle.getElementsByTagName("Url");
+            if(nl1 != null && nl1.getLength() > 0) {
+                    for(int i = 0 ; i < nl1.getLength();i++) {
+                            //get the title element
+                            Element el1 = (Element)nl1.item(i); 
+                            docPath=el1.getFirstChild().getNodeValue();
+                    }
+            }
     }
 
     private void setTitleInfo(Element ele, String tagName) {
@@ -91,6 +102,10 @@ public class XMLFormattingExtractor {
         parseXMLFile();
         parseDocument();
         return titleInfo;
+    }
+    
+    public String getDocPath(){
+        return docPath;
     }
 
 }

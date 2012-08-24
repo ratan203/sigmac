@@ -115,7 +115,7 @@ public class Document implements Serializable {
     private void createName(){
         int index1=this.uri.lastIndexOf("/");
         if(index1!=-1){
-            this.name=this.uri.substring(index1);
+            this.name=this.uri.substring(index1+1);
         }else{
             this.name=this.uri;
         }

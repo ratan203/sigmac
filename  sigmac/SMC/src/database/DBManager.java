@@ -29,6 +29,9 @@ public void updateDB(Connection con, Document doc){
         if(modDocUri.contains("'")){
             modDocUri=modDocUri.replace("'", "''");
         }
+        if(modDocUri.contains("\\")){
+            modDocUri=modDocUri.replace("\\", "\\\\");
+        }
         String modDocName=doc.getName();
         if(modDocName.contains("'")){
             modDocName=modDocName.replace("'", "''");

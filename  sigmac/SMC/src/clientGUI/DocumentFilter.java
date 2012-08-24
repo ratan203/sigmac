@@ -49,6 +49,7 @@ public class DocumentFilter {
                 }
             }
         }
+        filteredConceptList=optimizeRelationships(filteredConceptList);
         filterDoc.setDoc(filteredConceptList);
         return filterDoc;
     }         
@@ -64,10 +65,14 @@ public class DocumentFilter {
             for(RelatedConcept rc:conceptRelations.get(relCon)){
                 if(rc.getType().equals("is a")||rc.getType().equals("part of")){
                     filteredRelatedConcepts.add(rc);
-                    updateConceptList(conceptName,relCon,rc);
+                    if(!filteredConceptList.containsKey(relCon)){
+                        filteredConceptList.put(relCon, conceptList.get(relCon));
+                    }
                 }else if(rc.getStrength()>=asoLim){
                     filteredRelatedConcepts.add(rc);
-                    updateConceptList(conceptName,relCon,rc);
+                    if(!filteredConceptList.containsKey(relCon)){
+                        filteredConceptList.put(relCon, conceptList.get(relCon));
+                    }
                 }
             }
             if(filteredRelatedConcepts.size()>0){
@@ -78,33 +83,16 @@ public class DocumentFilter {
         return con;
     }
 
-    private void updateConceptList(String conceptName, String relCon, RelatedConcept rc) {
-        Concept c=conceptList.get(relCon);
-        ArrayList<RelatedConcept> rcList=c.getRelationships().get(conceptName);
-        ArrayList<RelatedConcept> releventRCList=new ArrayList<RelatedConcept>();
-        HashMap<String,ArrayList<RelatedConcept>> releventRels=new HashMap<String, ArrayList<RelatedConcept>>();
-        for(RelatedConcept rc1:rcList){
-            if(rc1.getType().equals(rc.getType())){
-                releventRCList.add(rc1);
-            }
-        }
-        
-        if(releventRCList.size()>0){
-            releventRels.put(conceptName, releventRCList);
-
-            if(filteredConceptList.containsKey(relCon)){
-                if(filteredConceptList.get(relCon).getRelationships().containsKey(conceptName)){
-                    filteredConceptList.get(relCon).getRelationships().get(conceptName).removeAll(releventRCList);
-                    filteredConceptList.get(relCon).getRelationships().get(conceptName).addAll(releventRCList);
-                }else{
-                    filteredConceptList.get(relCon).getRelationships().put(conceptName, releventRCList);
+    private HashMap<String, Concept> optimizeRelationships(HashMap<String, Concept> opitimizedConcept) {        
+        for(String s:opitimizedConcept.keySet()){
+            for(String r:opitimizedConcept.get(s).getRelationships().keySet()){
+                if(!filteredConceptList.containsKey(r)){
+                    opitimizedConcept.get(s).getRelationships().remove(r);
                 }
-            }else{
-                c.setRelationships(releventRels);
-                filteredConceptList.put(relCon, c);
             }
+            
         }
-        
+        return opitimizedConcept;
     }
 
 }
