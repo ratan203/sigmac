@@ -179,4 +179,40 @@ public class Document implements Serializable {
             this.doc.get(key).setImportance(0);
         }
     }
+
+    public HashMap<String,Concept> getNewDoc(ArrayList<Concept> concepts, int end){
+        HashMap<String,Concept> map=new HashMap<String, Concept>();
+        for(int i=0;i<end;i++){
+            Concept concept=concepts.get(i);
+            map.put(concept.getName(), concept);
+        }
+        Set<String> keySet = map.keySet();
+        for(String key : keySet){
+            Concept concept=map.get(key);
+            HashMap<String, ArrayList<RelatedConcept>> relationships = concept.getRelationships();
+            Set<String> relKeySet = relationships.keySet();
+            for(String relKey : relKeySet){
+                if(!map.containsKey(relKey) && doc.containsKey(relKey)){
+                    Concept rel=doc.get(relKey);
+                    map.put(rel.getName(), rel);
+                }
+            }
+        }
+        reArrangeMap(map);
+        return map;
+    }
+
+    private void reArrangeMap(HashMap<String,Concept> map){
+        Set<String> keySet = map.keySet();
+        for(String key : keySet){
+            Concept con=map.get(key);
+            HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
+            Set<String> relKeySet = relationships.keySet();
+            for(String relKey : relKeySet){
+                if(!map.containsKey(relKey)){
+                    con.deleteRelationshipsToConcept(relKey);
+                }
+            }
+        }
+    }
 }
