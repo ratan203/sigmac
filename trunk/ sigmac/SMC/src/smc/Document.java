@@ -202,6 +202,20 @@ public class Document implements Serializable {
         return map;
     }
 
+    public HashMap<String,Concept> getNewDoc(ArrayList<Concept> concepts, float coverage){
+        float covered=0.0f;
+        int end=0;
+        for(Concept c : concepts){
+            if(covered >= coverage){
+                break;
+            }else{
+                covered+=c.getImportance();
+            }
+            end++;
+        }
+        return getNewDoc(concepts, end);
+    }
+
     private void reArrangeMap(HashMap<String,Concept> map){
         Set<String> keySet = map.keySet();
         for(String key : keySet){
