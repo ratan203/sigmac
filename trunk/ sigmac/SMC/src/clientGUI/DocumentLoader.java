@@ -35,7 +35,6 @@ import smc.Parser;
 public class DocumentLoader {
    
    
-   
    public int insidefol(String paths,MapAdjust mpa,final java.awt.Component c,int noOfAllFiles,int noOfFiles) throws Exception{
 
        int noFiles=0;
@@ -160,8 +159,10 @@ public class DocumentLoader {
             progThrd.start();
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
-            smc.ConceptRanker ranker=new ConceptRanker();
-            ranker.rankConcepts(doc1);
+
+            smc.ConceptRanker r=new smc.ConceptRanker();
+            r.rankConcepts(doc1);
+
             mpa.setDocumentsObjects(doc1);
             
             ps.stopProgress();

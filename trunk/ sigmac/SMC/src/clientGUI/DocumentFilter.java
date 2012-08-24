@@ -43,7 +43,7 @@ public class DocumentFilter {
     List<String> mapKeysImp = new ArrayList<String>(importanceMap.keySet());
     
     HashMap<String, Concept> sortedMap = new LinkedHashMap<String, Concept>();
-    conceptData[] cd=new conceptData[importanceMap.size()];
+   // conceptData[] cd=new conceptData[importanceMap.size()];
     for(int i=0;i<importanceMap.size();i++){
         
     }

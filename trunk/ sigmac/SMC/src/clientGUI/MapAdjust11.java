@@ -27,7 +27,7 @@ import sun.dc.pr.PathStroker;
  *
  * @author COMPAQ
  */
-public class MapAdjust extends javax.swing.JFrame {
+public class MapAdjust11 extends javax.swing.JFrame {
 
     /**
      * Creates new form MapAdjust
@@ -36,7 +36,7 @@ public class MapAdjust extends javax.swing.JFrame {
     List paths;
     String absolutePath;
     ArrayList<Document> documents;
-    public MapAdjust() {
+    public MapAdjust11() {
         initComponents();
          paths=new ArrayList();
          documents=new ArrayList<Document>();
@@ -47,6 +47,8 @@ public class MapAdjust extends javax.swing.JFrame {
                     String temp=new File("oo").getCanonicalPath();
                     int a=temp.lastIndexOf("\\");
                     absolutePath=temp.substring(0,a);
+                    System.out.println(absolutePath);
+//                    System.exit(0);
                     
                 } catch (IOException ex) {
                     Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
@@ -397,8 +399,8 @@ public class MapAdjust extends javax.swing.JFrame {
           a.setVisible(true);
           
         panel1.add(a);
+          System.out.println("added");
           
-       
       }
     });
 //    NativeInterface.runEventPump();
