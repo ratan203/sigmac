@@ -18,6 +18,7 @@ public class deleteRelation extends javax.swing.JFrame {
     
        HashMap<String, Concept> node;
        Document doc;
+       MapAdjust mpa;
     /**
      * Creates new form deleteRelation
      */
@@ -128,11 +129,12 @@ public class deleteRelation extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        MapAdjust mpa=new MapAdjust();
         mpa.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void setNodeData(HashMap<String, Concept> node,Document doc){
+    public void setNodeData(HashMap<String, Concept> node,Document doc,MapAdjust mpa){
+        this.mpa=mpa;
         this.node=node;
         this.doc=doc;
         jComboBox1.removeAll();
