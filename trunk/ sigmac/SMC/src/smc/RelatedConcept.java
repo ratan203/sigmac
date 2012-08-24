@@ -115,4 +115,12 @@ public class RelatedConcept implements Serializable {
             return false;
         }
     }
+
+    public RelatedConcept getCopy(){
+        RelatedConcept rc=new RelatedConcept(this.type, this.rConcept, this.isHead, this.freequency);
+        rc.setIsStrength(this.isStrength);
+        rc.setPartStrength(this.partStrength);
+        rc.setStrength(this.strength);
+        return rc;
+    }
 }
