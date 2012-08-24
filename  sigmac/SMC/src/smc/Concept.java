@@ -215,4 +215,24 @@ public class Concept implements Serializable, Comparable<Concept> {
             return 1;
         }
     }
+
+    public Concept getCopy(){
+        Concept c=new Concept(this.name);
+        c.setFreequency(this.freequency);
+        c.setImportance(this.importance);
+        c.setTitleStrength(this.titleStrength);
+        c.setStrength(this.strength);
+        HashMap<String,ArrayList<RelatedConcept>> relations=new
+                HashMap<String, ArrayList<RelatedConcept>>();
+        Set<String> keySet = this.relationships.keySet();
+        for(String key : keySet){
+            ArrayList<RelatedConcept> rc=this.relationships.get(key);
+            ArrayList<RelatedConcept> list=new ArrayList<RelatedConcept>();
+            for(RelatedConcept r : rc){
+                list.add(r.getCopy());
+            }
+            relations.put(key, list);
+        }
+        return c;
+    }
 }
