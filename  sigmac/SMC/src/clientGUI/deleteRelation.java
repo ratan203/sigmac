@@ -7,6 +7,7 @@ package clientGUI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import smc.Concept;
+import smc.Document;
 
 /**
  *
@@ -16,6 +17,7 @@ public class deleteRelation extends javax.swing.JFrame {
 
     
        HashMap<String, Concept> node;
+       Document doc;
     /**
      * Creates new form deleteRelation
      */
@@ -39,6 +41,7 @@ public class deleteRelation extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DeleteRelations");
@@ -55,6 +58,13 @@ public class deleteRelation extends javax.swing.JFrame {
         jLabel2.setText("Node From");
 
         jLabel3.setText("Node To");
+
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,11 +83,13 @@ public class deleteRelation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(158, 158, 158)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -93,9 +105,11 @@ public class deleteRelation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(91, 91, 91))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(94, 94, 94))
         );
 
         pack();
@@ -111,8 +125,16 @@ public class deleteRelation extends javax.swing.JFrame {
         System.out.println(key1.get(jComboBox2.getSelectedIndex()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void setNodeData(HashMap<String, Concept> node){
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MapAdjust mpa=new MapAdjust();
+        mpa.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void setNodeData(HashMap<String, Concept> node,Document doc){
         this.node=node;
+        this.doc=doc;
         jComboBox1.removeAll();
         jComboBox2.removeAll();
         for(int i=0;i<node.size();i++){
@@ -126,6 +148,7 @@ public class deleteRelation extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;

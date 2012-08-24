@@ -334,7 +334,7 @@ public class MapAdjust extends javax.swing.JFrame {
         Document doc = documents.get(jList1.getSelectedIndex());
         HashMap<String, Concept> mp = doc.getDoc();
       //  System.out.println(doc1.keySet());
-        deleteRel.setNodeData(mp);
+        deleteRel.setNodeData(mp,doc);
         
         
     }//GEN-LAST:event_jButton4ActionPerformed
