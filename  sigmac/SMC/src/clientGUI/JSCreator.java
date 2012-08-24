@@ -25,6 +25,15 @@ public class JSCreator {
 	public JSCreator() {
 		// TODO Auto-generated constructor stub
 	}
+	public void CreateJS(Concept[] con,String actualpath) throws IOException{
+		ArrayList<Concept> concepts = new ArrayList<Concept>();
+		for(int i=0;i<con.length;i++){
+			concepts.add(con[i]);
+		}
+		Document document= new Document();
+		document.addConcepts(concepts);
+		CreateJS(document, actualpath);
+	}
 	
 	public void CreateJS(Document doc,String actualpath) throws IOException{
 		
@@ -49,12 +58,11 @@ public class JSCreator {
 				if(line.trim().equals("var json = replace;")){
                                     
 					sb.append("var json = "+json+";");
-				}
-                                else if(line.trim().equals("var actualpath=replace2;")){
-                                    String newstring="\""+actualpath+"\"";
-                                    newstring=newstring.replace("\\", "/");
-                                    sb.append("var actualpath = "+newstring+";");
-                                }else{
+				}else if(line.trim().equals("var actualpath=replace2;")){
+                    String newstring="\""+actualpath+"\"";
+                    newstring=newstring.replace("\\", "/");
+                    sb.append("var actualpath = "+newstring+";");
+                }else{
 				sb.append(line+"\n");
 				}
 			}
