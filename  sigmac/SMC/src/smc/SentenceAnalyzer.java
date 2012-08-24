@@ -32,7 +32,7 @@ public class SentenceAnalyzer {
 
     private void loadPatterns(){
         tmpMethod1();
-//        tmpMethod2();
+        //tmpMethod2();
     }
 
     public ArrayList<Concept> analyze(Tree parse){
@@ -187,6 +187,8 @@ public class SentenceAnalyzer {
 
     private void tmpMethod1(){
         patterns=new ArrayList<Pattern>();
+        //Java is a programming language .
+        //Java is a general-purpose , concurrent , class-based , object-oriented language
         HashMap<String,ArrayList<ModifierPattern>> map=new HashMap<String,
                 ArrayList<ModifierPattern>>();
         ArrayList<ModifierPattern> lst=new ArrayList<ModifierPattern>();
@@ -198,6 +200,8 @@ public class SentenceAnalyzer {
                 + " a | <: an) & !<< NP & > =var1))))",
                 map, new String[]{"c2"}, new String[]{"c1"});
         patterns.add(p);
+
+        //For generic concepts
         HashMap<String,ArrayList<ModifierPattern>> map1=new HashMap<String,
                 ArrayList<ModifierPattern>>();
         ArrayList<ModifierPattern> lst1=new ArrayList<ModifierPattern>();
@@ -213,6 +217,7 @@ public class SentenceAnalyzer {
                 map1, new String[]{"c1"}, new String[]{"c1"});
         patterns.add(p1);
 
+        //Java is a programming language originally developed by James Gosling at Sun Microsystems .
         HashMap<String,ArrayList<ModifierPattern>> map2=new HashMap<String,
                 ArrayList<ModifierPattern>>();
         ArrayList<ModifierPattern> lst2=new ArrayList<ModifierPattern>();
@@ -227,6 +232,27 @@ public class SentenceAnalyzer {
                 + "(DT=tmp >( NP=c2 !$+ CC & !$+PP & !<< NP & >NP) & [<: a | <: an]  )))))",
                 map2, new String[]{"c2"}, new String[]{"c1"});
         patterns.add(p2);
+
+        //PHP is a component of WAMP and LAMP .
+        //PHP is a part of WAMP and LAMP .
+        //SPL is a part of PHP .
+        //SPL is a component of PHP .
+        //Transaction Manager is a sub system of Aura
+        HashMap<String,ArrayList<ModifierPattern>> map3=new HashMap<String,
+                ArrayList<ModifierPattern>>();
+        ArrayList<ModifierPattern> lst3=new ArrayList<ModifierPattern>();
+        ArrayList<ModifierPattern> lst32=new ArrayList<ModifierPattern>();
+        ModifierPattern ptn13=new ModifierPattern("NP <, DT=tmp","delete tmp","c1");
+        ModifierPattern ptn132=new ModifierPattern("NP <, DT=tmp","delete tmp","c2");
+        lst3.add(ptn13);
+        lst32.add(ptn132);
+        map3.put("c1",lst3);
+        map3.put("c2", lst32);
+        Pattern p3=new Pattern("part of", "S <, (NP=c1 !<<NP & $+ (VP <, (VBZ <: is & $+"
+                + " (NP <, (NP <, (DT <: a & $+ (NN <: component | <: part | $+ (NN <: "
+                + "system & $- (NN<: sub))) ) & $+ (PP <, (IN <: of & $+ (NP=c2))))))))",
+                map2, new String[]{"c2"}, new String[]{"c1"});
+        patterns.add(p3);
     }
     private void tmpMethod2(){
         patterns=new ArrayList<Pattern>();
