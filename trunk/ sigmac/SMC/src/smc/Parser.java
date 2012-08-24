@@ -63,6 +63,11 @@ public class Parser {
 
         XMLFormattingExtractor xe=new XMLFormattingExtractor();
         doc.setTitleInfo(xe.getXMLFormatting(doc.getUri()));
+        String URI=xe.getDocPath();
+        doc.setUri(URI);
+        if(URI.contains("\\")){
+            doc.setName(URI.substring(URI.lastIndexOf("\\")));
+        }
 //        System.out.println("done");
 //        calc.calculateImportance(doc);
 //        doc.printDoc();
