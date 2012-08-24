@@ -4,6 +4,7 @@
  */
 package clientGUI;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import smc.Concept;
@@ -17,13 +18,14 @@ public class deleteRelation extends javax.swing.JFrame {
 
     
        HashMap<String, Concept> node;
-       Document doc;
+       Document doc,newDoc;
        MapAdjust mpa;
     /**
      * Creates new form deleteRelation
      */
     public deleteRelation() {
         initComponents();
+        jLabel4.setEnabled(false);
      
     }
 
@@ -43,10 +45,12 @@ public class deleteRelation extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DeleteRelations");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Select nodes to delete Relationship");
 
         jButton1.setText("Remove Relation");
@@ -84,21 +88,24 @@ public class deleteRelation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jLabel4)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(59, 59, 59)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -106,11 +113,13 @@ public class deleteRelation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(94, 94, 94))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel4)
+                .addGap(54, 54, 54))
         );
 
         pack();
@@ -124,24 +133,33 @@ public class deleteRelation extends javax.swing.JFrame {
         }
         System.out.println( key1.get(jComboBox1.getSelectedIndex()));
         System.out.println(key1.get(jComboBox2.getSelectedIndex()));
+        doc.deleteRelationship(key1.get(jComboBox1.getSelectedIndex()).toString(), key1.get(jComboBox2.getSelectedIndex()).toString());
+        newDoc.deleteRelationship(key1.get(jComboBox1.getSelectedIndex()).toString(), key1.get(jComboBox2.getSelectedIndex()).toString());
+        
+        jLabel4.setText(key1.get(jComboBox1.getSelectedIndex()).toString()+" and "+key1.get(jComboBox2.getSelectedIndex()).toString()+"Relation removed");
+        jLabel4.setEnabled(true);
+        jLabel4.setForeground(Color.red);
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         mpa.setVisible(true);
+        mpa.mapReload(newDoc);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void setNodeData(HashMap<String, Concept> node,Document doc,MapAdjust mpa){
+    public void setNodeData(HashMap<String, Concept> node,Document doc,MapAdjust mpa,Document newDoc){
         this.mpa=mpa;
         this.node=node;
         this.doc=doc;
+        this.newDoc=newDoc;
         jComboBox1.removeAll();
         jComboBox2.removeAll();
         for(int i=0;i<node.size();i++){
-        jComboBox1.addItem(node.keySet().toArray()[i]);
-        jComboBox2.addItem(node.keySet().toArray()[i]);
+             jComboBox1.addItem(node.keySet().toArray()[i]);
+             jComboBox2.addItem(node.keySet().toArray()[i]);
         }
     }
     /**
@@ -156,5 +174,6 @@ public class deleteRelation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,6 +37,7 @@ public class MapAdjust extends javax.swing.JFrame {
     //tt
     List paths;
     String absolutePath;
+    Document newDoc;
     ArrayList<Document> documents;
     public MapAdjust() {
         initComponents();
@@ -77,7 +78,7 @@ public class MapAdjust extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
-        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adjust Frame");
@@ -145,76 +146,76 @@ public class MapAdjust extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Adjust Map");
+        jButton1.setText("Adjust Map");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(28, 28, 28)
                         .addComponent(jLabel2)
-                        .addContainerGap(889, Short.MAX_VALUE))
+                        .addGap(0, 879, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 18, Short.MAX_VALUE)
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(21, 21, 21))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap()))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(106, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jButton4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton8)
-                                .addGap(13, 13, 13))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel1)
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)))
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)
+                        .addGap(13, 13, 13)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -236,6 +237,40 @@ public class MapAdjust extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jList1ValueChanged
 
+    public void mapReload(Document doc){
+    String actualpath=(String) paths.get(jList1.getSelectedIndex());
+      // Document doc = documents.get(jList1.getSelectedIndex());
+       JSCreator jsc = new JSCreator();
+
+        try {
+           jsc.CreateJS(doc,actualpath);
+
+
+        } catch (IOException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        NativeInterface.open();
+        panel1.removeAll();
+          SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+                
+
+          Web a=new Web(absolutePath+"\\visual\\example2.html");
+          JScrollPane scrollPane = new JScrollPane(a);
+          a.setBounds(0, 0, 700, 530);
+          a.setVisible(true);
+          
+        panel1.add(a);
+          
+       
+      }
+    });
+    }
+    
+    
+    
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         try {
              //TODO add your handling code here:
@@ -253,11 +288,13 @@ public class MapAdjust extends javax.swing.JFrame {
        System.out.println("You have selected "+paths.get(jList1.getSelectedIndex()));
     //   System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
        String actualpath=(String) paths.get(jList1.getSelectedIndex());
-       Document doc = documents.get(jList1.getSelectedIndex());
-       JSCreator jsc = new JSCreator();
+        Document doc = documents.get(jList1.getSelectedIndex());
+        DocumentFilter docFilter=new DocumentFilter();
+        newDoc=docFilter.filterDocument(doc, 60,0.2f);
+        JSCreator jsc = new JSCreator();
 
         try {
-           jsc.CreateJS(doc,actualpath);
+           jsc.CreateJS(newDoc,actualpath);
 
 
         } catch (IOException ex) {
@@ -293,8 +330,8 @@ public class MapAdjust extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
         }
-      BufferedReader in = new BufferedReader(fr);
-      String line;
+        BufferedReader in = new BufferedReader(fr);
+        String line;
         try {
             while ((line = in.readLine()) != null)
               deletedConcepts.add(line);
@@ -304,8 +341,12 @@ public class MapAdjust extends javax.swing.JFrame {
     
         System.out.println("Deleted concpets ="+deletedConcepts);
         Document doc = documents.get(jList1.getSelectedIndex());
-        
-        doc.printDoc();
+        for(String con:deletedConcepts){
+            doc.deleteConcept(con);
+        }
+        System.out.println("deleted");
+       // doc.printDoc();
+        mapReload(doc);
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -320,9 +361,13 @@ public class MapAdjust extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    int sliderValue=20;
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         // TODO add your handling code here:
-        System.out.println(jSlider1.getValue());
+       // System.out.println(jSlider1.getValue());
+        sliderValue=jSlider1.getValue();
+       
+        
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -332,12 +377,23 @@ public class MapAdjust extends javax.swing.JFrame {
         deleteRel.setVisible(true);
         deleteRel.setLocationRelativeTo(null);
         Document doc = documents.get(jList1.getSelectedIndex());
-        HashMap<String, Concept> mp = doc.getDoc();
+        HashMap<String, Concept> mp = newDoc.getDoc();
       //  System.out.println(doc1.keySet());
-        deleteRel.setNodeData(mp,doc,this);
+        deleteRel.setNodeData(mp,doc,this,newDoc);
         
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        Document doc = documents.get(jList1.getSelectedIndex());
+        DocumentFilter docFilter=new DocumentFilter();
+        newDoc=docFilter.filterDocument(doc, sliderValue,0.5f);
+        mapReload(newDoc);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void showLocation(String file){
         
@@ -365,12 +421,12 @@ public class MapAdjust extends javax.swing.JFrame {
          // UIUtils.setPreferredLookAndFeel();
           NativeInterface.open();
           SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
+          public void run() {
       
-          Web a=new Web(absolutePath+"\\visual\\html\\First.html");
-          JScrollPane scrollPane = new JScrollPane(a);
-          a.setBounds(0, 0, 700, 530);
-          a.setVisible(true);
+            Web a=new Web(absolutePath+"\\visual\\html\\First.html");
+            JScrollPane scrollPane = new JScrollPane(a);
+            a.setBounds(0, 0, 700, 530);
+            a.setVisible(true);
           
         panel1.add(a);
           
@@ -389,6 +445,7 @@ public class MapAdjust extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -396,7 +453,6 @@ public class MapAdjust extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSlider1;
