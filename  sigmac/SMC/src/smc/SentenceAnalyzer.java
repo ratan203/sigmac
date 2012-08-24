@@ -331,6 +331,37 @@ public class SentenceAnalyzer {
         }
         cp=cp.replaceAll("^[^A-Za-z]", "");
         cp=cp.replaceAll("[^A-Za-z]$", "");
+        cp=cp.replaceAll("  +", " ");
         return cp;
+    }
+
+    private void spawnConcepts(String bigConcept){
+        if(bigConcept.contains(",") && bigConcept.contains(" and ")){
+            
+        }else if(bigConcept.contains(",")){
+            processCommaSeperatedConcept(bigConcept);
+        }else if(bigConcept.contains(" and ")){
+
+        }
+    }
+
+
+    private String[] processCommaSeperatedConcept(String bigConcept){
+        String[] split = bigConcept.split(",");
+        if(split.length<2){
+
+        }else{
+            String last=split[split.length-1];
+            String[] split1 = last.split(" ");
+            if(split1.length<2){
+
+            }else{
+                String lastWord=split1[split1.length-1];
+                for(int i=0;i<split.length-1;i++){
+                    split[i]=filterConcept(split[i]+" "+lastWord);
+                }
+            }
+        }
+        return split;
     }
 }
