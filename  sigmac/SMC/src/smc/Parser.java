@@ -49,6 +49,7 @@ public class Parser {
             if(sentence.isEmpty() || sentence.size()>=MAX_SENTENCE_LENTH){
                 continue;
             }
+            
             sentenceCount++;
             
             try{
@@ -69,10 +70,11 @@ public class Parser {
         doc.setTitleInfo(xe.getXMLFormatting(doc.getUri()));
         String URI=xe.getDocPath();
         doc.setUri(URI);
+        doc.setLastModifiedDate(xe.getLastModifiedDate());
         if(URI.contains("\\")){
             doc.setName(URI.substring(URI.lastIndexOf("\\")));
         }
-        doc.setLastModifiedDate(xe.getLastModifiedDate());
+        
 //        System.out.println("done");
 //        calc.calculateImportance(doc);
 //        doc.printDoc();
