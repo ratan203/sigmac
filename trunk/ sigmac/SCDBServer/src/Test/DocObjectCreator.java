@@ -81,6 +81,7 @@ public class DocObjectCreator {
 						}
 				doc.addConcepts(concepts);
 				doc.setUri(docURI);
+				doc.setName(docURI);
 				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
