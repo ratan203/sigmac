@@ -4,9 +4,11 @@
  */
 package clientGUI;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 import smc.Document;
 
 /**
@@ -15,27 +17,82 @@ import smc.Document;
  */
 public class DocumentUploader extends Thread{
     Document doc=null;
+    Socket requestSocket;
+	ObjectOutputStream out;
+ 	ObjectInputStream in;
+ 	String message;
+ 	
+ 	boolean myTurn = true;
     
-    public DocumentUploader(Document doc){
+        public DocumentUploader(Document doc){
         this.doc=doc;
     }
     
+    @Override
     public void run(){
-     try{  
-            System.out.println("Socket initiation");
-            Socket s = new Socket("192.168.1.3",2002);
-            System.out.println("connected to server");
-            OutputStream os = s.getOutputStream();  
-            ObjectOutputStream oos = new ObjectOutputStream(os);  
-            oos.writeObject(doc);  
-            oos.close();  
-            os.close();  
-            s.close();  
+   
+        try{
+                requestSocket = new Socket("192.168.29.1", 2002);
+                out = new ObjectOutputStream(requestSocket.getOutputStream());
+                out.flush();
+                in = new ObjectInputStream(requestSocket.getInputStream());
+
+                do{
+                        message ="";
+                        if(myTurn)
+                        {
+
+                                sendMessage(doc);
+                                myTurn = false;
+                                Thread.sleep(1000);
+                        }
+                        else
+                        {
+                                recvMessage();
+                        }
+                }while(!message.equals("bye"));
+                JOptionPane.showMessageDialog(null, "File "+doc.getName()+" successfuly uploaded to the SigmaC Server");
         }
-         catch(Exception e){
-            System.out.println(e);
-         }
-    }
-            
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Unable to connect to the SigmaC Server");
+
+        }
+        finally{
+                try{
+                        in.close();
+                        out.close();
+                        requestSocket.close();
+                }
+                catch(Exception er){
+                        // Do not want to handle
+                }
+        }
+	}
+	void sendMessage(Document doc)
+	{
+            try{
+                    out.writeObject(doc);
+                    out.flush();
+            }
+            catch(IOException ioException){
+                    ioException.printStackTrace();
+            }
+	}
+	
+	void recvMessage()
+	{
+            try {
+                    message = (String)in.readObject();
+                    if(message == "turnOver")
+                    {
+                            myTurn = true;
+                    }
+                    System.out.println(message);
+            } catch (IOException e) {
+                    e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+            }
+	}
     
 }

@@ -1,24 +1,22 @@
 package clientGUI;
 
 
-import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import de.schlichtherle.io.FileReader;
 import de.schlichtherle.io.FileWriter;
-import java.awt.BorderLayout;
-import java.awt.geom.Path2D;
-import java.io.*;
-import java.net.Socket;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import smc.Concept;
 import smc.Document;
-import sun.dc.pr.PathStroker;
 
 /*
  * To change this template, choose Tools | Templates
@@ -281,16 +279,16 @@ public class MapAdjust extends javax.swing.JFrame {
            FileWriter f1 = new FileWriter(absolutePath+"\\visual\\rnodes.dpi");
            f1.write("");
            f1.close();
-        } catch (IOException ex) {
+         } catch (IOException ex) {
             Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
         }
-       System.out.println(jList1.getSelectedIndex()); 
-       System.out.println("You have selected "+paths.get(jList1.getSelectedIndex()));
+        System.out.println(jList1.getSelectedIndex()); 
+        System.out.println("You have selected "+paths.get(jList1.getSelectedIndex()));
     //   System.out.println("You have selected file URI"+documents.get(jList1.getSelectedIndex()).getUri());
-       String actualpath=(String) paths.get(jList1.getSelectedIndex());
+        String actualpath=(String) paths.get(jList1.getSelectedIndex());
         Document doc = documents.get(jList1.getSelectedIndex());
         DocumentFilter docFilter=new DocumentFilter();
-        newDoc=docFilter.filterDocument(doc, 60,0.2f);
+        newDoc=docFilter.filterDocument(doc, 20,0.0f);
         JSCreator jsc = new JSCreator();
 
         try {
@@ -343,21 +341,21 @@ public class MapAdjust extends javax.swing.JFrame {
         Document doc = documents.get(jList1.getSelectedIndex());
         for(String con:deletedConcepts){
             doc.deleteConcept(con);
+            newDoc.deleteConcept(con);
         }
         System.out.println("deleted");
        // doc.printDoc();
-        mapReload(doc);
+        mapReload(newDoc);
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         
-        
-        Document doc = documents.get(jList1.getSelectedIndex());
-        DocumentUploader docloader=new DocumentUploader(doc);
+       // Document doc = documents.get(jList1.getSelectedIndex());
+        DocumentUploader docloader=new DocumentUploader(newDoc);
         docloader.start();
-        System.out.println(doc.getName()+ " is selected" ); 
+        System.out.println(newDoc.getName()+ " is selected" ); 
        
     }//GEN-LAST:event_jButton7ActionPerformed
 

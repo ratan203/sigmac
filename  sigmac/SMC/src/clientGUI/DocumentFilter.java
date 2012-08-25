@@ -21,6 +21,8 @@ public class DocumentFilter {
     public Document filterDocument(Document doc,float percentage,float asoThresh){
         Document filterDoc = new Document();
         Concept concept;
+        filterDoc.setName(doc.getName());
+        filterDoc.setUri(doc.getUri());
         float requiredCoverage=percentage/100;
         float sumOfImportance=0;
         conceptList=doc.getDoc();
