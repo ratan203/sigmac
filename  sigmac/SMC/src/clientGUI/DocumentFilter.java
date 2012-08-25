@@ -15,6 +15,7 @@ import smc.RelatedConcept;
  * @author Thilina
  */
 public class DocumentFilter {
+    
     private HashMap<String,Concept> filteredConceptList=new HashMap<String, Concept>();
     private HashMap<String,Concept> conceptList=new HashMap<String, Concept>();
     private ArrayList<Concept> sortedConceptList;
@@ -24,6 +25,7 @@ public class DocumentFilter {
         Concept concept;
         filterDoc.setName(doc.getName());
         filterDoc.setUri(doc.getUri());
+        filterDoc.setLastModifiedDate(doc.getLastModifiedDate());
         float requiredCoverage=percentage/100;
         float sumOfImportance=0;
         conceptList=doc.getDoc();
