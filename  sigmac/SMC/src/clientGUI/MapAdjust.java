@@ -288,7 +288,11 @@ public class MapAdjust extends javax.swing.JFrame {
         String actualpath=(String) paths.get(jList1.getSelectedIndex());
         Document doc = documents.get(jList1.getSelectedIndex());
         DocumentFilter docFilter=new DocumentFilter();
+<<<<<<< .mine
+        newDoc=docFilter.filterDocument(doc, 60);
+=======
         newDoc=docFilter.filterDocument(doc, 20,0.0f);
+>>>>>>> .r159
         JSCreator jsc = new JSCreator();
 
         try {
@@ -389,7 +393,7 @@ public class MapAdjust extends javax.swing.JFrame {
         
         Document doc = documents.get(jList1.getSelectedIndex());
         DocumentFilter docFilter=new DocumentFilter();
-        newDoc=docFilter.filterDocument(doc, sliderValue,0.5f);
+        newDoc=docFilter.filterDocument(doc, sliderValue);
         mapReload(newDoc);
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -18,7 +18,8 @@ public class DocumentFilter {
     private HashMap<String,Concept> filteredConceptList=new HashMap<String, Concept>();
     private HashMap<String,Concept> conceptList=new HashMap<String, Concept>();
     private ArrayList<Concept> sortedConceptList;
-    public Document filterDocument(Document doc,float percentage,float asoThresh){
+    public Document filterDocument(Document doc,float percentage){
+        float asoThresh=(100-percentage)/100;
         Document filterDoc = new Document();
         Concept concept;
         filterDoc.setName(doc.getName());

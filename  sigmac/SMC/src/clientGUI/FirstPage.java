@@ -208,6 +208,7 @@ public class FirstPage extends javax.swing.JFrame  {
         JScrollPane sbrText = new JScrollPane(text);
         sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         text.setBackground(Color.lightGray);
+        frame.getContentPane().add(sbrText);
         frame.getContentPane().add(text);
 
         JTextPane jtp=new JTextPane();
