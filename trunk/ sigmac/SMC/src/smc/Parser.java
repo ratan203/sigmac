@@ -27,6 +27,7 @@ public class Parser {
     GrammaticalStructureFactory gsf;
     SentenceAnalyzer analyzer;
     StrengthCalculator calc;
+    private static final int MAX_SENTENCE_LENTH=30;
 
     public Parser(String modelFile){
         lp=new LexicalizedParser(modelFile);
@@ -45,6 +46,9 @@ public class Parser {
        
         
         for (List<HasWord> sentence : p){
+            if(sentence.isEmpty() || sentence.size()>=MAX_SENTENCE_LENTH){
+                continue;
+            }
             sentenceCount++;
             
             try{
