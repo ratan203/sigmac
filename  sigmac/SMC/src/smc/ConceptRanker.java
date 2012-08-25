@@ -54,7 +54,7 @@ public class ConceptRanker {
             }
         }
             System.out.println(doc.getTotalDocumentValue()-totalDocumentValue);
-        }while(i<100 || (doc.getTotalDocumentValue()-totalDocumentValue)<1.0015);
+        }while(i<100 && (doc.getTotalDocumentValue()-totalDocumentValue)>1.0015);
         System.out.println("Total====="+total);
         System.out.println("End Ranking *******************8");
         updateImportance(doc);
