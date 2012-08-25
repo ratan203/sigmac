@@ -79,7 +79,7 @@ public class DocumentFilter {
     private HashMap<String, Concept> optimizeRelationships(HashMap<String, Concept> opitimizedConcept) {        
         for(String s:opitimizedConcept.keySet()){
 //            for(String r:opitimizedConcept.get(s).getRelationships().keySet()){
-            String[] keyArray=(String[]) opitimizedConcept.get(s).getRelationships().keySet().toArray();
+            String[] keyArray=opitimizedConcept.get(s).getRelationships().keySet().toArray(new String[0]);
             for(int i=0;i<keyArray.length;i++){
                 if(!filteredConceptList.containsKey(keyArray[i])){
                     opitimizedConcept.get(s).getRelationships().remove(keyArray[i]);
