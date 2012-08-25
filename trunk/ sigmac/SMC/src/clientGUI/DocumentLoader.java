@@ -6,22 +6,19 @@ import adaptors.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mysql.jdbc.Connection;
 import database.DBConnector;
 import database.DBManager;
 import edu.stanford.nlp.process.DocumentPreprocessor.DocType;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import javax.swing.Timer;
 import optimization.Optimizer;
-import smc.ConceptRanker;
 import smc.Parser;
 /*
  * To change this template, choose Tools | Templates
@@ -100,6 +97,11 @@ public class DocumentLoader {
        Thread progThrd=new Thread(ps);
        progThrd.start();
        SCDocument doc = null;
+       File file=new File(path);
+       long lastModified=file.lastModified();
+       Date d = new Date(lastModified);
+       SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+       String dateString = sdf.format(d);
 //       if(extension.equalsIgnoreCase(".doc")){
 //             DocReader docreader = new DocReader();
 //             doc=docreader.getDocument(path);    
@@ -137,7 +139,7 @@ public class DocumentLoader {
             java.util.Date date= new java.util.Date();
             long timestamp=date.getTime();
             
-            xmlcreater.createXML(doc, "InterXML//"+timestamp+".xml",path);
+            xmlcreater.createXML(doc, "InterXML//"+timestamp+".xml",path,dateString);
             String XMLPath="InterXML//"+timestamp+".xml";
 
             ps.stopProgress();
