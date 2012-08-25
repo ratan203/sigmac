@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
 	 
 public class InXMLCreator {
  
-	public void createXML(SCDocument document,String outputFilePath, String url) {
+	public void createXML(SCDocument document,String outputFilePath, String url,String dateString) {
  
 	  try {
  
@@ -41,6 +41,10 @@ public class InXMLCreator {
                 Element uri = doc.createElement("Url");
                 rootElement.appendChild(uri);
                 uri.appendChild(doc.createTextNode(url));
+                
+                Element lastModified = doc.createElement("LastModified");
+                rootElement.appendChild(lastModified);
+                lastModified.appendChild(doc.createTextNode(dateString));
  
 		// body elements
 		Element body = doc.createElement("body");
