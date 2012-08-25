@@ -66,6 +66,7 @@ public class PCAcalc {
 		
 		int docId;
 		
+		// Creating the corelation metrix 
 		for(int i=1; i<=noOfConcepts ; i++){
 			for(int j=1 ;j<=noOfDocuments;j++){
 				 getConceptDoc ="SELECT frequency FROM concept_doc WHERE docId="+(startDocumentId+j-1)+
@@ -78,7 +79,7 @@ public class PCAcalc {
 			}
 			 			
 		}
-		
+		// Console output of the Original Metrix
 		PrintWriter pw = new PrintWriter(new File("outOriM.txt"));
 		for(int i=1; i<=noOfConcepts ; i++){
 			for(int j=1 ;j<=noOfDocuments;j++){
@@ -89,7 +90,10 @@ public class PCAcalc {
 		pw.flush();
 		pw.close();
 	}
-		
+	/**
+	 * Matrix Calculations
+	 * @throws IOException
+	 */
 	public void calcPCA() throws IOException{
 		Matrix originalData = new Matrix(matrix);
 		PCA pca = new PCA(matrix);
@@ -152,7 +156,12 @@ public class PCAcalc {
 	    pw.flush();
 	    pw.close();
 	}
-	
+	/**
+	 *  updating the document ranks table
+	 * @param adjestedMetrix
+	 * @param startConceptId
+	 * @param startDocumentId
+	 */
 	void updateDocRanksTable(Matrix adjestedMetrix,int startConceptId, int startDocumentId){
 		dbc = new DBConnector();
 		Connection con = dbc.getConnection();		
@@ -183,7 +192,12 @@ public class PCAcalc {
 		
 		
 	}
-	
+	/**
+	 * 
+	 * Sorting the document of a concept
+	 * @param conceptDocArray
+	 * @return
+	 */
 	ArrayList<ConceptDoc> sortDocArray(ConceptDoc[] conceptDocArray){
 		ArrayList<ConceptDoc> sortedConDocArray = new ArrayList<ConceptDoc>();
 		
