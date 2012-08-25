@@ -123,7 +123,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                                 g.setStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }else if(g.getFreequency()!=0&&d1.getSize()!=0){
-                                g.setStrength(((float)Math.pow(Math.E, -(1/((double)g.getFreequency()/d1.getSize())))));
+                                g.setStrength(((float)Math.pow(Math.E, -(1/(double)g.getFreequency()))));
                             }
                         }else if(g.getType().equals("is a")){
                             g.setStrength(1);

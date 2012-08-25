@@ -25,6 +25,7 @@ public class XMLFormattingExtractor {
     private Document dom;
     private String XMLPath="";
     private String docPath="";
+    private String lastModifedDate="";
     private Parser p=new Parser("grammar/englishPCFG.ser.gz");
     private HashMap<String,Title> titleInfo=new HashMap<String, Title>();
 
@@ -75,6 +76,16 @@ public class XMLFormattingExtractor {
                             docPath=el1.getFirstChild().getNodeValue();
                     }
             }
+            
+            //get a nodelist of path
+            NodeList nl2 = docEle.getElementsByTagName("LastModified");
+            if(nl2 != null && nl2.getLength() > 0) {
+                    for(int i = 0 ; i < nl2.getLength();i++) {
+                            //get the title element
+                            Element el2 = (Element)nl2.item(i); 
+                            lastModifedDate=el2.getFirstChild().getNodeValue();
+                    }
+            }
     }
 
     private void setTitleInfo(Element ele, String tagName) {
@@ -106,6 +117,10 @@ public class XMLFormattingExtractor {
     
     public String getDocPath(){
         return docPath;
+    }
+    
+    public String getLastModifiedDate(){
+        return lastModifedDate;
     }
 
 }

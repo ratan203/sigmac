@@ -22,6 +22,7 @@ public class Document implements Serializable {
     private HashMap<String,Title> title=new HashMap<String, Title>();
     private String uri;
     private String name="";
+    private String lastModified="";
     private int size=0;
 
     public Document(){
@@ -93,6 +94,14 @@ public class Document implements Serializable {
 
     public void setName(String name){
         this.name=name;
+    }
+    
+    public String getLastModifiedDate() {
+        return lastModified;
+    }
+
+    public void setLastModifiedDate(String lastMod){
+        this.lastModified=lastMod;
     }
 
     public int getSize() {

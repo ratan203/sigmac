@@ -72,6 +72,7 @@ public class Parser {
         if(URI.contains("\\")){
             doc.setName(URI.substring(URI.lastIndexOf("\\")));
         }
+        doc.setLastModifiedDate(xe.getLastModifiedDate());
 //        System.out.println("done");
 //        calc.calculateImportance(doc);
 //        doc.printDoc();
