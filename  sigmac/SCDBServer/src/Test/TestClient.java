@@ -21,7 +21,7 @@ public class TestClient{
 	void run()
 	{
 		try{
-			requestSocket = new Socket("localhost", 2004);
+			requestSocket = new Socket("localhost", 2002);
 			logger.info("Connected to localhost in port 2004");
 			
 			out = new ObjectOutputStream(requestSocket.getOutputStream());

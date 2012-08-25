@@ -14,13 +14,14 @@ import java.util.Set;
  *
  * @author user
  */
-public class Concept implements Serializable {
+public class Concept implements Serializable, Comparable<Concept> {
     private String name;
     private HashMap<String,ArrayList<RelatedConcept>> relationships;
     private int freequency;
-    private int titleStrength;
-    private int strength;
+    private float titleStrength;
+    private float strength;
     private float importance;
+    private float value;
     public static final int FREEQUENCY_STRENTH_MULTIPLIER=1;
 
     public Concept(String name){
@@ -28,6 +29,7 @@ public class Concept implements Serializable {
         relationships=new HashMap<String, ArrayList<RelatedConcept>>();
         freequency=1;
         strength=0;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public int getFreequency() {
@@ -36,6 +38,7 @@ public class Concept implements Serializable {
 
     public void setFreequency(int freequency) {
         this.freequency = freequency;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
 
@@ -43,44 +46,59 @@ public class Concept implements Serializable {
     public void modifyFreequency(int amount){
         //System.out.println("Test2");
         freequency+=amount;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
     public void modifyImprotance(float amount){
         importance+=amount;
-        System.out.println("modify importance of");
-        System.out.println(this.name);
-        System.out.println(importance);
+//        System.out.println("modify importance of");
+//        System.out.println(this.name);
+//        System.out.println(importance);
     }
 
     public float getImportance(){
         return importance;
     }
 
+    public void setImportance(float val){
+        this.importance=val;
+    }
+
     public String getName() {
         return name;
     }
 
-    public int getStrength(){
+    public float getStrength(){
         return this.strength;
     }
 
-    public int getValue(){
-        return this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
+    public float getValue(){
+        return this.value;
     }
 
-    public void setStrength(int strength){
+    public void modifyValue(float amount){
+        this.value+=amount;
+    }
+
+    public void resetValue(){
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
+    }
+
+    public void setStrength(float strength){
         this.strength=strength;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
-    public void updateStrength(int amount){
+    public void updateStrength(float amount){
         this.strength+=amount;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
-    public void setTitleStrength(int tStrength){
+    public void setTitleStrength(float tStrength){
         this.titleStrength=tStrength;
     }
 
-    public int getTitleStrength(){
+    public float getTitleStrength(){
         return this.titleStrength;
     }
 
@@ -175,5 +193,46 @@ public class Concept implements Serializable {
             value+=rel.getValue();
         }
         return value;
+    }
+
+    public boolean deleteRelationshipsToConcept(String concept){
+        if(this.relationships.containsKey(concept)){
+            this.relationships.remove(concept);
+        }
+        if(this.relationships.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public int compareTo(Concept o) { // this is to sort in decending order
+        if(this.importance==o.importance){
+            return 0;
+        }else if(this.importance>o.importance){
+            return -1;
+        }else{
+            return 1;
+        }
+    }
+
+    public Concept getCopy(){
+        Concept c=new Concept(this.name);
+        c.setFreequency(this.freequency);
+        c.setImportance(this.importance);
+        c.setTitleStrength(this.titleStrength);
+        c.setStrength(this.strength);
+        HashMap<String,ArrayList<RelatedConcept>> relations=new
+                HashMap<String, ArrayList<RelatedConcept>>();
+        Set<String> keySet = this.relationships.keySet();
+        for(String key : keySet){
+            ArrayList<RelatedConcept> rc=this.relationships.get(key);
+            ArrayList<RelatedConcept> list=new ArrayList<RelatedConcept>();
+            for(RelatedConcept r : rc){
+                list.add(r.getCopy());
+            }
+            relations.put(key, list);
+        }
+        return c;
     }
 }
