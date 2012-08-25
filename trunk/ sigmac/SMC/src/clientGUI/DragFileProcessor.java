@@ -2,6 +2,7 @@ package clientGUI;
 
 
 import java.io.File;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -67,7 +68,7 @@ int noOfAllFiles;
         return noFiles;
     }
 
-    private int traverseFolder(File file){
+    private void traverseFolder(File file){
        String filess;
        File folder = file;
        File[] listOfFiles = folder.listFiles();
@@ -90,10 +91,10 @@ int noOfAllFiles;
                       }
            }
          else{
-              traverseFolder(file);
+              traverseFolder(listOfFiles[j]);
              }
         }
-       return noFiles;
+      // return noFiles;
     }
 
     public void run() {
