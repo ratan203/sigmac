@@ -93,7 +93,9 @@ public class SentenceAnalyzer {
                         cMap.put(hConcept, new Concept(hConcept));
                     }
                     System.out.println(hConcept);
-                    hd.add(hConcept);
+                    ArrayList<String> spawnConcepts = spawnConcepts(hConcept);
+                    spawnConcepts.addAll(hd);
+                    //hd.add(hConcept);
                     //System.out.println(hConcept);
                 }
                 for(String key : p.getdependentKeys()){
@@ -122,7 +124,9 @@ public class SentenceAnalyzer {
                         cMap.put(dConcept, new Concept(dConcept));
                     }
                     System.out.println(dConcept);
-                    dp.add(dConcept);
+                    ArrayList<String> spawnConcepts = spawnConcepts(dConcept);
+                    spawnConcepts.addAll(dp);
+                    //dp.add(dConcept);
                     //System.out.println(dConcept);
                 }
                 for(String h: hd){
@@ -157,12 +161,13 @@ public class SentenceAnalyzer {
                     concept+=leave.nodeString()+" ";
                 }
                 concept=filterConcept(concept);
-                if(cMap.containsKey(concept)){
-                    //Concept c=cMap.get(concept);
-                    //c.modifyFreequency(1);
-                }else{
-                    if(concept.length()>2){
-                        cMap.put(concept, new Concept(concept));
+                ArrayList<String> spawnConcepts = spawnConcepts(concept);
+                for(String con : spawnConcepts){
+                    if(cMap.containsKey(concept)){
+                        //Concept c=cMap.get(concept);
+                        //c.modifyFreequency(1);
+                    }else{
+                        cMap.put(con, new Concept(con));
                     }
                 }
             }
@@ -335,14 +340,33 @@ public class SentenceAnalyzer {
         return cp;
     }
 
-    private void spawnConcepts(String bigConcept){
+    private ArrayList<String> spawnConcepts(String bigConcept){
+        ArrayList<String> concepts=new ArrayList<String>();
+        String[] split=null;
         if(bigConcept.contains(",") && bigConcept.contains(" and ")){
-            
+            split=processAndSeperatedConcepts(bigConcept);
+            for(int i=0;i<split.length;i++){
+               ArrayList<String> tmp=spawnConcepts(split[i]);
+               tmp.addAll(concepts);
+            }
         }else if(bigConcept.contains(",")){
-            processCommaSeperatedConcept(bigConcept);
+            split=processCommaSeperatedConcept(bigConcept);
+            for(int i=0; i<split.length;i++){
+                if(split[i].length()>2){
+                    concepts.add(split[i]);
+                }
+            }
         }else if(bigConcept.contains(" and ")){
-
+            split=processAndSeperatedConcepts(bigConcept);
+            for(int i=0; i<split.length;i++){
+                if(split[i].length()>2){
+                    concepts.add(split[i]);
+                }
+            }
+        }else{
+            concepts.add(bigConcept);
         }
+        return concepts;
     }
 
 
@@ -354,13 +378,21 @@ public class SentenceAnalyzer {
             String last=split[split.length-1];
             String[] split1 = last.split(" ");
             if(split1.length<2){
-
+                
             }else{
                 String lastWord=split1[split1.length-1];
                 for(int i=0;i<split.length-1;i++){
                     split[i]=filterConcept(split[i]+" "+lastWord);
                 }
             }
+        }
+        return split;
+    }
+
+    private String[] processAndSeperatedConcepts(String concept){
+        String[] split = concept.split(" and ");
+        for(int i=0; i<split.length;i++){
+            split[i]=filterConcept(split[i]);
         }
         return split;
     }
