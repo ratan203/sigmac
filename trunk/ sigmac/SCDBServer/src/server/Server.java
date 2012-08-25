@@ -17,7 +17,7 @@ public class Server{
 	
 	DBConnector dbc=new DBConnector();
     DBManager dbm=new DBManager();
-    Connection conn=(Connection) dbc.getConnection();
+    Connection dbConn=(Connection) dbc.getConnection();
     final Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	Server(){}
@@ -26,12 +26,12 @@ public class Server{
 	{
 		try{
 			//1. creating a server socket
-			providerSocket = new ServerSocket(2004, 10);
+			providerSocket = new ServerSocket(2002, 10);
 			//2. Wait for connection
 			//System.out.println("Waiting for connection");
 			logger.info("Waiting for connection");
 			connection = providerSocket.accept();
-			logger.debug("Connection received from {}",connection.getInetAddress().getHostName());
+			logger.info("Connection received from {}"+connection.getInetAddress());
 			//3. get Input and Output streams
 			out = new ObjectOutputStream(connection.getOutputStream());
 			out.flush();
@@ -41,19 +41,24 @@ public class Server{
 			do{
 				try{
 					doc = (Document)in.readObject();
+					if (doc != null){
+					out.writeObject("Document recieved"+doc.getName());	
+					out.writeObject("bye");	
 					logger.info("DocObject Readed");
-					logger.info("Got a Document named "+ doc.getName());
-					dbm.updateDB(conn, doc);
+					//doc.setUri(connection.getInetAddress()+":"+doc.getUri());
 					
-					if (doc.equals("bye"))
-						sendMessage("bye");
+					logger.info("Got a Document named "+ doc.getName());
+					
+					dbm.updateDB(dbConn,doc,connection.getInetAddress().toString());
+					}
+					
 				}
 				catch(ClassNotFoundException classnot){
 					logger.error("Data received in unknown format");
 				}catch(IOException e){
 					//System.out.println("EOFExeption");
 				}
-			}while(!doc.equals("bye"));
+			}while(true);
 		}
 		catch(IOException ioException){
 			ioException.printStackTrace();

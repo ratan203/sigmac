@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package server;
+package 	server;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,8 +18,7 @@ import smc.RelatedConcept;
  * @author Thilina
  */
 public class DBManager {
-	
-public void updateDB(Connection con, Document doc){
+public void updateDB(Connection con, Document doc, String ip){
         HashMap<String,Concept> concept=doc.getDoc();
         HashMap<String,ArrayList<RelatedConcept>> relationships=new HashMap<String, ArrayList<RelatedConcept>>();
         try{
@@ -30,11 +29,14 @@ public void updateDB(Connection con, Document doc){
         if(modDocUri.contains("'")){
             modDocUri=modDocUri.replace("'", "''");
         }
+        if(modDocUri.contains("\\")){
+            modDocUri=modDocUri.replace("\\", "\\\\");
+        }
         String modDocName=doc.getName();
         if(modDocName.contains("'")){
             modDocName=modDocName.replace("'", "''");
         }
-        String docInsertingQuery = "INSERT INTO documents(docURI,name,size) VALUES (\'"+modDocUri+"\',\'"+modDocName+"\',"+doc.getSize()+")";
+        String docInsertingQuery = "INSERT INTO documents(HostIP,docURI,name,size) VALUES (\'"+ip+"\',\'"+modDocUri+"\',\'"+modDocName+"\',"+doc.getSize()+")";
         stmt.executeUpdate(docInsertingQuery);
         String getDocId = "SELECT * from documents WHERE docURI=\'"+modDocUri+"\'";
         ResultSet rs1= stmt.executeQuery(getDocId);
@@ -77,9 +79,9 @@ public void updateDB(Connection con, Document doc){
             insertConceptDoc.setInt(1, temp);
             insertConceptDoc.setInt(2, docId);
             insertConceptDoc.setInt(3, concept.get(e).getFreequency());
-            insertConceptDoc.setInt(4, concept.get(e).getTitleStrength());
+            insertConceptDoc.setFloat(4, concept.get(e).getTitleStrength());
             insertConceptDoc.setFloat(5, concept.get(e).getImportance());
-            insertConceptDoc.setInt(6, concept.get(e).getStrength());
+            insertConceptDoc.setFloat(6, concept.get(e).getStrength());
             insertConceptDoc.executeUpdate();
             con.commit();
         }
@@ -112,7 +114,7 @@ public void updateDB(Connection con, Document doc){
                             insertRelDoc.setInt(2, g.getFreequency());
                             insertRelDoc.setInt(3, g.getIsStrength());
                             insertRelDoc.setInt(4, g.getPartStrength());
-                            insertRelDoc.setInt(5, g.getStrength());
+                            insertRelDoc.setFloat(5, g.getStrength());
                             int conceptId=0;
                             if(conceptMap.get(f)!=null){
                                 conceptId=conceptMap.get(f);
