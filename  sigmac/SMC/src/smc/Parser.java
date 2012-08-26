@@ -46,7 +46,7 @@ public class Parser {
        
         
         for (List<HasWord> sentence : p){
-            if(sentence.isEmpty() || sentence.size()>=MAX_SENTENCE_LENTH){
+            if(sentence.size()<3 || sentence.size()>=MAX_SENTENCE_LENTH){
                 continue;
             }
             
