@@ -190,11 +190,11 @@ public class Document implements Serializable {
         }
     }
 
-    public HashMap<String,Concept> getNewDoc(ArrayList<Concept> concepts, int end){
+    private HashMap<String,Concept> getNewDoc(ArrayList<Concept> concepts, int end){
         HashMap<String,Concept> map=new HashMap<String, Concept>();
         for(int i=0;i<end;i++){
             Concept concept=concepts.get(i);
-            map.put(concept.getName(), concept);
+            map.put(concept.getName(), concept.getCopy());
         }
         Set<String> keySet = map.keySet();
         for(String key : keySet){
@@ -204,7 +204,7 @@ public class Document implements Serializable {
             for(String relKey : relKeySet){
                 if(!map.containsKey(relKey) && doc.containsKey(relKey)){
                     Concept rel=doc.get(relKey);
-                    map.put(rel.getName(), rel);
+                    map.put(rel.getName(), rel.getCopy());
                 }
             }
         }
@@ -224,12 +224,7 @@ public class Document implements Serializable {
             }
             end++;
         }
-        HashMap<String,Concept> map= getNewDoc(concepts, end);
-        Set<String> keySet = map.keySet();
-        for(String key : keySet){
-            newMap.put(key, map.get(key).getCopy());
-        }
-        return newMap;
+        return getNewDoc(concepts, end);
     }
 
     private void reArrangeMap(HashMap<String,Concept> map){
@@ -244,5 +239,14 @@ public class Document implements Serializable {
                 }
             }
         }
+    }
+
+    public HashMap<String,Concept> getDocCopy(){
+        HashMap<String,Concept> map=new HashMap<String, Concept>();
+        Set<String> keySet = this.doc.keySet();
+        for(String key : keySet){
+            map.put(key, doc.get(key).getCopy());
+        }
+        return map;
     }
 }
