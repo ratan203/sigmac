@@ -153,6 +153,18 @@ public class FirstPage extends javax.swing.JFrame  {
         jButton1.setEnabled(false);
         frame.getContentPane().add(jButton1);
 
+        final JLabel reject=new JLabel();
+        reject.setText(null);
+        reject.setBounds(30, 390, 340, 20);
+        
+        reject.setVisible(true);
+        reject.setName("reject");
+        reject.setForeground(Color.red);
+        frame.getContentPane().add(reject);
+        
+        
+        
+        
         //for all files
         final JLabel jl1=new JLabel();
         jl1.setText("All Files Processing Progress");
@@ -205,15 +217,17 @@ public class FirstPage extends javax.swing.JFrame  {
         text.setBounds(20,20,350,230);
         text.setVisible(true);
         text.setWrapStyleWord(true);
+       
         JScrollPane sbrText = new JScrollPane(text);
         sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         text.setBackground(Color.lightGray);
         frame.getContentPane().add(sbrText);
         frame.getContentPane().add(text);
-
-        JTextPane jtp=new JTextPane();
-        jtp.setEditable(false);        
-        frame.getContentPane().add(jtp);
+       
+//        JTextPane jtp=new JTextPane();
+//        jtp.add(sbrText,BorderLayout.CENTER);
+//        jtp.setEditable(false);        
+//        frame.getContentPane().add(jtp);
         
          final MapAdjust mpa =new MapAdjust();
          jButton1.addActionListener(new ActionListener() {
@@ -235,7 +249,7 @@ public class FirstPage extends javax.swing.JFrame  {
 
             public void filesDropped(java.io.File[] files) {
            
-                DragFileProcessor tet=new DragFileProcessor(files,text,mpa);
+                DragFileProcessor tet=new DragFileProcessor(files,text,mpa,text);
                 Thread tt=new Thread(tet);
                 tt.start();
                 jButton1.setEnabled(true);

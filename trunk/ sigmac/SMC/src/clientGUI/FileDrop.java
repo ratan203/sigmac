@@ -1,19 +1,12 @@
 package clientGUI;
 
 
-import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import javax.swing.JTextArea;
-import javax.swing.Timer;
 
 /**
  * This class makes it easy to drag and drop files from the operating
