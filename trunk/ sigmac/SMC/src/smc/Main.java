@@ -33,11 +33,12 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, JWNLException {
         // TODO code application logic here
         Parser p=new Parser("grammar/englishPCFG.ser.gz");        
-        Document doc=p.parse("t.xml", DocType.XML, "body");
+        Document doc=p.parse("test.xml", DocType.XML, "body");
         Optimizer opti=new Optimizer();
         Document doc1=opti.optimizeDoc(doc);
         
-        ConceptRanker ranker=new ConceptRanker();
+         System.out.println(doc.getSize());
+        //ConceptRanker ranker=new ConceptRanker();
         
         ranker.rankConcepts(doc1);
         doc1.printDoc();
