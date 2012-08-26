@@ -34,11 +34,13 @@ public class Main {
         // TODO code application logic here
         Parser p=new Parser("grammar/englishPCFG.ser.gz");        
         Document doc=p.parse("t.xml", DocType.XML, "body");
-        //Optimizer opti=new Optimizer();
-        //Document doc1=opti.optimizeDoc(doc);
-        doc.printDoc();
+        Optimizer opti=new Optimizer();
+        Document doc1=opti.optimizeDoc(doc);
+        
         ConceptRanker ranker=new ConceptRanker();
-        //ranker.rankConcepts(doc1);
+        
+        ranker.rankConcepts(doc1);
+        doc1.printDoc();
 //        doc1.resetImportance();
 //        ArrayList<Concept> sortedConceptList = doc1.getSortedConceptList();
 //        for(Concept c : sortedConceptList){
