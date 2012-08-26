@@ -99,10 +99,11 @@ public class XMLFormattingExtractor {
                     titleVal=Integer.parseInt(el.getAttribute("scale"));
                 }
                 finTitle=el.getFirstChild().getNodeValue();
-                if(finTitle!=null){
+                if(finTitle!=null||finTitle.length()<3){
+                    
                     Set<String> set=p.parseTitle(finTitle);
                     Title titl=new Title(set, titleVal);
-                    titleInfo.put(finTitle, titl);
+                    titleInfo.put(finTitle, titl);                  
                 }
             }
         }

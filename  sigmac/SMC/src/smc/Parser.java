@@ -13,6 +13,7 @@ import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -96,7 +97,14 @@ public class Parser {
 
     public Set<String> parseTitle(String title){
        // ArrayList<String> words=new ArrayList<String>();
+        
+        if(title.length()<3|| title.length()>120){
+            Set hashSet = new HashSet();
+            hashSet.add("Document");
+            return hashSet;
+        }
         Tree parse = lp.apply(title);
         return analyzer.analyzeTitle(parse);
+        
     }
 }
