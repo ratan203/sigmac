@@ -5,13 +5,18 @@
 
 package smc;
 
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
+import edu.stanford.nlp.objectbank.TokenizerFactory;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
+import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.DocumentPreprocessor;
+import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -97,11 +102,12 @@ public class Parser {
 
     public Set<String> parseTitle(String title){
        // ArrayList<String> words=new ArrayList<String>();
-        
-        if(title.length()<3|| title.length()>120){
-            Set hashSet = new HashSet();
-            hashSet.add("Document");
-            return hashSet;
+        TokenizerFactory<CoreLabel> tokenizerFactory =
+        PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
+        List<CoreLabel> rawWords2 =
+        tokenizerFactory.getTokenizer(new StringReader(title)).tokenize();
+        if(rawWords2.isEmpty() || rawWords2.size()> MAX_SENTENCE_LENTH){
+            return new HashSet<String>();
         }
         Tree parse = lp.apply(title);
         return analyzer.analyzeTitle(parse);
