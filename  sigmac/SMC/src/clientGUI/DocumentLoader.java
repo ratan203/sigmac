@@ -33,7 +33,8 @@ public class DocumentLoader {
    
    
    public int insidefol(String paths,MapAdjust mpa,final java.awt.Component c,int noOfAllFiles,int noOfFiles) throws Exception{
-
+       JTextArea jt=(JTextArea) c;
+       JLabel rejct=getRejectLable(jt);
        int noFiles=0;
        String path = paths; 
        String filess,foldername; //intialize the file and foler name variables
@@ -42,28 +43,31 @@ public class DocumentLoader {
     
        for (int j = 0; j < listOfFiles.length; j++) {
      
-           if (listOfFiles[j].isFile())  {            // if it is a file (not a folder)
-                 String extension=null;
-                  filess = listOfFiles[j].getName();    //for each file get the file name
-                  String newfilepath=path+"\\"+filess;
-                  int dotPos = filess.lastIndexOf(".");
+         if (listOfFiles[j].isFile())  {            // if it is a file (not a folder)
+            String extension=null;
+            filess = listOfFiles[j].getName();    //for each file get the file name
+            String newfilepath=path+"\\"+filess;
+            int dotPos = filess.lastIndexOf(".");
+               
                   
-                  
-                  if(dotPos>-1){
-                           try {
-                                extension = filess.substring(dotPos);
-                                if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
-                                    noFiles+=1;
-                                    JTextArea jt=(JTextArea) c;
-                                    jt.append(newfilepath.trim()+"\n");
-                                    getLabelAll(c).setText("Processing " + (noOfFiles+noFiles) + " out of " + noOfAllFiles+" files");
-                                    getLabelOne(c).setText("Processing file");
-                                    filepath(newfilepath,extension,mpa,c,(noOfFiles+noFiles));
-                                }
-                            } catch (Exception ex) {
-                                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                      }
+            if(dotPos>-1){
+              try {
+               extension = filess.substring(dotPos);
+                if(extension.equalsIgnoreCase(".doc")||extension.equalsIgnoreCase(".ppt")||extension.equalsIgnoreCase(".docx")||extension.equalsIgnoreCase(".pptx")||extension.equalsIgnoreCase(".pdf")||extension.equalsIgnoreCase(".odt")||extension.equalsIgnoreCase(".html")){
+                 noFiles+=1;
+                 //JTextArea jt=(JTextArea) c;
+                 jt.append(newfilepath.trim()+"\n");
+                 getLabelAll(c).setText("Processing " + (noOfFiles+noFiles) + " out of " + noOfAllFiles+" files");
+                 getLabelOne(c).setText("Processing file");
+                 filepath(newfilepath,extension,mpa,c,(noOfFiles+noFiles));
+                 }
+                else{
+                rejct.setText(listOfFiles[j]+" is rejected");
+                }
+               } catch (Exception ex) {
+                  Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            }
                   
                   
                
@@ -89,6 +93,7 @@ public class DocumentLoader {
        JProgressBar jp=getProgressAll(jt);
        JProgressBar jp1=getProgressOne(jt);
        JLabel jl2=getLabelOne(jt);
+       JLabel rejct=getRejectLable(jt);
        int limit=0;
        String name=jl2.getText().replace("Processing file : ", "");
 
@@ -102,30 +107,33 @@ public class DocumentLoader {
        Date d = new Date(lastModified);
        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
        String dateString = sdf.format(d);
-//       if(extension.equalsIgnoreCase(".doc")){
-//             DocReader docreader = new DocReader();
-//             doc=docreader.getDocument(path);    
-//       }
-//       else if(extension.equalsIgnoreCase(".ppt")){
-//             pptreader pptreader = new pptreader();
-//             doc=pptreader.getDocument(path);
-//       }
-//       else if(extension.equalsIgnoreCase(".pdf")){
-//            File f=new File(path);
-//            PDFAdapter adapter=new PDFAdapter(f);
-//            doc=adapter.getDocument();
-//       }else if(extension.equalsIgnoreCase(".pptx")){
-//             PpptxSCD pptx = new PpptxSCD();
-//             doc=pptx.getDocument(path);
-//       }
-        if(extension.equalsIgnoreCase(".docx")){
-             DocxSCD docx = new DocxSCD();
+       if(extension.equalsIgnoreCase(".doc")){
+             DOCReader docreader = new DOCReader();
+             doc=docreader.getDocument(path);    
+       }
+       else if(extension.equalsIgnoreCase(".ppt")){
+             PPTReader pptreader = new PPTReader();
+             doc=pptreader.getDocument(path);
+       }
+       else if(extension.equalsIgnoreCase(".pdf")){
+            File f=new File(path);
+            PDFAdapter adapter=new PDFAdapter(f);
+            doc=adapter.getDocument();
+       }else if(extension.equalsIgnoreCase(".pptx")){
+             PPTXReader pptx = new PPTXReader();
+             doc=pptx.getDocument(path);
+       }
+       else if(extension.equalsIgnoreCase(".docx")){
+             DOCXReader docx = new DOCXReader();
              doc=docx.getDocument(path);
        }
-//       else if(extension.equalsIgnoreCase(".odt")){
-//             OdsExtractor odt = new OdsExtractor();
-//             doc=odt.getDocument(path);
-//       }
+       else if(extension.equalsIgnoreCase(".odt")){
+             ODSReader odt = new ODSReader();
+             doc=odt.getDocument(path);
+       }
+       else{
+       rejct.setText(path+" is rejected");
+       }
        ps.stopProgress();
        progThrd.stop();
 
@@ -211,6 +219,24 @@ public class DocumentLoader {
         JLabel jlOne = null;
         for(JLabel jl:jLabels){
              if(jl.getName().equals("labelOne")){
+                jlOne=jl;
+            }
+        }
+        return jlOne;
+   }
+    
+    public JLabel getRejectLable(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JLabel) ){
+                    JLabel jl = (JLabel)jb;
+                    jLabels.add(jl);
+            }
+        }
+        JLabel jlOne = null;
+        for(JLabel jl:jLabels){
+             if(jl.getName().equals("reject")){
                 jlOne=jl;
             }
         }

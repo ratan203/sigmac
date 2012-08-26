@@ -313,7 +313,7 @@ public class MapAdjust11 extends javax.swing.JFrame {
       public void run() {
                 
 
-          Web a=new Web(absolutePath+"\\visual\\example2.html");
+          InnerWeb a=new InnerWeb(absolutePath+"\\visual\\example2.html");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);
@@ -393,7 +393,7 @@ public class MapAdjust11 extends javax.swing.JFrame {
           SwingUtilities.invokeLater(new Runnable() {
       public void run() {
       
-          Web a=new Web(absolutePath+"\\visual\\html\\First.html");
+          InnerWeb a=new InnerWeb(absolutePath+"\\visual\\html\\First.html");
           JScrollPane scrollPane = new JScrollPane(a);
           a.setBounds(0, 0, 700, 530);
           a.setVisible(true);

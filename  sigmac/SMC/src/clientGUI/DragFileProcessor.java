@@ -1,7 +1,9 @@
 package clientGUI;
 
 
+import java.awt.Component;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,18 +27,18 @@ JTextArea text;
 MapAdjust mpa;
 int noFiles=0;
 int noOfAllFiles;
+final java.awt.Component c;
 
 
-    DragFileProcessor(File[] files,JTextArea text,MapAdjust mpa) {
+    DragFileProcessor(File[] files,JTextArea text,MapAdjust mpa,final java.awt.Component c) {
         this.files=files;
         this.text=text;
         this.mpa=mpa;
         this.noOfAllFiles = noOFFiles(files);
+        this.c=c;
     }
 
-    DragFileProcessor() {
-//        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    
 
     private int noOFFiles(java.io.File[] files){
         for( int i = 0; i < files.length; i++ ){
@@ -98,6 +100,8 @@ int noOfAllFiles;
     }
 
     public void run() {
+        JTextArea jt=(JTextArea) c;
+        JLabel rejct=getRejectLable(jt);
         text.setText(null);
         int noOfFiles = 0;
         DocumentLoader dl=new DocumentLoader();
@@ -131,6 +135,11 @@ int noOfAllFiles;
                                 jl2.setText("Processing file ");
                                 inside.filepath(filenameExtension, extension, mpa, text,noOfFiles);
                             }
+                            else{
+                                    rejct.setText(files[i]+" is rejected");
+                                    Thread.sleep(500);
+                                    rejct.setText(null);
+                                }
                         } catch (Exception ex) {
                             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -154,5 +163,22 @@ int noOfAllFiles;
 //            jp1.setValue(100);
 //            jb.setEnabled(true);
     }
+     public JLabel getRejectLable(final java.awt.Component c){
+       JTextArea jt=(JTextArea)c;
+       ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
+        for (Component jb : jt.getParent().getComponents()){
+            if((jb instanceof JLabel) ){
+                    JLabel jl = (JLabel)jb;
+                    jLabels.add(jl);
+            }
+        }
+        JLabel jlOne = null;
+        for(JLabel jl:jLabels){
+             if(jl.getName().equals("reject")){
+                jlOne=jl;
+            }
+        }
+        return jlOne;
+   }
 }
 

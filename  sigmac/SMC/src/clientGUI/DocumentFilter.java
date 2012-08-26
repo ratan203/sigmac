@@ -26,6 +26,7 @@ public class DocumentFilter {
         filterDoc.setName(doc.getName());
         filterDoc.setUri(doc.getUri());
         filterDoc.setLastModifiedDate(doc.getLastModifiedDate());
+        filterDoc.setSize(doc.getSize());
         float requiredCoverage=percentage/100;
         float sumOfImportance=0;
         conceptList=doc.getDoc();
