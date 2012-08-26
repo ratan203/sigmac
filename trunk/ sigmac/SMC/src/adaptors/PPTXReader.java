@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @author thilina
  */
-public class PpptxSCD {
+public class PPTXReader {
 
     /**
      * @param args the command line arguments

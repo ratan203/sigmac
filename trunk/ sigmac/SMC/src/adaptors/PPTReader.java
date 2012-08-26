@@ -7,7 +7,7 @@ import org.apache.poi.hslf.usermodel.SlideShow;
 
 import org.apache.poi.hwpf.usermodel.CharacterRun;
 
-public class pptreader {
+public class PPTReader {
 
 public SCDocument getDocument(String path) {
 File docFile = null;
@@ -19,7 +19,7 @@ String body = null;
 try {
     HSLFSlideShow slideshow=new HSLFSlideShow(path);
     SlideShow ppss = new SlideShow(slideshow);
-    pptextractor pptex=new pptextractor(); //get object of pptextractor class
+    PPTExtractor pptex=new PPTExtractor(); //get object of pptextractor class
     
     SCDocument sd=pptex.textextractor(slideshow,ppss);        //call textextractor method
     return sd;

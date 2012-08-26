@@ -8,7 +8,7 @@ import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.model.TextRun;
 import org.apache.poi.hslf.usermodel.RichTextRun;
 
-public class SetLike {
+public class DOCExtractor {
     private Map<Integer, Integer> map = new HashMap<Integer,Integer>();
 
     public void add( Integer s ) {

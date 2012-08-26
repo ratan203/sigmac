@@ -16,17 +16,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-public class OdsExtractor {
+public class ODSReader {
 	
 	String body = new String();
 	ArrayList<Title> titles = new ArrayList<Title>();
 	
 	
-	private static OdsExtractor instance = null;
+	private static ODSReader instance = null;
 	   
-	   public static OdsExtractor getInstance() {
+	   public static ODSReader getInstance() {
 	      if(instance == null) {
-	         instance = new OdsExtractor();
+	         instance = new ODSReader();
 	      }
 	      return instance;
 	   }
