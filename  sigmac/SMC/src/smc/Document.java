@@ -160,6 +160,7 @@ public class Document implements Serializable {
         if(isolated2){
             deleteConcept(c2);
         }
+        System.out.println("deleted");
     }
 
     public ArrayList<Concept> getSortedConceptList(){
