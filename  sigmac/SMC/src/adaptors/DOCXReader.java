@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @author thilina
  */
-public class DocxSCD {
+public class DOCXReader {
 
     /**
      * @param args the command line arguments

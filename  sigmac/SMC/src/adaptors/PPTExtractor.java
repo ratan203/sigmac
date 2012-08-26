@@ -20,7 +20,7 @@ import org.apache.poi.hslf.usermodel.SlideShow;
  *
  * @author COMPAQ
  */
-public class pptextractor {
+public class PPTExtractor {
     String body=null;
     public SCDocument textextractor(HSLFSlideShow slideshow,SlideShow ppss) throws IOException{
         
@@ -57,7 +57,7 @@ public class pptextractor {
              afontsize[k]= (Integer) ofontsize[k];
          }
          
-          SetLike holder = new SetLike();
+          DOCExtractor holder = new DOCExtractor();
           for( Integer value : afontsize ) {
             holder.add( value );
          }

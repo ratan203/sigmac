@@ -9,7 +9,7 @@ import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.hwpf.usermodel.CharacterRun;
 import org.apache.poi.hwpf.usermodel.Range;
 
-public class DocReader {
+public class DOCReader {
 ArrayList<Title> titles = new ArrayList();
 String body = null;
 
@@ -34,7 +34,7 @@ try {
     String all=docExtractor.getText();
     //titles.add(new Title(null));
     Range overall=doc.getOverallRange();
-    DocReaderAnalizer dra=new DocReaderAnalizer();
+    DOCReaderAnalizer dra=new DOCReaderAnalizer();
     Object BodyFONTsize=dra.getBodyFont(overall, doc, range, cr);
     Integer bodyfontsize = new Integer(BodyFONTsize.toString());
     
