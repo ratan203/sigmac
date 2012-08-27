@@ -410,11 +410,16 @@ public class MapAdjust extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Document doc = documents.get(jList1.getSelectedIndex());
+        //checking the size of the document
+        System.out.println("Testing the size jbutton1 action perfomed");
+        System.out.println("passed doc size to the method is :"+doc.getDoc().size());
+        //endi checking size
         DocumentFilter docFilter=new DocumentFilter();
         newDoc=docFilter.filterDocument(doc, sliderValue);
         //tdesting new doc obtained to cover persentage
         System.out.println("Testing the doc obtained for showing percentage");
         newDoc.testDocForRelations();
+        System.out.println(newDoc.getDoc().size());
         System.out.println("new doc to show percentage of map is done successfully");
         //end testing
         mapReload(newDoc);

@@ -225,6 +225,9 @@ public class DocumentLoader {
             r.rankConcepts(doc1);
 
             mpa.setDocumentsObjects(doc1);
+            System.out.println("Size of the document after optimizing and ranking");
+            System.out.println(doc1.getDoc().size());
+            System.out.println("Size is printed above");
             
             ps.stopProgress();
             progThrd.stop();
