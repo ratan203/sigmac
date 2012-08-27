@@ -253,7 +253,7 @@ public class FirstPage extends javax.swing.JFrame  {
                 DragFileProcessor tet=new DragFileProcessor(files,text,mpa,text);
                 Thread tt=new Thread(tet);
                 tt.start();
-                jButton1.setEnabled(true);
+                
             } 
         });
 
