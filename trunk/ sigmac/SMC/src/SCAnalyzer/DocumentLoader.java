@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import optimization.Optimizer;
+import smc.ConceptRanker;
 import smc.Parser;
 /*
  * To change this template, choose Tools | Templates
@@ -165,6 +166,29 @@ public class DocumentLoader {
             Parser p=new Parser("grammar/englishPCFG.ser.gz");
             smc.Document doc2=p.parse(XMLPath, DocType.XML, "body");
 
+            //testing code check the created document by the parser
+            System.out.println("Testing doc returned by the parser::::::::::::::::::::::::::::::::::::: ");
+            doc2.testDocForRelations();
+            doc2.printDoc();
+            System.out.println("Doc returned by the parser is done and dusted:::::::::::::::::::::::::::");
+            System.out.println("Doc returned by the parser is done and dusted:::::::::::::::::::::::::::");
+            System.out.println("Doc returned by the parser is done and dusted:::::::::::::::::::::::::::");
+            System.out.println("Doc returned by the parser is done and dusted:::::::::::::::::::::::::::");
+            //System.exit(0);
+            //testing ranking of the doc created by the parser
+            smc.ConceptRanker rkr=new ConceptRanker();
+            doc2.resetImportance();
+            rkr.rankConcepts(doc2);
+            System.out.println("Testing rank doc returned by the parser");
+            doc2.testDocForRelations();
+            doc2.printDoc();
+            System.out.println("Rnaked doc returned by the parser is done and dusted ::::::::");
+            System.out.println("Rnaked doc returned by the parser is done and dusted ::::::::");
+            System.out.println("Rnaked doc returned by the parser is done and dusted ::::::::");
+            System.out.println("Rnaked doc returned by the parser is done and dusted ::::::::");
+
+            //System.exit(0);
+
             ps.stopProgress();
             progThrd.stop();
 
@@ -172,8 +196,30 @@ public class DocumentLoader {
             ps.setLimit(1000);
             progThrd=new Thread(ps);
             progThrd.start();
+            doc2.testDocForRelations();
             Optimizer opti=new Optimizer();
             smc.Document doc1=opti.optimizeDoc(doc2);
+            //testing optimized document
+            System.out.println("Testing the doc returned by the optimizer ::::::::::::::::::::::");
+            doc1.testDocForRelations();
+            doc1.printDoc();
+            System.out.println("Doc returned byt the optimizer is done and dusted :::::::::::::");
+            System.out.println("Doc returned byt the optimizer is done and dusted :::::::::::::");
+            System.out.println("Doc returned byt the optimizer is done and dusted :::::::::::::");
+            //System.exit(0);
+            //testing the ranking of optimized document
+            smc.ConceptRanker rkkr=new smc.ConceptRanker();
+            doc1.resetImportance();
+            rkkr.rankConcepts(doc1);
+            System.out.println("Testing the ranked doc returned by the parser");
+            doc1.testDocForRelations();
+            doc1.printDoc();
+            System.out.println("rnaked doc returned by the optimizer is done and dusted :::::::::::");
+            System.out.println("rnaked doc returned by the optimizer is done and dusted :::::::::::");
+            System.out.println("rnaked doc returned by the optimizer is done and dusted :::::::::::");
+            System.out.println("rnaked doc returned by the optimizer is done and dusted :::::::::::");
+
+            //System.exit(0);
 
             smc.ConceptRanker r=new smc.ConceptRanker();
             r.rankConcepts(doc1);
