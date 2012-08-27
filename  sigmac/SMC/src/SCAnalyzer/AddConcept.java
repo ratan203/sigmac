@@ -259,22 +259,43 @@ public class AddConcept extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         ArrayList<Concept> concepts=new ArrayList<Concept>();
         Concept neWconcept=new Concept(conceptName);
+       
         Set<String> relConceptSet=relconcept.keySet();
         ArrayList<String> relationshipTypes=new ArrayList<String>();
         relationshipTypes.add("aso");
         relationshipTypes.add("is a");
         relationshipTypes.add("part of");
         for(String relcocepts:relConceptSet){
-            neWconcept.addRelatedConcept(relcocepts, relationshipTypes.get(relconcept.get(relcocepts)), false, 1);
+            neWconcept.addRelatedConcept(relcocepts, relationshipTypes.get(relconcept.get(relcocepts)), false, 1);   
         }
-        
-        
+      
         neWconcept.setImportance(.8f);
         concepts.add(neWconcept);
+        System.out.println("iiiiiiinew doc");
+        newDoc.testDocForRelations();
+        System.out.println("tested new doc");
+        
+        
         newDoc.addConcepts(concepts);
+        System.out.println("iiiiiiinew doc-2");
+        newDoc.testDocForRelations();
+        System.out.println("tested new doc-2");
+        
+        
+        
+        System.out.println("iiiiiiinew doc-original");
+        originalDoc.testDocForRelations();
+        System.out.println("tested new doc-original");
+        
+        
         originalDoc.addConcepts(concepts);
+        
+        System.out.println("iiiiiiinew doc-modif");
+        originalDoc.testDocForRelations();
+        System.out.println("tested new doc-modif");
         mpa.mapReload(newDoc);
         
         this.setVisible(false);

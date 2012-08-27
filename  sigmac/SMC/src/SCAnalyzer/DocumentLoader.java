@@ -237,8 +237,8 @@ public class DocumentLoader {
             //Connection conn=(Connection) db1.getConnection();
             //dbm.updateDB(conn, doc1);
 
-            JButton jb=getNextButton(jt);
-            jb.setEnabled(true);
+            //JButton jb=getNextButton(jt);
+           // jb.setEnabled(true);
 
        }
    }

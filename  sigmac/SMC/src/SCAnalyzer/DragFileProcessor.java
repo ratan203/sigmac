@@ -72,9 +72,11 @@ final java.awt.Component c;
 
     private void traverseFolder(File file){
        String filess;
+       
+      if(file.listFiles().length>0){
        File folder = file;
        File[] listOfFiles = folder.listFiles();
-
+       
        for (int j = 0; j < listOfFiles.length; j++) {
 
            if (listOfFiles[j].isFile())  {
@@ -96,7 +98,7 @@ final java.awt.Component c;
               traverseFolder(listOfFiles[j]);
              }
         }
-      // return noFiles;
+      }// return noFiles;
     }
 
     public void run() {
@@ -161,7 +163,7 @@ final java.awt.Component c;
             jl2.setText(jl2.getText().replace("Processing", "Processed"));
 //            jp.setValue(noOfAllFiles * 100);
 //            jp1.setValue(100);
-//            jb.setEnabled(true);
+            jb.setEnabled(true);
     }
      public JLabel getRejectLable(final java.awt.Component c){
        JTextArea jt=(JTextArea)c;

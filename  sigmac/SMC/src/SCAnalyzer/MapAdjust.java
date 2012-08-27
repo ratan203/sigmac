@@ -302,7 +302,7 @@ public class MapAdjust extends javax.swing.JFrame {
         String actualpath=(String) paths.get(jList1.getSelectedIndex());
         Document doc = documents.get(jList1.getSelectedIndex());
         DocumentFilter docFilter=new DocumentFilter();
-        newDoc=docFilter.filterDocument(doc, 60);
+        newDoc=docFilter.filterDocument(doc, 50);
         JSCreator jsc = new JSCreator();
 
         try {

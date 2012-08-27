@@ -1,16 +1,12 @@
 package SCAnalyzer;
 
 
-import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
-import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
 
 
 public class FileDrop
@@ -358,23 +354,6 @@ public class FileDrop
                     {   javax.swing.JComponent jc = (javax.swing.JComponent) c;
                         jc.setBorder( normalBorder );
                         log( out, "FileDrop: normal border restored." );
-                        
-                        JTextArea jt=(JTextArea)c;
-                        ArrayList<JButton> jbutton=new ArrayList<JButton>();
-                            for (Component jb : jt.getParent().getComponents()){
-                                if((jb instanceof JButton) ){
-                                        JButton jp = (JButton)jb;
-                                        jbutton.add(jp);
-                                }
-                            }
-
-                            JButton jpOne = null;
-                            for(JButton jl:jbutton){
-                                if(jl.getName().equals("next")){
-                                    jpOne=jl;
-                                }
-                            }
-                            jpOne.setEnabled(true);
                     }   // end if: JComponent
                 }   // end dragExit
 
