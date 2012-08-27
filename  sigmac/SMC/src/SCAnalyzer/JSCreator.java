@@ -129,7 +129,7 @@ public class JSCreator {
 			
 			jss.append("\t\t\"adjacencies\" : [\n");
 			for(String rkey: relatedconceptSet){
-                            j++;
+                j++;
 				if(currentRel.get(rkey)!=null){
 					if(!(currentRel.get(rkey).equals(key))){
 						currentRel.put(key, rkey);
@@ -138,11 +138,8 @@ public class JSCreator {
 						jss.append("\t\t\"nodeFrom\" : \""+ key+"\",\n");
 						jss.append("\t\t\"data\" : {}\n");
 						jss.append("\t\t}");
-						
-						
-						if(j!=relatedconceptSet.size()){
-                                                jss.append(",\n");
-                                                }
+																	
+                        jss.append(",\n");                      
 						
 					}	
 				}else if(currentRel.get(key)!=null){
@@ -152,12 +149,9 @@ public class JSCreator {
 						jss.append("\t\t\"nodeTo\" : \""+ rkey+"\",\n");
 						jss.append("\t\t\"nodeFrom\" : \""+ key+"\",\n");
 						jss.append("\t\t\"data\" : {}\n");
-						jss.append("\t\t}");
-						
-						
-						if(j!=relatedconceptSet.size()){
-                                                jss.append(",\n");
-                                                }
+						jss.append("\t\t}");						
+												
+	                    jss.append(",\n");	                    
 						
 					}	
 				}else{
@@ -167,13 +161,14 @@ public class JSCreator {
 					jss.append("\t\t\"nodeFrom\" : \""+ key+"\",\n");
 					jss.append("\t\t\"data\" : {}\n");
 					jss.append("\t\t}");
-					
-					
-                                        if(j!=relatedconceptSet.size()){
+										
 					jss.append(",\n");
-                                        }
-				}
+          
+				}											
 			}
+			if((relatedconceptSet.size()>0) && (jss.lastIndexOf("[")<jss.lastIndexOf(","))){
+				jss.deleteCharAt(jss.lastIndexOf(","));
+			}	
 			jss.append("\t\t]\n");
 			jss.append("\t}");
 			i++;
