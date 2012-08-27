@@ -74,7 +74,7 @@ public class DocxDomParser {
 
                 //get the formatObj object
                 DocxTrav e = new DocxTrav();
-                DocxFormatObj fo = new DocxFormatObj();
+                DocxFormatObject fo = new DocxFormatObject();
                 fo = e.getDocxFormat(el);
 
                 //add it to list

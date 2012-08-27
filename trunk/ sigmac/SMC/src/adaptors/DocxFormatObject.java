@@ -2,25 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package adaptors;
 
 /**
  *
- * @author thilina
+ * @author Thilina
  */
-public class DocxFormatObj {
-        String OStyle;
+public class DocxFormatObject {
+    String OStyle;
         String[] OallText;
         String[] OhasSpace;
         String[] OisBold;
-    public DocxFormatObj(String style, String[] text, String[] space, String[] bold) {
+    public DocxFormatObject(String style, String[] text, String[] space, String[] bold) {
         OStyle=style;
         OallText=text;
         OhasSpace=space;
         OisBold=bold;
     }
-    public DocxFormatObj() {
+    public DocxFormatObject() {
         OStyle="";
         OallText=null;
         OhasSpace=null;

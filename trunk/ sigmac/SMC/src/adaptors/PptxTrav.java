@@ -83,7 +83,7 @@ public class PptxTrav {
                     allTxt[i] = allTxtString;
                 }
                 //Create a new formatObj with the value read from the xml nodes
-                PptxFormatObj e = new PptxFormatObj(style, allTxt, isBold);
+                PptxformatObj e = new PptxformatObj(style, allTxt, isBold);
                 allObj.add(e);
             }
         }
