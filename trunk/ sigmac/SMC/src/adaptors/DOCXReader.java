@@ -31,8 +31,8 @@ public class DOCXReader {
 
         ArrayList norText=new ArrayList();
         while(it.hasNext()) {
-                DocxFormatObj fo=new DocxFormatObj();
-                fo=(DocxFormatObj) it.next();
+                DocxFormatObject fo=new DocxFormatObject();
+                fo=(DocxFormatObject) it.next();
                 String styl=fo.getStyle();
                 String[] txt=fo.getText();
                 String[] space=fo.getSpace();
