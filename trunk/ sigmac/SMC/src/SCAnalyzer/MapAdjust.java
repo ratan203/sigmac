@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import smc.Concept;
 import smc.Document;
+import smc.RelatedConcept;
 
 /*
  * To change this template, choose Tools | Templates
@@ -356,9 +358,30 @@ public class MapAdjust extends javax.swing.JFrame {
     
         System.out.println("Deleted concpets ="+deletedConcepts);
         Document doc = documents.get(jList1.getSelectedIndex());
+        //checking the document before deleting
+        System.out.println("checking doc in the ui before deleting:::::::::::::::::::::::::::");
+        doc.testDocForRelations();
+        System.out.println("testing before del in ui is a success");
         for(String con:deletedConcepts){
+            //testing testing
+            System.out.println("testing relations of the concept being deleted");
+            Concept get = doc.getDoc().get(con);
+            HashMap<String, ArrayList<RelatedConcept>> relationships = get.getRelationships();
+            System.out.println("no of rels : "+relationships.size());
+            Set<String> keySet = relationships.keySet();
+            for(String key : keySet){
+                System.out.println(key);
+            }
+            System.out.println("done printing relationships of the concept being deleted");
+            //end testing
             doc.deleteConcept(con);
+                    System.out.println("Testing the doc after deleting concept of original doc");
+                doc.testDocForRelations();
+                System.out.println("testing after deleting success :::::::::::::");
             newDoc.deleteConcept(con);
+                    System.out.println("Testing the doc after deleting concept of newDoc");
+        newDoc.testDocForRelations();
+        System.out.println("testing after deleting success :::::::::::::");
         }
         System.out.println("deleted");
         //testing delteded doc concept
