@@ -4,8 +4,14 @@
  */
 package SCAnalyzer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import smc.Concept;
+import smc.Document;
 
 /**
  *
@@ -18,16 +24,17 @@ public class AddConcept extends javax.swing.JFrame {
      */
      DefaultListModel dm1,dm2;
      String concept=null;
+     HashMap<String, Integer> relconcept=new HashMap<String, Integer>();
+     Document newDoc;
+     String conceptName;
+     MapAdjust mpa;
+     Document originalDoc;
     public AddConcept() {
         initComponents();
         jList1.setModel(dm1=new DefaultListModel());
         jList2.setModel(dm2=new DefaultListModel());
-        dm1.addElement("Nidheesh");
-        dm1.addElement("Hunaif");
-        dm1.addElement("Adarsh");
-        dm1.addElement("Mirosha");
-        dm1.addElement("Jamsheena");
-        dm1.addElement("Anamika");
+        
+        
     }
 
     
@@ -57,6 +64,7 @@ public class AddConcept extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add Concept");
@@ -104,6 +112,13 @@ public class AddConcept extends javax.swing.JFrame {
 
         jLabel4.setText("Relationship");
 
+        jButton1.setText("Sava Changes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,13 +147,16 @@ public class AddConcept extends javax.swing.JFrame {
                                 .addGap(67, 67, 67))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                                    .addComponent(jButton1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(22, 22, 22)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)))))
                 .addContainerGap())
@@ -168,7 +186,9 @@ public class AddConcept extends javax.swing.JFrame {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -185,6 +205,7 @@ public class AddConcept extends javax.swing.JFrame {
     {
         dm2.addElement(temp[i]);
         dm1.removeElement(temp[i]);
+        relconcept.put(temp[i].toString(), jComboBox1.getSelectedIndex());
     }
     }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -199,21 +220,25 @@ public class AddConcept extends javax.swing.JFrame {
    else{
     dm1.addElement(temp[0]);
     dm2.removeElement(temp[0]);
+    relconcept.remove(temp[0]);
    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
           Object[] temp = jList1.getSelectedValues();
-   if(temp.length>1)
-       JOptionPane.showMessageDialog(rootPane, "Please select only one item...");
-   else if(temp.length<1)
-       JOptionPane.showMessageDialog(rootPane, "Please select an item...");
-   else
-   {
-       dm2.addElement(temp[0]);
-       dm1.removeElement(temp[0]);
-   }
+        if(temp.length>1)
+            JOptionPane.showMessageDialog(rootPane, "Please select only one item...");
+        else if(temp.length<1)
+            JOptionPane.showMessageDialog(rootPane, "Please select an item...");
+        else
+        {
+            System.out.println(temp[0]);
+            dm2.addElement(temp[0]);
+            dm1.removeElement(temp[0]);
+            relconcept.put(temp[0].toString(), jComboBox1.getSelectedIndex());
+
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -228,12 +253,59 @@ public class AddConcept extends javax.swing.JFrame {
     {
         dm1.addElement(temp[i]);
         dm2.removeElement(temp[i]);
+        relconcept.remove(temp[i]);
     }}
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Concept> concepts=new ArrayList<Concept>();
+        Concept neWconcept=new Concept(conceptName);
+        Set<String> relConceptSet=relconcept.keySet();
+        ArrayList<String> relationshipTypes=new ArrayList<String>();
+        relationshipTypes.add("aso");
+        relationshipTypes.add("is a");
+        relationshipTypes.add("part of");
+        for(String relcocepts:relConceptSet){
+            neWconcept.addRelatedConcept(relcocepts, relationshipTypes.get(relconcept.get(relcocepts)), false, 1);
+        }
+        
+        
+        neWconcept.setImportance(.8f);
+        concepts.add(neWconcept);
+        newDoc.addConcepts(concepts);
+        originalDoc.addConcepts(concepts);
+        mpa.mapReload(newDoc);
+        
+        this.setVisible(false);
+        mpa.setVisible(true);
+        
+        
+        
+//        
+//        for(int i=0;i<relConceptName.length;i++){
+//           // concept.addRelatedConcept(relConceptName[i], conceptName, rootPaneCheckingEnabled, i);
+//            System.out.println(relConceptName);
+//        }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
-    public void analyzeData(String message){
-    
+    public void analyzeData(Document newDoc, String conceptName, MapAdjust mpa,Document doc){
+        this.newDoc=newDoc;
+        this.mpa=mpa;
+        this.originalDoc=doc;
+        this.conceptName=conceptName;
+        Set<String> concepts=newDoc.getDoc().keySet();
+        for(int i=0;i<concepts.size();i++){
+            dm1.addElement(concepts.toArray()[i]);
+        
+        }
     
     }
     /**
@@ -278,6 +350,7 @@ public class AddConcept extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

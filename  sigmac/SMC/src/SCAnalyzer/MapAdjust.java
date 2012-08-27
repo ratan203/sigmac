@@ -412,11 +412,13 @@ public class MapAdjust extends javax.swing.JFrame {
        // JOptionPane.showInputDialog(message);
         String head="Concept";
         message=JOptionPane.showInputDialog(null, "Enter the name of concpet", head, 1);
-        System.out.println(message);
         AddConcept add=new AddConcept();
+        Document doc = documents.get(jList1.getSelectedIndex());
+        add.analyzeData(newDoc,message,this,doc);
+        this.setVisible(false);
         add.setVisible(true);
         add.setLocationRelativeTo(null);
-       // add.analyzeData(message);
+       
        
         
                 
