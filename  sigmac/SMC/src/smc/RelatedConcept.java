@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author user
  */
-public class RelatedConcept implements Serializable {
+public class RelatedConcept implements Serializable, Comparable<RelatedConcept> {
     private String type;
     private String rConcept;
     private boolean isHead;
@@ -122,5 +122,15 @@ public class RelatedConcept implements Serializable {
         rc.setPartStrength(this.partStrength);
         rc.setStrength(this.strength);
         return rc;
+    }
+
+    public int compareTo(RelatedConcept o) {
+        if(this.strength==o.strength){
+            return 0;
+        }else if(this.strength>o.strength){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

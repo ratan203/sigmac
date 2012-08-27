@@ -44,9 +44,9 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
 
             concept.setRelationships(relationships1);
             if(!docc.getTitleInfo().isEmpty()){
-                conceptStrength=((float)concept.getFreequency()/(float)docc.getSize())+((float)concept.getTitleStrength()/(float)docc.getTitleInfo().size());
+                conceptStrength= setConceptStrength((float)concept.getFreequency(),(float)docc.getSize(),(float)concept.getTitleStrength(),(float)docc.getTitleInfo().size());
             }else{
-                conceptStrength=(float)concept.getFreequency()/(float)docc.getSize();
+                conceptStrength=setConceptStrtength((float)concept.getFreequency(),(float)docc.getSize());
             }
             concept.setStrength(conceptStrength);
             doc1.remove(morphRoot);
@@ -57,9 +57,9 @@ private Document optimizeDocument(Document docc) throws FileNotFoundException, J
             relationshipJoin(doc.get(con).getRelationships());
             doc.get(con).setRelationships(relationships1);
             if(!docc.getTitleInfo().isEmpty()){
-                doc.get(con).setStrength((float)(doc.get(con).getFreequency()/(float)docc.getSize())+((float)doc.get(con).getTitleStrength()/(float)docc.getTitleInfo().size()));
+                doc.get(con).setStrength(setConceptStrength((float)doc.get(con).getFreequency(),(float)docc.getSize(),(float)doc.get(con).getTitleStrength(),(float)docc.getTitleInfo().size()));
             }else{
-                doc.get(con).setStrength((float)doc.get(con).getFreequency()/(float)docc.getSize());
+                doc.get(con).setStrength(setConceptStrtength((float)doc.get(con).getFreequency(),(float)docc.getSize()));
             }
             doc1.put(morphRoot,doc.get(con));
         }
@@ -123,7 +123,7 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
                                 g.setStrength(1);
                                 g.setHead(Boolean.TRUE);
                             }else if(g.getFreequency()!=0&&d1.getSize()!=0){
-                                g.setStrength(((float)Math.pow(Math.E, -(1/(double)g.getFreequency()))));
+                                g.setStrength(setAsoStrength(g.getFreequency()));
                             }
                         }else if(g.getType().equals("is a")){
                             g.setStrength(1);
@@ -195,5 +195,23 @@ private void relationshipJoin(HashMap<String,ArrayList<RelatedConcept>> relation
 
     public Document optimizeDoc(Document doc) throws FileNotFoundException, JWNLException{
         return optimizeConcept(optimizeRelationships(optimizeDocument(doc)));
+    }
+
+    private float setConceptStrength(float frequency, float docSize, float titleStrength, float noOfTitles) {
+        float strength;
+        strength=(frequency/docSize)+(titleStrength/noOfTitles);
+        return strength;
+    }
+
+    private float setConceptStrtength(float frequency, float docSize) {
+        float strength;
+        strength=(frequency/docSize);
+        return strength;
+    }
+
+    private float setAsoStrength(float f) {
+        float strength;
+        strength=(float) Math.pow(Math.E, -(1/(double)f));
+        return strength;
     }
 }

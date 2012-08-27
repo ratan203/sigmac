@@ -7,6 +7,7 @@ package smc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -234,5 +235,11 @@ public class Concept implements Serializable, Comparable<Concept> {
             relations.put(key, list);
         }
         return c;
+    }
+    
+    public ArrayList<RelatedConcept> getSortedRelatedConcepts(String con){
+        ArrayList<RelatedConcept> relationshipSort=relationships.get(con);
+        Collections.sort(relationshipSort);
+        return relationshipSort;
     }
 }

@@ -3,8 +3,6 @@ package SCAnalyzer;
 
 import chrriis.common.UIUtils;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import de.schlichtherle.io.FileReader;
-import de.schlichtherle.io.FileWriter;
 import java.awt.BorderLayout;
 import java.awt.geom.Path2D;
 import java.io.*;
