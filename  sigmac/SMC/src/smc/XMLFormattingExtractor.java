@@ -5,6 +5,7 @@
 
 package smc;
 
+import com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -45,6 +46,7 @@ public class XMLFormattingExtractor {
 
 
             }catch(Exception exep){
+                dom=new CoreDocumentImpl();
                 System.out.println("Can not parse XML file");
             }
     }
