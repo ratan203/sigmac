@@ -9,18 +9,18 @@ package adaptors;
  *
  * @author thilina
  */
-public class DocxformatObj {
+public class DocxFormatObj {
         String OStyle;
         String[] OallText;
         String[] OhasSpace;
         String[] OisBold;
-    public DocxformatObj(String style, String[] text, String[] space, String[] bold) {
+    public DocxFormatObj(String style, String[] text, String[] space, String[] bold) {
         OStyle=style;
         OallText=text;
         OhasSpace=space;
         OisBold=bold;
     }
-    public DocxformatObj() {
+    public DocxFormatObj() {
         OStyle="";
         OallText=null;
         OhasSpace=null;

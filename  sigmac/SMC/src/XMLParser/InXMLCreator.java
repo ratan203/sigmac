@@ -29,6 +29,7 @@ public class InXMLCreator {
 		// Document elements
 		Document doc = docBuilder.newDocument();
                 
+                //Anaphora resolving of body text before added to intermediate XML file
                 String tmpFile="anaphora//test1.txt";
                 String textToResolve=document.getBody().replace("\n", "").replace("\r", "");
                 AnaphoraResolver ana=new AnaphoraResolver(textToResolve,tmpFile);
@@ -51,7 +52,6 @@ public class InXMLCreator {
 		Element body = doc.createElement("body");
                 rootElement.appendChild(body);
 		body.appendChild(doc.createTextNode(anaRes));                
-//		body.appendChild(doc.createTextNode(document.getBody()));
  
 		//Title elements
 		Element titles = doc.createElement("titles");
