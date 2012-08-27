@@ -253,6 +253,9 @@ public class MapAdjust extends javax.swing.JFrame {
     String actualpath=(String) paths.get(jList1.getSelectedIndex());
       // Document doc = documents.get(jList1.getSelectedIndex());
        JSCreator jsc = new JSCreator();
+       //testing document
+       doc.testDocForRelations();
+       //done testing
 
         try {
            jsc.CreateJS(doc,actualpath);
@@ -358,6 +361,11 @@ public class MapAdjust extends javax.swing.JFrame {
             newDoc.deleteConcept(con);
         }
         System.out.println("deleted");
+        //testing delteded doc concept
+        System.out.println("Testing doc after deleteing concept :::::::::");
+        newDoc.testDocForRelations();
+        System.out.println("doc testing done successfully after deleting concepts");
+        //end testing of deleted doc
        // doc.printDoc();
         mapReload(newDoc);
         
@@ -404,6 +412,11 @@ public class MapAdjust extends javax.swing.JFrame {
         Document doc = documents.get(jList1.getSelectedIndex());
         DocumentFilter docFilter=new DocumentFilter();
         newDoc=docFilter.filterDocument(doc, sliderValue);
+        //tdesting new doc obtained to cover persentage
+        System.out.println("Testing the doc obtained for showing percentage");
+        newDoc.testDocForRelations();
+        System.out.println("new doc to show percentage of map is done successfully");
+        //end testing
         mapReload(newDoc);
     }//GEN-LAST:event_jButton1ActionPerformed
 
