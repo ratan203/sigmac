@@ -28,7 +28,7 @@ function WriteToFile(path,message,actualpath)
 {
 
 var fso = new ActiveXObject("Scripting.FileSystemObject");
-alert(actualpath);
+
  var txtFile = fso.OpenTextFile(path, 8, true, 0);  
  
     txtFile.WriteLine(message);  
@@ -114,7 +114,6 @@ function init(){
       //Fade the node and its connections when
       //clicking the close button
       closeButton.onclick = function() {
-	  alert(node.name);
 	  var actualpath=replace2;
 	 
 	  WriteToFile("visual\\rnodes.dpi",node.name,actualpath);
