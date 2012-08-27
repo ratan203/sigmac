@@ -140,11 +140,14 @@ public class Document implements Serializable {
         Set<String> keySet = relationships.keySet();
         for(String key : keySet){
             Concept rel=doc.get(key);
+            System.out.println("Related concept is : "+ rel.getName());
             if(rel!=null){
                 boolean isolated = rel.deleteRelationshipsToConcept(concept);
                 if(isolated){
                     deleteConcept(key);
                 }
+            }else{
+                System.out.println("how the hell this happened this is bug fo sure");
             }
         }
     }
@@ -296,6 +299,7 @@ public class Document implements Serializable {
         for(String key : keySet){
             if(!key.matches(".*[A-Za-z]+.*")){
                 System.out.println("Empty Concept found on the doc");
+                System.exit(0);
             }
             Concept con=this.doc.get(key);
             HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
@@ -307,9 +311,31 @@ public class Document implements Serializable {
                     System.out.println("Concept : "+key);
                     System.out.println("Related Concept : "+ key1);
                     System.out.println("relationship to none existing concept");
+                    System.exit(0);
                 }
                 if(!key1.matches(".*[A-Za-z]+.*")){
                     System.out.println("Empty Relation Found for concept : "+ key);
+                    System.exit(0);
+                }
+            }
+        }
+        testBothwayRels();
+    }
+
+    private void testBothwayRels(){
+        Set<String> keySet = this.doc.keySet();
+        for(String key : keySet){
+            Concept get = doc.get(key);
+            HashMap<String, ArrayList<RelatedConcept>> relationships = get.getRelationships();
+            Set<String> keySet1 = relationships.keySet();
+            for(String key1 : keySet1){
+                Concept rel = doc.get(key1);
+                HashMap<String, ArrayList<RelatedConcept>> relationships1 = rel.getRelationships();
+                if(relationships1.containsKey(key)){
+
+                }else{
+                    System.out.println("CONCEPT  : "+key+" has a rel to : "+key1+" but he dosent:::::");
+                    System.exit(0);
                 }
             }
         }
