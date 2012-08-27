@@ -2,12 +2,7 @@ package SCAnalyzer;
 
 
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -340,13 +335,15 @@ public class MapAdjust extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         FileReader fr = null;
+        FileWriter fw=null;
         ArrayList<String> deletedConcepts=new ArrayList<String>();
-        
         try {
             fr = new FileReader(absolutePath+"\\visual\\rnodes.dpi");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        
         BufferedReader in = new BufferedReader(fr);
         String line;
         try {
@@ -355,43 +352,84 @@ public class MapAdjust extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
         }
+        finally{
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     
         System.out.println("Deleted concpets ="+deletedConcepts);
         Document doc = documents.get(jList1.getSelectedIndex());
-        //checking the document before deleting
-        System.out.println("checking doc in the ui before deleting:::::::::::::::::::::::::::");
-        doc.testDocForRelations();
-        System.out.println("testing before del in ui is a success");
+
+        String message="You are going to delete ";
+        int j=0;
+
         for(String con:deletedConcepts){
-            //testing testing
-            System.out.println("testing relations of the concept being deleted");
-            Concept get = doc.getDoc().get(con);
-            HashMap<String, ArrayList<RelatedConcept>> relationships = get.getRelationships();
-            System.out.println("no of rels : "+relationships.size());
-            Set<String> keySet = relationships.keySet();
-            for(String key : keySet){
-                System.out.println(key);
-            }
-            System.out.println("done printing relationships of the concept being deleted");
-            //end testing
-            doc.deleteConcept(con);
-                    System.out.println("Testing the doc after deleting concept of original doc");
-                doc.testDocForRelations();
-                System.out.println("testing after deleting success :::::::::::::");
-            newDoc.deleteConcept(con);
-                    System.out.println("Testing the doc after deleting concept of newDoc");
-        newDoc.testDocForRelations();
-        System.out.println("testing after deleting success :::::::::::::");
+
+             j++;
+             if(j==1){
+                 message=message+con+" ";
+             }
+             else if(j==deletedConcepts.size()){
+                  message=message+","+con+".";
+             }
+             else{
+                message=message+","+con;
+             }
         }
+        for(String con:deletedConcepts){
+
+            doc.deleteConcept(con);
+              System.out.println("testing after deleting success :::::::::::::");
+            newDoc.deleteConcept(con);
+
+        }
+        int answer=JOptionPane.showConfirmDialog(null, message);
+        if(answer==0){
+            for(String con:deletedConcepts){
+                doc.deleteConcept(con);
+                newDoc.deleteConcept(con);
+            }
+            System.out.println("deleted");
+
+           mapReload(newDoc);
+            }
+
         System.out.println("deleted");
         //testing delteded doc concept
         System.out.println("Testing doc after deleteing concept :::::::::");
         newDoc.testDocForRelations();
         System.out.println("doc testing done successfully after deleting concepts");
-        //end testing of deleted doc
-       // doc.printDoc();
+
         mapReload(newDoc);
+
         
+         try {
+            fw = new FileWriter(absolutePath+"\\visual\\rnodes.dpi");
+            
+         } catch (IOException ex) {
+            Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+         }
+           BufferedWriter out = new BufferedWriter(fw);
+        
+           try {
+                out.write("");
+            } 
+           catch (IOException ex) {
+                Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           finally{
+            try {
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           }
+           
+     
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

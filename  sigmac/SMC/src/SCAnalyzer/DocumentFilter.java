@@ -30,7 +30,9 @@ public class DocumentFilter {
         filterDoc.setSize(doc.getSize());
         float requiredCoverage=percentage/100;
         float sumOfImportance=0;
+
         conceptList=(HashMap<String, Concept>) doc.getDoc().clone();
+
         //Sort concepts by importance value 
         sortedConceptList=doc.getSortedConceptList();
         
@@ -70,7 +72,7 @@ public class DocumentFilter {
                         filteredConceptList.put(relCon, conceptList.get(relCon));
                     }
                 }
-            }else{
+            }else if(rcs.size()==1){
                 filteredRelatedConcepts.add(rcs.get(0));
                 filteredConceptList.put(relCon, conceptList.get(relCon));
             }
@@ -80,6 +82,8 @@ public class DocumentFilter {
                     if(!filteredConceptList.containsKey(relCon)){
                         filteredConceptList.put(relCon, conceptList.get(relCon));
                     }
+
+
                 }
             }
             if(filteredRelatedConcepts.size()>0){
@@ -92,6 +96,7 @@ public class DocumentFilter {
 
     private HashMap<String, Concept> optimizeRelationships(HashMap<String, Concept> opitimizedConcept) {        
         for(String s:opitimizedConcept.keySet()){
+//            for(String r:opitimizedConcept.get(s).getRelationships().keySet()){
             String[] keyArray=opitimizedConcept.get(s).getRelationships().keySet().toArray(new String[0]);
             for(int i=0;i<keyArray.length;i++){
                 if(!filteredConceptList.containsKey(keyArray[i])){
