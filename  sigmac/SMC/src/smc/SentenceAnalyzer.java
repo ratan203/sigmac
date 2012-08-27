@@ -85,16 +85,21 @@ public class SentenceAnalyzer {
                         hConcept+=leave.nodeString()+" ";
                     }
                     hConcept=filterConcept(hConcept);
-                    if(cMap.containsKey(hConcept)){
-                        //Concept c=cMap.get(hConcept);
-                        //c.modifyFreequency(1);
-                        System.out.println("not expected");
-                    }else{
-                        cMap.put(hConcept, new Concept(hConcept));
-                    }
-                    System.out.println(hConcept);
                     ArrayList<String> spawnConcepts = spawnConcepts(hConcept);
-                    spawnConcepts.addAll(hd);
+                    for(String spc: spawnConcepts){
+                        if(spc.matches(".*[A-Za-z]+.*")){
+                            hd.add(spc);
+                            if(cMap.containsKey(hConcept)){
+                                //Concept c=cMap.get(hConcept);
+                                //c.modifyFreequency(1);
+                                System.out.println("not expected");
+                            }else{
+                                cMap.put(hConcept, new Concept(hConcept));
+                            }
+                            System.out.println(spc);
+                        }
+                    }
+                    //spawnConcepts.addAll(hd);
                     //hd.add(hConcept);
                     //System.out.println(hConcept);
                 }
@@ -117,28 +122,34 @@ public class SentenceAnalyzer {
                         dConcept+=leave.nodeString()+" ";
                     }
                     dConcept=filterConcept(dConcept);
-                    if(cMap.containsKey(dConcept)){
-                        //Concept c=cMap.get(dConcept);
-                        //c.modifyFreequency(1);
-                    }else{
-                        cMap.put(dConcept, new Concept(dConcept));
-                    }
-                    System.out.println(dConcept);
                     ArrayList<String> spawnConcepts = spawnConcepts(dConcept);
-                    spawnConcepts.addAll(dp);
+                    for(String spc : spawnConcepts){
+                        if(spc.matches(".*[A-Za-z]+.*")){
+                            dp.add(spc);
+                            if(cMap.containsKey(dConcept)){
+                                //Concept c=cMap.get(dConcept);
+                                //c.modifyFreequency(1);
+                            }else{
+                                cMap.put(dConcept, new Concept(dConcept));
+                            }
+                            System.out.println(spc);
+                        }
+                    }
                     //dp.add(dConcept);
                     //System.out.println(dConcept);
                 }
-                for(String h: hd){
-                    Concept head=cMap.get(h);
-                    for(String d : dp){
-                        head.addRelatedConcept(d, p.getType(), false, 1);
+                if(!hd.isEmpty() && !dp.isEmpty()){
+                    for(String h: hd){
+                        Concept head=cMap.get(h);
+                        for(String d : dp){
+                            head.addRelatedConcept(d, p.getType(), false, 1);
+                        }
                     }
-                }
-                for(String d : dp){
-                    Concept dependent=cMap.get(d);
-                    for(String h : hd){
-                        dependent.addRelatedConcept(h, p.getType(), true, 1);
+                    for(String d : dp){
+                        Concept dependent=cMap.get(d);
+                        for(String h : hd){
+                            dependent.addRelatedConcept(h, p.getType(), true, 1);
+                        }
                     }
                 }
             }
@@ -163,6 +174,9 @@ public class SentenceAnalyzer {
                 concept=filterConcept(concept);
                 ArrayList<String> spawnConcepts = spawnConcepts(concept);
                 for(String con : spawnConcepts){
+                    if(!con.matches(".*[A-Za-z]+.*")){
+                        continue;
+                    }
                     if(cMap.containsKey(concept)){
                         //Concept c=cMap.get(concept);
                         //c.modifyFreequency(1);
@@ -342,31 +356,33 @@ public class SentenceAnalyzer {
 
     private ArrayList<String> spawnConcepts(String bigConcept){
         ArrayList<String> concepts=new ArrayList<String>();
-        String[] split=null;
-        if(bigConcept.contains(",") && bigConcept.contains(" and ")){
-            split=processAndSeperatedConcepts(bigConcept);
-            for(int i=0;i<split.length;i++){
-               ArrayList<String> tmp=spawnConcepts(split[i]);
-               tmp.addAll(concepts);
-            }
-        }else if(bigConcept.contains(",")){
-            split=processCommaSeperatedConcept(bigConcept);
-            for(int i=0; i<split.length;i++){
-                if(split[i].length()>2){
-                    concepts.add(split[i]);
-                }
-            }
-        }else if(bigConcept.contains(" and ")){
-            split=processAndSeperatedConcepts(bigConcept);
-            for(int i=0; i<split.length;i++){
-                if(split[i].length()>2){
-                    concepts.add(split[i]);
-                }
-            }
-        }else{
-            concepts.add(bigConcept);
-        }
+        concepts.add(filterConcept(bigConcept));
         return concepts;
+//        String[] split=null;
+//        if(bigConcept.contains(",") && bigConcept.contains(" and ")){
+//            split=processAndSeperatedConcepts(bigConcept);
+//            for(int i=0;i<split.length;i++){
+//               ArrayList<String> tmp=spawnConcepts(split[i]);
+//               tmp.addAll(concepts);
+//            }
+//        }else if(bigConcept.contains(",")){
+//            split=processCommaSeperatedConcept(bigConcept);
+//            for(int i=0; i<split.length;i++){
+//                if(split[i].length()>2){
+//                    concepts.add(split[i]);
+//                }
+//            }
+//        }else if(bigConcept.contains(" and ")){
+//            split=processAndSeperatedConcepts(bigConcept);
+//            for(int i=0; i<split.length;i++){
+//                if(split[i].length()>2){
+//                    concepts.add(split[i]);
+//                }
+//            }
+//        }else{
+//            concepts.add(bigConcept);
+//        }
+//        return concepts;
     }
 
 
