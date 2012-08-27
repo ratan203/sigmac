@@ -79,6 +79,45 @@ public class Document implements Serializable {
         }
     }
 
+    public void addUnmatchedConcepts(ArrayList<Concept> concepts){
+        for(Concept con : concepts){
+            HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
+            Set<String> keySet = relationships.keySet();
+            if(doc.containsKey(con.getName())){
+                Concept get = doc.remove(con.getName());
+                get.modifyFreequency(con.getFreequency());
+                get.modifyStrength(con.getStrength());
+                for(String key : keySet){
+                    ArrayList<RelatedConcept> get1 = relationships.get(key);
+                    for(RelatedConcept relCon : get1){
+                        get.addRelatedConcept(relCon);
+                    }
+                }
+                doc.put(get.getName(), get);
+            }else{
+                doc.put(con.getName(), con);
+            }
+        }
+        for(Concept con : concepts){
+            HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
+            Set<String> keySet = relationships.keySet();
+            for(String key : keySet){
+                ArrayList<RelatedConcept> rela = relationships.get(key);
+                if(doc.containsKey(key)){
+                    Concept get = doc.get(key);
+                    for(RelatedConcept r : rela){
+                        get.addRelatedConcept(con.getName(), r.getType(), !r.isHead(), r.getFreequency());
+                    }
+                }else{
+                    boolean isolated = con.deleteRelationshipsToConcept(key);
+                    if(isolated){
+                        doc.remove(con.getName());
+                    }
+                }
+            }
+        }
+    }
+
     public void printDoc(){
         Set<String> keys=doc.keySet();
         for(String key : keys){
