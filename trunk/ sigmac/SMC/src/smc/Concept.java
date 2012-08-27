@@ -51,6 +51,11 @@ public class Concept implements Serializable, Comparable<Concept> {
         value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
     }
 
+    public void modifyStrength(float amount){
+        this.strength+=amount;
+        value=this.strength + this.freequency*FREEQUENCY_STRENTH_MULTIPLIER;
+    }
+
     public void modifyImprotance(float amount){
         importance+=amount;
 //        System.out.println("modify importance of");
