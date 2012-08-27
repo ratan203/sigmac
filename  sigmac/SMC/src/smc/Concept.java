@@ -198,10 +198,14 @@ public class Concept implements Serializable, Comparable<Concept> {
     }
 
     public boolean deleteRelationshipsToConcept(String concept){
+        System.out.println("find relation to : "+concept);
         if(this.relationships.containsKey(concept)){
             this.relationships.remove(concept);
+        }else{
+            System.out.println("ohh no relationship found this is a bug");
         }
         if(this.relationships.isEmpty()){
+            System.out.println("oh im not related to any one im : "+this.name);
             return true;
         }else{
             return false;
