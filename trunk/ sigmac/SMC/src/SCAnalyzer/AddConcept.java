@@ -273,13 +273,19 @@ public class AddConcept extends javax.swing.JFrame {
         }
       
         neWconcept.setImportance(.8f);
+        Set<String> keySet = neWconcept.getRelationships().keySet();
+        System.out.println(neWconcept.getName());
+        System.out.println("Rels are printed below");
+        neWconcept.printConcept();
         concepts.add(neWconcept);
+        ArrayList<Concept> cons=new ArrayList<Concept>();
+        cons.add(neWconcept.getCopy());
         System.out.println("iiiiiiinew doc");
         newDoc.testDocForRelations();
         System.out.println("tested new doc");
         
         
-        newDoc.addConcepts(concepts);
+        newDoc.addUnmatchedConcepts(cons);
         System.out.println("iiiiiiinew doc-2");
         newDoc.testDocForRelations();
         System.out.println("tested new doc-2");
@@ -291,7 +297,7 @@ public class AddConcept extends javax.swing.JFrame {
         System.out.println("tested new doc-original");
         
         
-        originalDoc.addConcepts(concepts);
+        originalDoc.addUnmatchedConcepts(concepts);
         
         System.out.println("iiiiiiinew doc-modif");
         originalDoc.testDocForRelations();
