@@ -18,7 +18,7 @@ public class DocxTrav {
      * @param empEl (Element)
      * @return DocxFormatObj
      */
-    public DocxFormatObj getDocxFormat(Element empEl) {
+    public DocxFormatObject getDocxFormat(Element empEl) {
         String style = "";
         NodeList styleTE = empEl.getElementsByTagName("w:pPr");
         if (styleTE != null && styleTE.getLength() > 0) {
@@ -79,7 +79,7 @@ public class DocxTrav {
         }
 
         //Create a new formatObj with the value read from the xml nodes
-        DocxFormatObj e = new DocxFormatObj(style, allTxt, hasSpace, isBold);
+        DocxFormatObject e = new DocxFormatObject(style, allTxt, hasSpace, isBold);
 
         return e;
     }

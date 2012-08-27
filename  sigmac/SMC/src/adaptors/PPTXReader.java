@@ -42,8 +42,8 @@ public class PPTXReader {
                     fo2 = (ArrayList) it2.next();
                     Iterator it3 = fo2.iterator();
                     while (it3.hasNext()) {
-                        PptxFormatObj pptxObj = new PptxFormatObj();
-                        pptxObj = (PptxFormatObj) it3.next();
+                        PptxformatObj pptxObj = new PptxformatObj();
+                        pptxObj = (PptxformatObj) it3.next();
 
                         String styl = pptxObj.getStyle();
                         String[] txt = pptxObj.getText();
