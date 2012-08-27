@@ -18,6 +18,7 @@ import java.util.Set;
 public class Concept implements Serializable, Comparable<Concept> {
     private String name;
     private HashMap<String,ArrayList<RelatedConcept>> relationships;
+    private ArrayList<RelatedConcept> asoRelationships;
     private int freequency;
     private float titleStrength;
     private float strength;
@@ -236,9 +237,17 @@ public class Concept implements Serializable, Comparable<Concept> {
         }
         return c;
     }
-    
+    public ArrayList<RelatedConcept> getAsoRelatedConcepts(ArrayList<RelatedConcept> all){
+        asoRelationships=new ArrayList<RelatedConcept>();
+        for(RelatedConcept rc:all){
+            if(rc.getType().equals("aso")){
+                asoRelationships.add(rc);
+            }
+        }
+        return asoRelationships;
+    }
     public ArrayList<RelatedConcept> getSortedRelatedConcepts(String con){
-        ArrayList<RelatedConcept> relationshipSort=relationships.get(con);
+        ArrayList<RelatedConcept> relationshipSort=getAsoRelatedConcepts(relationships.get(con));
         Collections.sort(relationshipSort);
         return relationshipSort;
     }

@@ -2,6 +2,7 @@ package XMLParser;
 	 
 import adaptors.SCDocument;
 import java.io.File;
+import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,7 +19,7 @@ import org.w3c.dom.Element;
 	 
 public class InXMLCreator {
  
-	public void createXML(SCDocument document,String outputFilePath, String url,String dateString) {
+	public void createXML(SCDocument document,String outputFilePath, String url,String dateString) throws IOException {
  
 	  try {
  
@@ -27,11 +28,11 @@ public class InXMLCreator {
  
 		// Document elements
 		Document doc = docBuilder.newDocument();
-
-//                Anaphora ana=new Anaphora();
-//                String tmpFile="anaphora//test1.txt";
-//                String ana1=document.getBody();
-//                String anaRes=ana.resolveAnaph(ana1.replace("\n", "").replace("\r", ""),tmpFile);
+                
+                String tmpFile="anaphora//test1.txt";
+                String textToResolve=document.getBody().replace("\n", "").replace("\r", "");
+                AnaphoraResolver ana=new AnaphoraResolver(textToResolve,tmpFile);
+                String anaRes=ana.resolveAnaphora();
 
                 Element rootElement = doc.createElement("document");
 		doc.appendChild(rootElement);
@@ -49,8 +50,8 @@ public class InXMLCreator {
 		// body elements
 		Element body = doc.createElement("body");
                 rootElement.appendChild(body);
-//		body.appendChild(doc.createTextNode(anaRes);                
-		body.appendChild(doc.createTextNode(document.getBody()));
+		body.appendChild(doc.createTextNode(anaRes));                
+//		body.appendChild(doc.createTextNode(document.getBody()));
  
 		//Title elements
 		Element titles = doc.createElement("titles");
