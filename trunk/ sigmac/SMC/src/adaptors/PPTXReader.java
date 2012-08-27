@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package adaptors;
 
 import java.util.ArrayList;
@@ -19,57 +18,57 @@ public class PPTXReader {
      */
     public SCDocument getDocument(String path) {
         // TODO code application logic here
-        PptxDomParser dp=new PptxDomParser();
+        PptxDomParser dp = new PptxDomParser();
         dp.setXmlPath(path);
-        ArrayList ll=dp.getData();
+        ArrayList ll = dp.getData();
         Iterator it = ll.iterator();
-        ArrayList title1=new ArrayList();
-        ArrayList title2=new ArrayList();
-        ArrayList title3=new ArrayList();
-        ArrayList title4=new ArrayList();
-        ArrayList title5=new ArrayList();
+        ArrayList title1 = new ArrayList();
+        ArrayList title2 = new ArrayList();
+        ArrayList title3 = new ArrayList();
+        ArrayList title4 = new ArrayList();
+        ArrayList title5 = new ArrayList();
 
-        ArrayList norText=new ArrayList();
-        while(it.hasNext()) {
-            ArrayList fo=new ArrayList();
-            fo=(ArrayList) it.next();
+        ArrayList norText = new ArrayList();
+        while (it.hasNext()) {
+            ArrayList fo = new ArrayList();
+            fo = (ArrayList) it.next();
             Iterator it1 = fo.iterator();
-            while(it1.hasNext()) {
-                ArrayList fo1=new ArrayList();
-                fo1=(ArrayList) it1.next();
+            while (it1.hasNext()) {
+                ArrayList fo1 = new ArrayList();
+                fo1 = (ArrayList) it1.next();
                 Iterator it2 = fo1.iterator();
-                while(it2.hasNext()) {
-                    ArrayList fo2=new ArrayList();
-                    fo2=(ArrayList) it2.next();
+                while (it2.hasNext()) {
+                    ArrayList fo2 = new ArrayList();
+                    fo2 = (ArrayList) it2.next();
                     Iterator it3 = fo2.iterator();
-                    while(it3.hasNext()) {
-                        PptxformatObj pptxObj=new PptxformatObj();
-                        pptxObj=(PptxformatObj) it3.next();
+                    while (it3.hasNext()) {
+                        PptxFormatObj pptxObj = new PptxFormatObj();
+                        pptxObj = (PptxFormatObj) it3.next();
 
-                        String styl=pptxObj.getStyle();
-                        String[] txt=pptxObj.getText();
-                        ArrayList bold=pptxObj.getBold();
+                        String styl = pptxObj.getStyle();
+                        String[] txt = pptxObj.getText();
+                        ArrayList bold = pptxObj.getBold();
 
-                        if(txt.length>0 && (styl.equals("ctrTitle")||styl.equals("title")||styl.equals("subTitle"))){
-                            for(int i=0;i<txt.length;i++){
-                                if(txt[i]!=null && !txt[i].equals("") && styl.equals("ctrTitle")){
+                        if (txt.length > 0 && (styl.equals("ctrTitle") || styl.equals("title") || styl.equals("subTitle"))) {
+                            for (int i = 0; i < txt.length; i++) {
+                                if (txt[i] != null && !txt[i].equals("") && styl.equals("ctrTitle")) {
                                     title1.add(txt[i]);
-                                }else if(txt[i]!=null && !txt[i].equals("") && styl.equals("title")){
+                                } else if (txt[i] != null && !txt[i].equals("") && styl.equals("title")) {
                                     title2.add(txt[i]);
-                                }else if(txt[i]!=null && !txt[i].equals("") && styl.equals("subTitle")){
+                                } else if (txt[i] != null && !txt[i].equals("") && styl.equals("subTitle")) {
                                     title3.add(txt[i]);
                                 }
                             }
 
-                        }else if(!styl.equals("sldNum")){
-                            for(int i=0;i<txt.length;i++){
-                                if(txt[i]!=null && !txt[i].equals("")){
+                        } else if (!styl.equals("sldNum")) {
+                            for (int i = 0; i < txt.length; i++) {
+                                if (txt[i] != null && !txt[i].equals("")) {
                                     norText.add(txt[i]);
                                 }
                             }
                         }
-                        for(int j=0;j<bold.size();j++){
-                            if(bold.get(j)!=null && !bold.get(j).equals("")){
+                        for (int j = 0; j < bold.size(); j++) {
+                            if (bold.get(j) != null && !bold.get(j).equals("")) {
                                 title5.add(bold.get(j));
                             }
                         }
@@ -87,35 +86,34 @@ public class PPTXReader {
         Iterator titleit4 = title4.iterator();
         Iterator titleit5 = title5.iterator();
         Iterator textit = norText.iterator();
-        ArrayList titles=new ArrayList();
-        while(titleit1.hasNext()) {
-            Title t1=new Title((String) titleit1.next(), 5);
+        ArrayList titles = new ArrayList();
+        while (titleit1.hasNext()) {
+            Title t1 = new Title((String) titleit1.next(), 5);
             titles.add(t1);
         }
-        while(titleit2.hasNext()) {
-            Title t2=new Title((String) titleit2.next(), 4);
+        while (titleit2.hasNext()) {
+            Title t2 = new Title((String) titleit2.next(), 4);
             titles.add(t2);
         }
-        while(titleit3.hasNext()) {
-            Title t3=new Title((String) titleit3.next(), 3);
+        while (titleit3.hasNext()) {
+            Title t3 = new Title((String) titleit3.next(), 3);
             titles.add(t3);
         }
-        while(titleit4.hasNext()) {
-            Title t4=new Title((String) titleit4.next(), 2);
+        while (titleit4.hasNext()) {
+            Title t4 = new Title((String) titleit4.next(), 2);
             titles.add(t4);
         }
-        while(titleit5.hasNext()) {
-            Title t5=new Title((String) titleit5.next(), 1);
+        while (titleit5.hasNext()) {
+            Title t5 = new Title((String) titleit5.next(), 1);
             titles.add(t5);
         }
-        String bodyText="";
-        while(textit.hasNext()){
-            bodyText=bodyText+". \n"+textit.next();
+        String bodyText = "";
+        while (textit.hasNext()) {
+            bodyText = bodyText + ". \n" + textit.next();
         }
         System.out.println(bodyText);
 
-        SCDocument scd=new SCDocument(bodyText, titles);
+        SCDocument scd = new SCDocument(bodyText, titles);
         return scd;
     }
-
 }

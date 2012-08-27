@@ -3,6 +3,7 @@ package SCAnalyzer;
 
 import XMLParser.InXMLCreator;
 import adaptors.*;
+import com.mysql.jdbc.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -230,19 +231,16 @@ public class DocumentLoader {
             System.out.println("Size is printed above");
             
             ps.stopProgress();
-            progThrd.stop();
-
-            DBConnector db1=new DBConnector();
-            DBManager dbm=new DBManager();
-            //Connection conn=(Connection) db1.getConnection();
-            //dbm.updateDB(conn, doc1);
-
-            //JButton jb=getNextButton(jt);
-           // jb.setEnabled(true);
+            progThrd.stop();           
 
        }
    }
 
+   /**
+    * Method to get JLabel with 'labelAll' name 
+    * @param c Any awt component
+    * @return JLabel
+    */
    public JLabel getLabelAll(final java.awt.Component c){
        JTextArea jt=(JTextArea)c;
        ArrayList<JLabel> jLabels = new ArrayList<JLabel>();
