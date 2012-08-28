@@ -232,7 +232,14 @@ public class DocumentLoader {
             
             ps.stopProgress();
             progThrd.stop();           
+            
+            System.gc();
 
+<<<<<<< .mine
+            
+
+=======
+>>>>>>> .r217
        }
    }
 
