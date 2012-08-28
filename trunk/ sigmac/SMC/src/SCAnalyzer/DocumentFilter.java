@@ -34,6 +34,7 @@ public class DocumentFilter {
         float sumOfImportance = 0;
         conceptList = (HashMap<String, Concept>) doc.getDoc().clone();
 
+        conceptList=doc.getDocCopy();
         //Sort concepts by importance value 
         sortedConceptList = doc.getSortedConceptList();
 
