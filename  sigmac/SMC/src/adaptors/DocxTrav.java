@@ -15,7 +15,7 @@ public class DocxTrav {
 
     /**
      * Method to traverse through all <w:p> nodes and extract titles and body text
-     * @param empEl (Element)
+     * @param Element
      * @return DocxFormatObj
      */
     public DocxFormatObject getDocxFormat(Element empEl) {
@@ -86,8 +86,8 @@ public class DocxTrav {
 
     /**
      * Method to get node content
-     * @param ele (Element)
-     * @param tagName (Tag name)
+     * @param Element
+     * @param String (Tag name)
      * @return String (node content)
      */
     private String getTextValue(Element ele, String tagName) {

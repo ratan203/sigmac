@@ -32,7 +32,7 @@ public class AnaphoraResolver {
     /**
      * This method is for processing co-reference file and resolve only inter sentential anaphora
      * 
-     * @return Anaphora resolved text
+     * @return String (Anaphora resolved text)
      */
     public String resolveAnaphora() {
         //Creation of co reference identified file (.coref)
