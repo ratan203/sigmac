@@ -32,8 +32,12 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, JWNLException {
         // TODO code application logic here
         Parser p=new Parser("grammar/englishPCFG.ser.gz");        
-        Document doc=p.parse("t.xml", DocType.XML, "body");
+        Document doc=p.parse("test.xml", DocType.XML, "body");
         doc.testDocForRelations();
+        HashMap<String, Concept> docCopy = doc.getDocCopy();
+        Document d=new Document();
+        d.setDoc(docCopy);
+        d.printDoc();
         System.exit(0);
         Optimizer opti=new Optimizer();
         Document doc1=opti.optimizeDoc(doc);
