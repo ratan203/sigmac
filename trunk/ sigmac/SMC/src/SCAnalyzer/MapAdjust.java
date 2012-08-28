@@ -77,6 +77,7 @@ public class MapAdjust extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adjust Frame");
@@ -85,7 +86,7 @@ public class MapAdjust extends javax.swing.JFrame {
 
         jLabel2.setText("Map View");
 
-        jButton4.setText("Delete Relationship");
+        jButton4.setText("Delete Relationships");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -158,6 +159,13 @@ public class MapAdjust extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Add Relationships");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,19 +185,20 @@ public class MapAdjust extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addContainerGap())
+                        .addContainerGap(947, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 33, Short.MAX_VALUE)))
+                                .addGap(0, 33, Short.MAX_VALUE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38))))
         );
         layout.setVerticalGroup(
@@ -222,6 +231,8 @@ public class MapAdjust extends javax.swing.JFrame {
                                 .addComponent(jButton5)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton8)
                                 .addGap(13, 13, 13)))))
@@ -303,6 +314,7 @@ public class MapAdjust extends javax.swing.JFrame {
         Document doc = documents.get(jList1.getSelectedIndex());
         DocumentFilter docFilter=new DocumentFilter();
         newDoc=docFilter.filterDocument(doc, 50);
+        jSlider1.setValue(50);
         JSCreator jsc = new JSCreator();
 
         try {
@@ -360,11 +372,14 @@ public class MapAdjust extends javax.swing.JFrame {
             }
         }
         
-    
+        if(deletedConcepts.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No changes are done");
+        }
+        else{
         System.out.println("Deleted concpets ="+deletedConcepts);
         Document doc = documents.get(jList1.getSelectedIndex());
 
-        String message="You are going to delete ";
+        String message="You are going to delete '";
         int j=0;
 
         for(String con:deletedConcepts){
@@ -374,19 +389,13 @@ public class MapAdjust extends javax.swing.JFrame {
                  message=message+con+" ";
              }
              else if(j==deletedConcepts.size()){
-                  message=message+","+con+".";
+                  message=message+",'"+con+"'.";
              }
              else{
-                message=message+","+con;
+                message=message+",'"+con;
              }
         }
-        for(String con:deletedConcepts){
-
-            doc.deleteConcept(con);
-              System.out.println("testing after deleting success :::::::::::::");
-            newDoc.deleteConcept(con);
-
-        }
+      
         int answer=JOptionPane.showConfirmDialog(null, message);
         if(answer==0){
             for(String con:deletedConcepts){
@@ -395,9 +404,9 @@ public class MapAdjust extends javax.swing.JFrame {
             }
             System.out.println("deleted");
 
-           mapReload(newDoc);
+          
             }
-
+        mapReload(newDoc);
         System.out.println("deleted");
         //testing delteded doc concept
         System.out.println("Testing doc after deleteing concept :::::::::");
@@ -428,7 +437,7 @@ public class MapAdjust extends javax.swing.JFrame {
                 Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
             }
            }
-           
+        } 
      
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -442,7 +451,7 @@ public class MapAdjust extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    int sliderValue=20;
+    int sliderValue;
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         // TODO add your handling code here:
        // System.out.println(jSlider1.getValue());
@@ -469,7 +478,7 @@ public class MapAdjust extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        sliderValue=50;
         Document doc = documents.get(jList1.getSelectedIndex());
         //checking the size of the document
         System.out.println("Testing the size jbutton1 action perfomed");
@@ -490,20 +499,43 @@ public class MapAdjust extends javax.swing.JFrame {
         // TODO add your handling code here:
        // JOptionPane.showInputDialog(message);
         String head="Concept";
-        message=JOptionPane.showInputDialog(null, "Enter the name of concpet", head, 1);
+        message=JOptionPane.showInputDialog(null, "Enter the name of new concpet", head, 1);
         AddConcept add=new AddConcept();
         Document doc = documents.get(jList1.getSelectedIndex());
+        if(newDoc.getDoc().keySet().contains(message)){
+            JOptionPane.showMessageDialog(null, "New concept is available in the Map");
+        }
+        else if(message.length()<3){
+             JOptionPane.showMessageDialog(null, "Invalid concept length");
+        }
+        else{
         add.analyzeData(newDoc,message,this,doc);
         this.setVisible(false);
         add.setVisible(true);
         add.setLocationRelativeTo(null);
-       
+       }
+        
        
         
                 
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        AddRelation addRelation=new AddRelation();
+        addRelation.setVisible(true);
+        addRelation.setLocationRelativeTo(null);
+        Document doc = documents.get(jList1.getSelectedIndex());
+        HashMap<String, Concept> mp = newDoc.getDoc();
+      //  System.out.println(doc1.keySet());
+        addRelation.setNodeData(mp,doc,this,newDoc);
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void showLocation(String file){
         
@@ -557,6 +589,7 @@ public class MapAdjust extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
