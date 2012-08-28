@@ -12,6 +12,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import smc.Concept;
 import smc.Document;
+import smc.RelatedConcept;
 
 /**
  *
@@ -285,11 +286,35 @@ public class AddConcept extends javax.swing.JFrame {
         System.out.println("tested new doc");
         
         
-        newDoc.addUnmatchedConcepts(cons);
+        newDoc.addUnmatchedConcepts(concepts);
         System.out.println("iiiiiiinew doc-2");
         newDoc.testDocForRelations();
         System.out.println("tested new doc-2");
-        
+        for(Concept cptt : concepts){
+            Concept get = newDoc.getDoc().get(cptt.getName());
+            System.out.println("print the given one");
+            cptt.printConcept();
+            System.out.println("now printing the one found in the new do");
+            get.printConcept();
+            HashMap<String, ArrayList<RelatedConcept>> relationships = cptt.getRelationships();
+            Set<String> keySet1 = relationships.keySet();
+            for(String key1 : keySet1){
+                Concept get1 = newDoc.getDoc().get(key1);
+                System.out.println("printing concepts related to added one");
+                get1.printConcept();
+            }
+            //System.out.println("ORRRRRRRRRINNNNNNNNNNNNNNNNNNNn");
+            System.out.println("now printin the one in the original doc");
+            Concept get1 = originalDoc.getDoc().get(cptt.getName());
+            //get1.printConcept();
+            HashMap<String, ArrayList<RelatedConcept>> relationships1 = cptt.getRelationships();
+            Set<String> keySet11 = relationships1.keySet();
+            for(String key1 : keySet1){
+                Concept get11 = originalDoc.getDoc().get(key1);
+                System.out.println("printing concepts related to added one");
+                get11.printConcept();
+            }
+        }
         
         
         System.out.println("iiiiiiinew doc-original");
@@ -302,6 +327,19 @@ public class AddConcept extends javax.swing.JFrame {
         System.out.println("iiiiiiinew doc-modif");
         originalDoc.testDocForRelations();
         System.out.println("tested new doc-modif");
+        for(Concept cptt : concepts){
+            Concept get = originalDoc.getDoc().get(cptt.getName());
+            get.printConcept();
+        }
+
+        System.out.println("after modifying original doc");
+        for(Concept cptt : concepts){
+            Concept get = newDoc.getDoc().get(cptt.getName());
+            get.printConcept();
+        }
+        newDoc.testDocForRelations();
+        System.out.println("after modifying original doc");
+
         mpa.mapReload(newDoc);
         
         this.setVisible(false);
