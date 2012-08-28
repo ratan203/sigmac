@@ -42,8 +42,11 @@ public class DOCExtractor {
            
                      for (int l = 0; l < richTextRuns.length; l++) {
                          if(richTextRuns[l].getFontSize()>bodyfontsize){
+                             System.out.println("length"+richTextRuns[l].getText()+"  "+richTextRuns[l].getLength());
+                            if(richTextRuns[l].getLength()>5){ 
                             titles.add(new Title(richTextRuns[l].getText()));
                          }
+                       }
                           
                  }
             }
