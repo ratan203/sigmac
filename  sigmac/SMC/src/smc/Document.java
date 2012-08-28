@@ -24,6 +24,7 @@ public class Document implements Serializable {
     private String name="";
     private String lastModified="";
     private int size=0;
+    private String serverPath;
 
     public Document(){
         doc=new HashMap<String, Concept>();
@@ -43,6 +44,13 @@ public class Document implements Serializable {
         this.doc = doc;
     }
 
+    public void setServerPath(String path){
+        this.serverPath=path;
+    }
+    
+    public String getServerPath(){
+        return serverPath;
+    }
     public String getUri() {
         return uri;
     }
