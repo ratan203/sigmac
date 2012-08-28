@@ -32,7 +32,6 @@ public class DocumentFilter {
         //Coverage that shuold cover by relevent set of concepts
         float requiredCoverage = percentage / 100;
         float sumOfImportance = 0;
-        conceptList = (HashMap<String, Concept>) doc.getDoc().clone();
 
         conceptList=doc.getDocCopy();
         //Sort concepts by importance value 
