@@ -174,6 +174,10 @@ public class Concept implements Serializable, Comparable<Concept> {
         }
     }
 
+    public void resetRelatedConcepts(HashMap<String,ArrayList<RelatedConcept>> map){
+        this.relationships=map;
+    }
+
     public void printConcept(){
         
         System.out.println("Concept : "+ name);
@@ -253,6 +257,7 @@ public class Concept implements Serializable, Comparable<Concept> {
             }
             relations.put(key, list);
         }
+        c.resetRelatedConcepts(relations);
         return c;
     }
     public ArrayList<RelatedConcept> getAsoRelatedConcepts(ArrayList<RelatedConcept> all){
