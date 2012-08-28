@@ -235,11 +235,6 @@ public class DocumentLoader {
             
             System.gc();
 
-<<<<<<< .mine
-            
-
-=======
->>>>>>> .r217
        }
    }
 
