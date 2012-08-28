@@ -273,7 +273,8 @@ public class AddConcept extends javax.swing.JFrame {
             neWconcept.addRelatedConcept(relcocepts, relationshipTypes.get(relconcept.get(relcocepts)), false, 1);   
         }
       
-        neWconcept.setImportance(.8f);
+        neWconcept.setStrength(1.0f);
+        neWconcept.setUserAddedStatus(true);
         Set<String> keySet = neWconcept.getRelationships().keySet();
         System.out.println(neWconcept.getName());
         System.out.println("Rels are printed below");
