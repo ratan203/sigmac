@@ -26,8 +26,8 @@ public class CoreferenceIdentifier {
      * Identify each noun phrases in the text and tag them by a corefID
      * If any set of nouns refer same proper noun all of them have same corefID
      * 
-     * @param Txt (Which need to identify co-reference )
-     * @param tempFileDest Destination to create intermediate .coref file 
+     * @param String (Which need to identify co-reference )
+     * @param String (Destination to create intermediate .coref file )
      */
     public void resolveAnaph(String Txt, String tempFileDest) {
         try {

@@ -24,6 +24,7 @@ public class Concept implements Serializable, Comparable<Concept> {
     private float strength;
     private float importance;
     private float value;
+    private boolean isUserAdded=false;
     public static final int FREEQUENCY_STRENTH_MULTIPLIER=1;
 
     public Concept(String name){
@@ -69,6 +70,14 @@ public class Concept implements Serializable, Comparable<Concept> {
 
     public void setImportance(float val){
         this.importance=val;
+    }
+    
+    public boolean getUserAddedStatus(){
+        return isUserAdded;
+    }
+
+    public void setUserAddedStatus(boolean userAdded){
+        this.isUserAdded=userAdded;
     }
 
     public String getName() {

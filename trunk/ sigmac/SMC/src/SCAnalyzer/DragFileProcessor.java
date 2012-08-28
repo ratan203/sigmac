@@ -37,8 +37,8 @@ public class DragFileProcessor implements Runnable {
 
     /**
      * Method to get no of files drag on text area
-     * @param files
-     * @return Number of files
+     * @param Files[]
+     * @return Integer (Number of files)
      */
     private int noOFFiles(java.io.File[] files) {
         for (int i = 0; i < files.length; i++) {
@@ -71,7 +71,7 @@ public class DragFileProcessor implements Runnable {
 
     /**
      * Method to get number of files in a folder
-     * @param file 
+     * @param File 
      */
     private void traverseFolder(File file) {
         try{
@@ -169,7 +169,7 @@ public class DragFileProcessor implements Runnable {
 
     /**
      * Method to get JLabel with 'reject' name
-     * @param Awt component
+     * @param java.awt.Component
      * @return JLabel
      */
     public JLabel getRejectLable(final java.awt.Component c) {
