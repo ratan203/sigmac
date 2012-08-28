@@ -365,6 +365,54 @@ public class Document implements Serializable {
             return;
         }
     }
+    
+    public void addUserRelations(String headCon, String tailConcept, String type){
+        RelatedConcept toHead=new RelatedConcept(type, tailConcept, true, 1);
+        toHead.setStrength(1);
+        ArrayList<RelatedConcept> toHeadAL=new ArrayList<RelatedConcept>();
+        toHeadAL.add(toHead);
+        
+        RelatedConcept toTail=new RelatedConcept(type, headCon, false, 1);
+        toTail.setStrength(1);
+        ArrayList<RelatedConcept> toTailAL=new ArrayList<RelatedConcept>();
+        toTailAL.add(toTail);
+        
+        HashMap<String,ArrayList<RelatedConcept>> relateTempHead=this.doc.get(headCon).getRelationships();
+        if(relateTempHead.containsKey(tailConcept)){
+            ArrayList<RelatedConcept> temp= relateTempHead.get(tailConcept);
+            boolean exist=false;
+            for(RelatedConcept rc:temp){
+                if(rc.getType().equals(type)){
+                    rc.setStrength(rc.getStrength()+1); 
+                    exist=true;
+                }
+            }
+            if(exist){
+                relateTempHead.get(tailConcept).add(toHead);
+            }
+        }else{
+            relateTempHead.put(tailConcept, toHeadAL);
+        }
+        
+        HashMap<String,ArrayList<RelatedConcept>> relateTempTail=this.doc.get(tailConcept).getRelationships();
+        if(relateTempTail.containsKey(headCon)){
+            ArrayList<RelatedConcept> temp= relateTempTail.get(headCon);
+            boolean exist=false;
+            for(RelatedConcept rc:temp){
+                if(rc.getType().equals(type)){
+                    rc.setStrength(rc.getStrength()+1); 
+                    exist=true;
+                }
+            }
+            if(exist){
+                relateTempTail.get(headCon).add(toTail);
+            }
+        }else{
+            relateTempTail.put(headCon, toTailAL);
+        }
+        
+    }
+
 
     public void testDocForRelations(){
         Set<String> keySet = this.doc.keySet();
