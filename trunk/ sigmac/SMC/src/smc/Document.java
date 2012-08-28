@@ -79,6 +79,34 @@ public class Document implements Serializable {
         }
     }
 
+    public void addNewConcept(Concept con){
+        HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
+        Set<String> keySet = relationships.keySet();
+        if(this.doc.containsKey(con.getName())){
+            Concept concept = doc.get(con.getName());
+            concept.modifyFreequency(con.getFreequency());
+            concept.modifyStrength(con.getStrength());
+            for(String key : keySet){
+                ArrayList<RelatedConcept> list = relationships.get(key);
+                for(RelatedConcept rel : list){
+                    concept.addRelatedConcept(key, rel.getType(), rel.isHead(), rel.getFreequency());
+                }
+            }
+        }else{
+            doc.put(con.getName(), con);
+        }
+        Concept c=doc.get(con.getName());
+        HashMap<String, ArrayList<RelatedConcept>> rels = c.getRelationships();
+        Set<String> relKeys = rels.keySet();
+        for(String key : relKeys){
+            if(doc.containsKey(key)){
+                
+            }else{
+
+            }
+        }
+    }
+
     public void addUnmatchedConcepts(ArrayList<Concept> concepts){
         for(Concept con : concepts){
             HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
@@ -90,7 +118,7 @@ public class Document implements Serializable {
                 for(String key : keySet){
                     ArrayList<RelatedConcept> get1 = relationships.get(key);
                     for(RelatedConcept relCon : get1){
-                        get.addRelatedConcept(relCon);
+                        get.addRelatedConcept(key,relCon.getType(),relCon.isHead(),relCon.getFreequency());
                     }
                 }
                 doc.put(get.getName(), get);
@@ -109,10 +137,15 @@ public class Document implements Serializable {
                         get.addRelatedConcept(con.getName(), r.getType(), !r.isHead(), r.getFreequency());
                     }
                 }else{
+                    System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+                    System.out.println(key);
+                    System.out.println("above concept is not in the hash map");
                     boolean isolated = con.deleteRelationshipsToConcept(key);
                     if(isolated){
                         doc.remove(con.getName());
                     }
+                    Concept get = doc.get(key);
+                    get.deleteRelationshipsToConcept(con.getName());
                 }
             }
         }
