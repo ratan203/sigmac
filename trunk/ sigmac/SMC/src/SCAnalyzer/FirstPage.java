@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.text.DefaultCaret;
 
 /*
  * To change this template, choose Tools | Templates
@@ -219,10 +220,12 @@ public class FirstPage extends javax.swing.JFrame  {
         text.setVisible(true);
         text.setWrapStyleWord(true);
        
-        JScrollPane sbrText = new JScrollPane(text);
-        sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        DefaultCaret caret = (DefaultCaret)text.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+//        JScrollPane sbrText = new JScrollPane(text);
+//        sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         text.setBackground(Color.lightGray);
-        frame.getContentPane().add(sbrText);
+//        frame.getContentPane().add(sbrText);
         frame.getContentPane().add(text);
        
 //        JTextPane jtp=new JTextPane();

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,9 +68,24 @@ public class AnaphoraResolver {
                     arrayIn = Integer.parseInt(corefid);
                     arrayCont = tokens[i].substring(tokens[i].indexOf(">") + 1);
 
+                    ArrayList<String> proNounsToResolve=new ArrayList<String> ();
+                    proNounsToResolve.add("he");
+                    proNounsToResolve.add("she");
+                    proNounsToResolve.add("her");
+                    proNounsToResolve.add("his");
+                    proNounsToResolve.add("him");
+                    proNounsToResolve.add("it");
+                    proNounsToResolve.add("its");
+                    proNounsToResolve.add("they");
+                    proNounsToResolve.add("them");
+                    proNounsToResolve.add("this");
+                    proNounsToResolve.add("that");
+                    proNounsToResolve.add("these");
+                    proNounsToResolve.add("those");
+                    
                     //Check wheather the checking noun is pronoun if it is store it's proper noun 
                     //If the noun is a proper noun then replace older proper noun with same corefID with new proper noun
-                    if (arrayCont.equalsIgnoreCase("he") || arrayCont.equalsIgnoreCase("she") || arrayCont.equalsIgnoreCase("it") || arrayCont.equalsIgnoreCase("his") || arrayCont.equalsIgnoreCase("her") || arrayCont.equalsIgnoreCase("its") || arrayCont.equalsIgnoreCase("they") || arrayCont.equalsIgnoreCase("them") || arrayCont.contains("The ")) {
+                    if (proNounsToResolve.contains(arrayCont.trim().toLowerCase())|| arrayCont.replaceAll("^\\s+", "").toLowerCase().substring(0, 3).equals("the ")) {
                         if (corefArry.get(arrayIn) == null) {
                             corefArry.put(arrayIn, arrayCont);
                         }

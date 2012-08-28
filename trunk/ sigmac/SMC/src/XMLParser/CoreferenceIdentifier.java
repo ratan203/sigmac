@@ -35,7 +35,10 @@ public class CoreferenceIdentifier {
                 File file = new File(tempFileDest);
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
                 String text = Txt.replaceAll("\\([^\\(]*?\\)", " ");
-                text = text.replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("{", " ").replace("}", " ");
+                text = text.trim().replace("..", ".").replace("(", " ").replace(")", " ").replace("[", " ").replace("]", " ").replace("{", " ").replace("}", " ");
+                if(text.charAt(0)=='.'){
+                    text=text.substring(1, text.length()-1);
+                }
                 out.write(text);
                 out.newLine();
                 out.close();
