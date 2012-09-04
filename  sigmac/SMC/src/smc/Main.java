@@ -36,7 +36,7 @@ import optimization.Optimizer;
 
 /**
  *
- * @author user
+ * @author jayaprabath
  */
 public class Main {
 

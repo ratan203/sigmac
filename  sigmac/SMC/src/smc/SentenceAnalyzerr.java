@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  *
- * @author user
+ * @author jayaprabath
  */
 public class SentenceAnalyzerr {
 

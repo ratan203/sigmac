@@ -31,7 +31,7 @@ import java.util.Set;
 
 /**
  *
- * @author COMPAQ
+ * @author jayaprabath
  */
 public class SentenceAnalyzer {
     private ArrayList<Pattern> patterns;

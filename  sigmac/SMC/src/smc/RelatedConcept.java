@@ -23,7 +23,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author user
+ * @author jayaprabath
  */
 public class RelatedConcept implements Serializable, Comparable<RelatedConcept> {
     private String type;
