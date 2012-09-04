@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author user
+ * @author jayaprabath
  */
 public class Pattern {
 

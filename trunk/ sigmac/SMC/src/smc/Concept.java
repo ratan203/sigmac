@@ -27,7 +27,7 @@ import java.util.Set;
 
 /**
  *
- * @author user
+ * @author jayaprabath
  */
 public class Concept implements Serializable, Comparable<Concept> {
     private String name;

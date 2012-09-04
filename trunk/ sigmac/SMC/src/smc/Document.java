@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  *This class represent a document and contains all its concepts
  * relationships and meta data of the document
- * @author user
+ * @author jayaprabath
  */
 public class Document implements Serializable {
 

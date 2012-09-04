@@ -24,7 +24,7 @@ import edu.stanford.nlp.trees.tregex.tsurgeon.TsurgeonPattern;
 
 /**
  *
- * @author user
+ * @author jayaprabath
  */
 public class ModifierPattern {
     private TregexPattern treg;
