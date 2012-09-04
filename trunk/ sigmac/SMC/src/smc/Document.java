@@ -1,6 +1,20 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2012 Jayaprabath Fernando
+ *
+ * This file is part of SigmaC.
+ *
+ * SigmaC is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SigmaC is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SigmaC.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package smc;
@@ -13,7 +27,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- *
+ *This class represent a document and contains all its concepts
+ * relationships and meta data of the document
  * @author user
  */
 public class Document implements Serializable {
@@ -36,10 +51,18 @@ public class Document implements Serializable {
         createName();
     }
 
+    /**
+     *
+     * @return hash map
+     */
     public HashMap<String, Concept> getDoc() {
         return doc;
     }
 
+    /**
+     * The map provided must preserve the semantics of the document
+     * @param doc -hash map containing concepts
+     */
     public void setDoc(HashMap<String, Concept> doc) {
         this.doc = doc;
     }
@@ -67,6 +90,11 @@ public class Document implements Serializable {
         this.title=titles;
     }
 
+    /**
+     * only use this method if the concepts added would preserve the
+     * semantics of the document
+     * @param concepts - array list of concepts
+     */
     public void addConcepts(ArrayList<Concept> concepts){
 //        System.out.println("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
         for(Concept c : concepts){
@@ -87,6 +115,10 @@ public class Document implements Serializable {
         }
     }
 
+    /**
+     * Add new concepts to the document
+     * @param con - concept to be added to the document
+     */
     public void addNewConcept(Concept con){
         HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
         Set<String> keySet = relationships.keySet();
@@ -115,6 +147,11 @@ public class Document implements Serializable {
         }
     }
 
+    /**
+     * Use this method if the list of concept dose not
+     * necessarily preserve the semantics of the document
+     * @param concepts - array list of concepts
+     */
     public void addUnmatchedConcepts(ArrayList<Concept> concepts){
         for(Concept con : concepts){
             HashMap<String, ArrayList<RelatedConcept>> relationships = con.getRelationships();
@@ -159,6 +196,9 @@ public class Document implements Serializable {
         }
     }
 
+    /**
+     * prints the document on the console
+     */
     public void printDoc(){
         Set<String> keys=doc.keySet();
         for(String key : keys){
@@ -210,6 +250,11 @@ public class Document implements Serializable {
         }
     }
 
+    /**
+     * delete concept from the document - if concept is not present
+     * the call would do nothing
+     * @param concept - name of the concept to be deleted
+     */
     public void deleteConcept(String concept){
         Concept con=this.doc.get(concept);
         if(con==null){
@@ -232,6 +277,12 @@ public class Document implements Serializable {
         }
     }
 
+    /**
+     * this may cause the concept itself to be deleted if the concept has
+     * no more relationships
+     * @param c1 - concept1
+     * @param c2 - concept 2
+     */
     public void deleteRelationship(String c1,String c2){
         Concept con1=this.doc.get(c1);
         Concept con2=this.doc.get(c2);
@@ -246,6 +297,10 @@ public class Document implements Serializable {
         System.out.println("deleted");
     }
 
+    /**
+     * get a sorted concept list
+     * @return array list of sorted concepts
+     */
     public ArrayList<Concept> getSortedConceptList(){
         ArrayList<Concept> concepts=getConcepList();
         Collections.sort(concepts);
@@ -266,6 +321,10 @@ public class Document implements Serializable {
         
     }
 
+    /**
+     * reset the imortance value of concep
+     * use this before recalculating rank
+     */
     public void resetImportance(){ // this one for testing
         Set<String> keySet = this.doc.keySet();
         for(String key : keySet){
@@ -324,6 +383,10 @@ public class Document implements Serializable {
         }
     }
 
+    /**
+     * get a copy of all the concepts in the document
+     * @return copy of the hash map of the document
+     */
     public HashMap<String,Concept> getDocCopy(){
         HashMap<String,Concept> map=new HashMap<String, Concept>();
         Set<String> keySet = this.doc.keySet();
@@ -373,7 +436,13 @@ public class Document implements Serializable {
             return;
         }
     }
-    
+
+    /**
+     * add relationships between concepts
+     * @param headCon
+     * @param tailConcept
+     * @param type
+     */
     public void addUserRelations(String headCon, String tailConcept, String type){
         RelatedConcept toHead=new RelatedConcept(type, tailConcept, true, 1);
         toHead.setStrength(1);
