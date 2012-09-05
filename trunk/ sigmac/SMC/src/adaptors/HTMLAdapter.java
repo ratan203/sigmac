@@ -24,6 +24,7 @@ public class HTMLAdapter {
     }
 
     public SCDocument parseHTML(String file) throws IOException{
+        System.out.println("HTML FILE :"+file);
         File f=new File(file);
         Document doc = Jsoup.parse(f, "UTF-8", "");
         ArrayList<Title> titles=processTitles(doc);
