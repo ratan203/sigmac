@@ -260,6 +260,10 @@ public class MapAdjust extends javax.swing.JFrame {
     public void mapReload(Document doc){
     String actualpath=(String) paths.get(jList1.getSelectedIndex());
       // Document doc = documents.get(jList1.getSelectedIndex());
+    System.out.println("Size of the document for the map reloading");
+        System.out.println(doc.getDoc().size());
+        System.out.println("now creating the js creator");
+        doc.printDoc();
        JSCreator jsc = new JSCreator();
        //testing document
        doc.testDocForRelations();
@@ -478,7 +482,6 @@ public class MapAdjust extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        sliderValue=50;
         Document doc = documents.get(jList1.getSelectedIndex());
         //checking the size of the document
         System.out.println("Testing the size jbutton1 action perfomed");
