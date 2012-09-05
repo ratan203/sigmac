@@ -91,6 +91,7 @@ public class DocumentLoader {
 
        
        //System.out.println("File Path ="+path+"   Extension is ="+extension);
+       System.out.println("Document loader filepath method");
        JTextArea jt=(JTextArea) c;
        JProgressBar jp=getProgressAll(jt);
        JProgressBar jp1=getProgressOne(jt);
@@ -133,10 +134,14 @@ public class DocumentLoader {
        else if(extension.equalsIgnoreCase(".odt")){
              ODSReader odt = new ODSReader();
              doc=odt.getDocument(path);
+       }else if(extension.equalsIgnoreCase(".html")||extension.equalsIgnoreCase(".htm")){
+             HTMLAdapter html=new HTMLAdapter();
+             doc=html.parseHTML(path);
        }
        else{
        rejct.setText(path+" is rejected");
        }
+           System.out.println("Extension is :"+extension);
        }
        catch(Exception e){
             rejct.setText(path+" is rejected");
@@ -223,6 +228,7 @@ public class DocumentLoader {
             //System.exit(0);
 
             smc.ConceptRanker r=new smc.ConceptRanker();
+            doc1.resetImportance();
             r.rankConcepts(doc1);
 
             mpa.setDocumentsObjects(doc1);
