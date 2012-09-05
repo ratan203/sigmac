@@ -25,6 +25,7 @@ public class DocumentUploader extends Thread{
     
         public DocumentUploader(Document doc){
         ConceptRanker cr=new ConceptRanker();
+        doc.resetImportance();
         cr.rankConcepts(doc);
         this.doc=doc;
     }
