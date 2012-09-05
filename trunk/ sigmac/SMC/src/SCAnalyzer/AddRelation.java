@@ -168,9 +168,20 @@ public class AddRelation extends javax.swing.JFrame {
              relationshipTypes.add("aso");
              relationshipTypes.add("is a");
              relationshipTypes.add("part of");
+             System.out.println("test before adding relation to new doc");
+             doc.testDocForRelations();
+             System.out.println("test passed");
             doc.addUserRelations(key1.get(jComboBox1.getSelectedIndex()).toString(), key1.get(jComboBox2.getSelectedIndex()).toString(), relationshipTypes.get(jComboBox3.getSelectedIndex()));
+            System.out.println("Testing after adding relations");
+            doc.testDocForRelations();
+            System.out.println("testing passed");
+            System.out.println("testing new doc before adding relations");
+             newDoc.testDocForRelations();
+             System.out.println("test passed");
             newDoc.addUserRelations(key1.get(jComboBox1.getSelectedIndex()).toString(), key1.get(jComboBox2.getSelectedIndex()).toString(), relationshipTypes.get(jComboBox3.getSelectedIndex()));
-            
+            System.out.println("testing new do ca after adding relations");
+            newDoc.testDocForRelations();
+            System.out.println("Testing passed");
             jLabel4.setText(key1.get(jComboBox1.getSelectedIndex()).toString() + " and " + key1.get(jComboBox2.getSelectedIndex()).toString() + " Relation Added");
         }
         jLabel4.setEnabled(true);
