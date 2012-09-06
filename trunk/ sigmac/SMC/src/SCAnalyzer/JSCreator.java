@@ -112,10 +112,10 @@ public class JSCreator {
 		//for each concept
 		for(String key : conceptSet){
 			
-		    key.replaceAll("\\", "");
+			String newkey = key.replaceAll("[\\-\\+\\.\\^:,]","");
 			jss.append("\t{\n");
-			jss.append("\t\t\"id\" : \""+key+"\",\n");
-			jss.append("\t\t\"name\" : \""+key+"\",\n");			
+			jss.append("\t\t\"id\" : \""+newkey+"\",\n");
+			jss.append("\t\t\"name\" : \""+newkey+"\",\n");			
 			jss.append("\t\t\"data\" : {\n");
 			jss.append("\t\t\"$color\" : \"#83548B\",\n");
 			jss.append("\t\t\"$type\" :  \"circle\" \n\t\t},\n");
@@ -130,14 +130,14 @@ public class JSCreator {
 			jss.append("\t\t\"adjacencies\" : [\n");
 			for(String rkey: relatedconceptSet){
 				
-				rkey.replaceAll("\\", "");
+				String newrkey = rkey.replaceAll("[\\-\\+\\.\\^:,]","");
                 j++;
 				if(currentRel.get(rkey)!=null){
 					if(!(currentRel.get(rkey).equals(key))){
 						currentRel.put(key, rkey);
 						jss.append("\t\t{\n");
-						jss.append("\t\t\"nodeTo\" : \""+ rkey+"\",\n");
-						jss.append("\t\t\"nodeFrom\" : \""+ key+"\",\n");
+						jss.append("\t\t\"nodeTo\" : \""+ newrkey+"\",\n");
+						jss.append("\t\t\"nodeFrom\" : \""+ newrkey+"\",\n");
 						jss.append("\t\t\"data\" : {}\n");
 						jss.append("\t\t}");
 																	
@@ -148,8 +148,8 @@ public class JSCreator {
 					if(!(currentRel.get(key).equals(rkey))){
 						currentRel.put(key, rkey);
 						jss.append("\t\t{\n");
-						jss.append("\t\t\"nodeTo\" : \""+ rkey+"\",\n");
-						jss.append("\t\t\"nodeFrom\" : \""+ key+"\",\n");
+						jss.append("\t\t\"nodeTo\" : \""+ newrkey+"\",\n");
+						jss.append("\t\t\"nodeFrom\" : \""+ newrkey+"\",\n");
 						jss.append("\t\t\"data\" : {}\n");
 						jss.append("\t\t}");						
 												
@@ -159,8 +159,8 @@ public class JSCreator {
 				}else{
 					currentRel.put(key, rkey);
 					jss.append("\t\t{\n");
-					jss.append("\t\t\"nodeTo\" : \""+ rkey+"\",\n");
-					jss.append("\t\t\"nodeFrom\" : \""+ key+"\",\n");
+					jss.append("\t\t\"nodeTo\" : \""+ newrkey+"\",\n");
+					jss.append("\t\t\"nodeFrom\" : \""+ newrkey+"\",\n");
 					jss.append("\t\t\"data\" : {}\n");
 					jss.append("\t\t}");
 										
