@@ -112,7 +112,7 @@ public class JSCreator {
 		//for each concept
 		for(String key : conceptSet){
 			
-		
+		    key.replaceAll("\\", "");
 			jss.append("\t{\n");
 			jss.append("\t\t\"id\" : \""+key+"\",\n");
 			jss.append("\t\t\"name\" : \""+key+"\",\n");			
@@ -129,6 +129,8 @@ public class JSCreator {
 			
 			jss.append("\t\t\"adjacencies\" : [\n");
 			for(String rkey: relatedconceptSet){
+				
+				rkey.replaceAll("\\", "");
                 j++;
 				if(currentRel.get(rkey)!=null){
 					if(!(currentRel.get(rkey).equals(key))){
