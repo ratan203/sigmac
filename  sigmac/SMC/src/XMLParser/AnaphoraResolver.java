@@ -64,10 +64,10 @@ public class AnaphoraResolver {
 
                 //Checking for resolving anaphora noun by noun
                 for (int i = 0; i < tokens.length; i++) {
+                    tokens[i]=tokens[i].replaceAll("\\*", "");
                     corefid = StringUtils.substringBetween(tokens[i], "CorefID=\"", "\">");
                     arrayIn = Integer.parseInt(corefid);
                     arrayCont = tokens[i].substring(tokens[i].indexOf(">") + 1);
-
                     ArrayList<String> proNounsToResolve=new ArrayList<String> ();
                     proNounsToResolve.add("he");
                     proNounsToResolve.add("she");
@@ -85,7 +85,7 @@ public class AnaphoraResolver {
                     
                     //Check wheather the checking noun is pronoun if it is store it's proper noun 
                     //If the noun is a proper noun then replace older proper noun with same corefID with new proper noun
-                    if (proNounsToResolve.contains(arrayCont.trim().toLowerCase())|| arrayCont.replaceAll("^\\s+", "").toLowerCase().substring(0, 3).equals("the ")) {
+                    if (proNounsToResolve.contains(arrayCont.trim().toLowerCase())|| (arrayCont.replaceAll("^\\s+", "").length()>3&&arrayCont.replaceAll("^\\s+", "").toLowerCase().substring(0, 3).equals("the "))) {
                         if (corefArry.get(arrayIn) == null) {
                             corefArry.put(arrayIn, arrayCont);
                         }
