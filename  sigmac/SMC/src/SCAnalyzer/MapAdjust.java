@@ -44,6 +44,9 @@ public class MapAdjust extends javax.swing.JFrame {
          jButton6.setEnabled(false);
          jSlider1.setEnabled(false);
          jButton4.setEnabled(false);
+         jButton2.setEnabled(false);
+         jButton3.setEnabled(false);
+         jButton1.setEnabled(false);
          try {
                     String temp=new File("oo").getCanonicalPath();
                     int a=temp.lastIndexOf("\\");
@@ -305,6 +308,9 @@ public class MapAdjust extends javax.swing.JFrame {
            jButton6.setEnabled(true);
            jSlider1.setEnabled(true);
            jButton4.setEnabled(true);
+           jButton2.setEnabled(true);
+           jButton1.setEnabled(true);
+           jButton3.setEnabled(true);
            FileWriter f1 = new FileWriter(absolutePath+"\\visual\\rnodes.dpi");
            f1.write("");
            f1.close();
@@ -354,7 +360,7 @@ public class MapAdjust extends javax.swing.JFrame {
         FileWriter fw=null;
         ArrayList<String> deletedConcepts=new ArrayList<String>();
         try {
-            fr = new FileReader(absolutePath+"\\visual\\rnodes.dpi");
+            fr = new FileReader(absolutePath+"\\visual\\rnodes.dpi"); //read deleted concepts from file
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -364,7 +370,7 @@ public class MapAdjust extends javax.swing.JFrame {
         String line;
         try {
             while ((line = in.readLine()) != null)
-              deletedConcepts.add(line);
+              deletedConcepts.add(line);      //add delted concepts to list
         } catch (IOException ex) {
             Logger.getLogger(MapAdjust.class.getName()).log(Level.SEVERE, null, ex);
         }
