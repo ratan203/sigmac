@@ -101,7 +101,7 @@ public class SentenceAnalyzer {
                     hConcept=filterConcept(hConcept);
                     ArrayList<String> spawnConcepts = spawnConcepts(hConcept);
                     for(String spc: spawnConcepts){
-                        if(spc.matches(".*[A-Za-z]+.*")){
+                        if(spc.matches(".*[A-Za-z]+.*") && spc.length()>3){
                             hd.add(spc);
                             if(cMap.containsKey(hConcept)){
                                 //Concept c=cMap.get(hConcept);
@@ -138,7 +138,7 @@ public class SentenceAnalyzer {
                     dConcept=filterConcept(dConcept);
                     ArrayList<String> spawnConcepts = spawnConcepts(dConcept);
                     for(String spc : spawnConcepts){
-                        if(spc.matches(".*[A-Za-z]+.*")){
+                        if(spc.matches(".*[A-Za-z]+.*") && spc.length()>3){
                             dp.add(spc);
                             if(cMap.containsKey(dConcept)){
                                 //Concept c=cMap.get(dConcept);
@@ -188,7 +188,7 @@ public class SentenceAnalyzer {
                 concept=filterConcept(concept);
                 ArrayList<String> spawnConcepts = spawnConcepts(concept);
                 for(String con : spawnConcepts){
-                    if(!con.matches(".*[A-Za-z]+.*")){
+                    if(!con.matches(".*[A-Za-z]+.*") || con.length()<=3){
                         continue;
                     }
                     if(cMap.containsKey(concept)){
@@ -363,7 +363,7 @@ public class SentenceAnalyzer {
             }
         }
         cp=cp.replaceAll("^[^A-Za-z]", "");
-        cp=cp.replaceAll("[^A-Za-z]$", "");
+        cp=cp.replaceAll("[^A-Za-z0-9]+$", "");
         cp=cp.replaceAll("  +", " ");
         return cp;
     }
