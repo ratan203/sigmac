@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import optimization.Optimizer;
+import smc.Concept;
 import smc.ConceptRanker;
 import smc.Parser;
 /*
@@ -230,6 +231,12 @@ public class DocumentLoader {
             smc.ConceptRanker r=new smc.ConceptRanker();
             doc1.resetImportance();
             r.rankConcepts(doc1);
+            //following part is for test print
+            ArrayList<Concept> sortedConceptList = doc1.getSortedConceptList();
+            System.out.println("print sorted concept list after ranking ********************^^^^^^^^^^^^^");
+            for(Concept cc : sortedConceptList){
+                cc.printConcept();
+            }
 
             mpa.setDocumentsObjects(doc1);
             System.out.println("Size of the document after optimizing and ranking");
