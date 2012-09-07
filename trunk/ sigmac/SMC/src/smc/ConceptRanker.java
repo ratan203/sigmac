@@ -34,6 +34,7 @@ public class ConceptRanker {
     }
 
     public void rankConcepts(Document doc){
+        resetConceptValues(doc);
         System.out.println("Start Ranking **************");
         HashMap<String, Concept> cMap = doc.getDoc();
         float totalDocumentValue = doc.getTotalDocumentValue();
@@ -103,7 +104,7 @@ public class ConceptRanker {
                 relatedConcept.modifyImprotance(importance);
             }
         }
-        resetConceptValues(doc);
+        //resetConceptValues(doc);
         System.out.println("Total==="+tot);
     }
     private void resetConceptValues(Document doc){
