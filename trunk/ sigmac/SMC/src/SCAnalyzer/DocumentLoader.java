@@ -122,8 +122,9 @@ public class DocumentLoader {
        }
        else if(extension.equalsIgnoreCase(".pdf")){
            
-           PDFAdapter adapter=new PDFAdapter();
-            doc=adapter.getDocument(path);
+          File f=new File(path);
+          PDFAdapter adapter=new PDFAdapter(f);
+          doc=adapter.getDocument();
        }else if(extension.equalsIgnoreCase(".pptx")){
              PPTXReader pptx = new PPTXReader();
              doc=pptx.getDocument(path);
